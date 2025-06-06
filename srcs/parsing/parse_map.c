@@ -6,7 +6,7 @@
 /*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 13:50:26 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/06/06 14:52:12 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/06/06 15:43:53 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int	check_top_bot(t_map *map)
 					if (c != '1')
 						return (1);
 				}
-				if (map[map->y + 1][map->x] == ' ' || map[map->y
+				if (map->map[map->y + 1][map->x] == ' ' || map->map[map->y
 					- 1][map->x] == ' ')
 					return (1);
 			}
@@ -73,8 +73,8 @@ static int	check_left_right(t_map *map)
 					if (c != '1')
 						return (1);
 				}
-				if (map[map->y][map->x + 1] == ' ' || map[map->y][map->x
-					- 1] == ' ')
+				if (map->map[map->y][map->x + 1] == ' '
+					|| map->map[map->y][map->x - 1] == ' ')
 					return (1);
 			}
 			map->x++;
@@ -90,10 +90,13 @@ int	parse_map(t_map *map, char *file_path)
 	char	*line;
 
 	// init_struct(map);
+	line = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (!line)
+		return (perror("Memory allocation failed"), 1);
 	fd = open(file_path, O_RDONLY);
 	if (fd < 0)
 		return (perror("Error opening file"), 1);
-	while (get_next_line(fd) > 0)
+	while (get_next_line(fd, line) > 0)
 	{
 		if (check_left_right(map) || check_top_bot(map))
 		{
@@ -103,4 +106,7 @@ int	parse_map(t_map *map, char *file_path)
 		}
 		printf("Line: %s\n", line);
 	}
+	free(line);
+	close(fd);
+	return (0);
 }

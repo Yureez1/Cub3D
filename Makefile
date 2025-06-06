@@ -6,15 +6,16 @@
 #    By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/04 17:01:27 by jbanchon          #+#    #+#              #
-#    Updated: 2025/06/06 14:48:49 by jbanchon         ###   ########.fr        #
+#    Updated: 2025/06/06 15:59:14 by jbanchon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3d
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I$(MLX_DIR)
+CFLAGS = -Wall -Wextra -Werror -I$(MLX_DIR) -I$(GNL_DIR)
 LDFLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lbsd
 
+GNL_DIR = ./gnl
 MLX_DIR = ./mlx
 
 OBJ_DIR = objs
@@ -22,8 +23,10 @@ OBJ_DIR = objs
 SRCS = \
 	srcs/main.c \
 	srcs/parsing/parse_map.c \
+	$(GNL_DIR)/get_next_line.c \
+	$(GNL_DIR)/get_next_line_utils.c \
 
-OBJS = $(patsubst srcs/%.c, $(OBJ_DIR)/%.o, $(SRCS))
+OBJS = $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRCS))
 
 LILA = \033[1;38;5;206m
 GREEN = \033[32m
@@ -37,7 +40,7 @@ $(NAME): $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) -o $(NAME)
 	@echo "$(GREEN)Cub3D compiled successfully!$(NC)"
 
-$(OBJ_DIR)/%.o: srcs/%.c
+$(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) -c $< -o $@
 	

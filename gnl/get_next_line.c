@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/12 17:00:29 by jbanchon          #+#    #+#             */
-/*   Updated: 2024/07/02 12:11:34 by jbanchon         ###   ########.fr       */
+/*   Created: 2025/06/06 15:57:17 by jbanchon          #+#    #+#             */
+/*   Updated: 2025/06/06 15:59:37 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,12 @@
 
 void	free_stash(void)
 {
-	get_next_line(-23);
+	get_next_line(-23, NULL);
 }
 
-char	*get_next_line(int fd)
+char	*get_next_line(int fd, char *line)
 {
 	static char	*stash;
-	char		*line;
 	char		*buf;
 	
 	if (fd < -0 || BUFFER_SIZE <= 0)
