@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/04 13:33:09 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/06/04 14:35:45 by jbanchon         ###   ########.fr       */
+/*   Created: 2025/06/04 13:33:11 by jbanchon          #+#    #+#             */
+/*   Updated: 2025/06/05 14:02:34 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#include "inc/cub3d.h"
 
-# include "mlx/mlx.h"
-# include <fcntl.h>
-# include <math.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <string.h>
-# include <unistd.h>
+int main(void)
+{
+    void *mlx;
+    void *mlx_win;
 
-
-
-
-#endif
+    mlx = mlx_init();
+    mlx_win = mlx_new_window(mlx, 800, 600, "Cub3D Window");
+    mlx_loop(mlx);
+}

@@ -6,40 +6,49 @@
 #    By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/04 17:01:27 by jbanchon          #+#    #+#              #
-#    Updated: 2025/06/04 17:01:44 by jbanchon         ###   ########.fr        #
+#    Updated: 2025/06/06 11:17:45 by jbanchon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC = cub3d
-CFLAGS = -Wall -Wextra -Werror -g -Imlx
-OBJS = $(SRCS:.c=.o)
-
-SRCS = main.c \
+NAME = cub3d
+CC = cc
+CFLAGS = -Wall -Wextra -Werror -I$(MLX_DIR)
+LDFLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lbsd
 
 MLX_DIR = ./mlx
-MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lbsd
+
+OBJ_DIR = objs
+
+SRCS = \
+	srcs/main.c
+
+OBJS = $(patsubst srcs/%.c, $(OBJ_DIR)/%.o, $(SRCS))
 
 LILA = \033[1;38;5;206m
 GREEN = \033[32m
 NC = \033[0m
 
-%.o: %.c
-	@$(CC) $(CFLAGS) -c -o $@ $<
 
 all: $(NAME)
+
+$(NAME): $(OBJS)
 	@echo "$(LILA)Compiling Cub3D...$(NC)"
-	$(CC) $(CFLAGS) $(OBJS) $(MLX_FLAGS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) -o $(NAME)
 	@echo "$(GREEN)Cub3D compiled successfully!$(NC)"
 
+$(OBJ_DIR)/%.o: srcs/%.c
+	@mkdir -p $(dir $@)
+	@$(CC) $(CFLAGS) -c $< -o $@
+	
 clean:
 	@echo "$(LILA)Cleaning up object files...$(NC)"
-	rm -f $(OBJS)
-	rm -f $(NAME)
+	@rm -rf $(OBJ_DIR)
+	@rm -f $(OBJS)
 	@echo "$(GREEN)Object files cleaned!$(NC)"
 
 fclean: clean
 	@echo "$(LILA)Cleaning up all files...$(NC)"
-	rm -f $(NAME)
+	@rm -f $(NAME)
 	@echo "$(GREEN)All files cleaned!$(NC)"
 
 re: fclean all

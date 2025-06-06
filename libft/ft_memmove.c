@@ -1,24 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/04 13:33:11 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/06/04 14:35:40 by jbanchon         ###   ########.fr       */
+/*   Created: 2024/05/07 15:22:36 by julien            #+#    #+#             */
+/*   Updated: 2024/05/31 11:49:07 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
-# include "mlx/mlx.h"
+#include "libft.h"
 
-int main(void)
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-    void *mlx;
-    void *mlx_win;
+	size_t	i;
 
-    mlx = mlx_init();
-    mlx_win = mlx_new_window(mlx, 800, 600, "Cub3D Window");
-    mlx_loop(mlx);
+	if (!dst && !src)
+		return (NULL);
+	if (dst > src)
+	{
+		i = len;
+		while (i > 0)
+		{
+			i--;
+			((unsigned char *)dst)[i] = ((const unsigned char *)src)[i];
+		}
+	}
+	else
+	{
+		i = 0;
+		while (i < len)
+		{
+			((unsigned char *)dst)[i] = ((const unsigned char *)src)[i];
+			i++;
+		}
+	}
+	return (dst);
 }
