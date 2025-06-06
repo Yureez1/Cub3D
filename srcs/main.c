@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 13:33:11 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/06/06 14:46:14 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/06/06 17:02:14 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,16 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		return (perror("Usage: ./cub3d <map_file>"), EXIT_FAILURE);
 	init_struct(map);
-	if (init_window(&mlx, &mlx_win) != 0)
-    {
-        free(map);
+	if (parse_map(map, argv[1]) != 0)
+	{
+		free(map);
 		return (EXIT_FAILURE);
-    }
-	parse_map(map, argv[1]);
-    free(map);
+	}
+	if (init_window(&mlx, &mlx_win) != 0)
+	{
+		free(map);
+		return (EXIT_FAILURE);
+	}
+	free(map);
 	return (0);
 }

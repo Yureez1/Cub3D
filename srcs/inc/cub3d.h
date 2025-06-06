@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 13:33:09 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/06/06 14:41:51 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/06/06 16:23:46 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,14 @@ typedef struct		s_map
 	int		player_y;
 }			t_map;
 
-int			init_struct(t_map *map);
-int			parse_map(t_map *map, char *file_path);
+int	parse_map(t_map *map, char *file_path);
+int	validate_map(t_map *map);
+int	read_map_lines(int fd, t_map *map);
+int	finalize_map(t_map *map, char **temp_map);
+int	fill_temp_map(int fd, char **temp_map, int *height, int *max_width);
+char	**allocate_temp_map(void);
+int	store_map_line(char **temp_map, char *line, int *max_width, int line_count);
+int	open_map_file(char *file_path);
+int	init_struct(t_map *map);
 
 #endif
