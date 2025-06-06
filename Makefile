@@ -6,7 +6,7 @@
 #    By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/04 17:01:27 by jbanchon          #+#    #+#              #
-#    Updated: 2025/06/06 11:17:45 by jbanchon         ###   ########.fr        #
+#    Updated: 2025/06/06 14:48:49 by jbanchon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,8 @@ MLX_DIR = ./mlx
 OBJ_DIR = objs
 
 SRCS = \
-	srcs/main.c
+	srcs/main.c \
+	srcs/parsing/parse_map.c \
 
 OBJS = $(patsubst srcs/%.c, $(OBJ_DIR)/%.o, $(SRCS))
 
