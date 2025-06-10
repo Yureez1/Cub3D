@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 13:50:26 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/06/10 13:38:37 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/06/10 15:42:30 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,72 +21,6 @@ int	init_struct(t_map *map)
 	map->height = 0;
 	map->player_x = -1;
 	map->player_y = -1;
-	return (0);
-}
-
-static int	check_top_bot(t_map *map)
-{
-	char	c;
-
-	map->y = 0;
-	map->x = 0;
-	while (map->y < map->height)
-	{
-		while (map->x < map->width)
-		{
-			c = map->map[map->y][map->x];
-			if (c == '0' || c == '1' || c == 'N' || c == 'S' || c == 'E'
-				|| c == 'W')
-			{
-				if (map->y == 0 || map->y == map->height - 1)
-				{
-					if (c != '1')
-						return (1);
-				}
-				if (map->y > 0 && map->y < map->height - 1)
-				{
-					if (map->map[map->y][map->x + 1] == ' '
-						|| map->map[map->y][map->x - 1] == ' ')
-						return (1);
-				}
-			}
-			map->x++;
-		}
-		map->y++;
-	}
-	return (0);
-}
-
-static int	check_left_right(t_map *map)
-{
-	char	c;
-
-	map->y = 0;
-	map->x = 0;
-	while (map->y < map->height)
-	{
-		while (map->x < map->width)
-		{
-			c = map->map[map->y][map->x];
-			if (c == '0' || c == '1' || c == 'N' || c == 'S' || c == 'E'
-				|| c == 'W')
-			{
-				if (map->y == 0 || map->y == map->height - 1)
-				{
-					if (c != '1')
-						return (1);
-				}
-				if (map->x > 0 && map->x < map->width - 1)
-				{
-					if (map->map[map->y][map->x + 1] == ' '
-						|| map->map[map->y][map->x - 1] == ' ')
-						return (1);
-				}
-			}
-			map->x++;
-		}
-		map->y++;
-	}-
 	return (0);
 }
 
@@ -169,8 +103,9 @@ int	fill_temp_map(int fd, char **temp_map, int *height, int *max_width)
 			free(line);
 			return (1);
 		}
-		printf("Line %d read: \"%s\" (length=%d)\n", *height, temp_map[*height],
-			(int)ft_strlen(temp_map[*height]));
+		/*printf("Line %d read: \"%s\" (length=%d)\n", *height,
+			temp_map[*height],
+			(int)ft_strlen(temp_map[*height]));*/
 		(*height)++;
 		free(line);
 	}
@@ -181,6 +116,7 @@ int	fill_temp_map(int fd, char **temp_map, int *height, int *max_width)
 int	finalize_map(t_map *map, char **temp_map)
 {
 	int	i;
+	int	j;
 
 	map->map = malloc(sizeof(char *) * (map->height + 1));
 	if (!map->map)
@@ -188,7 +124,19 @@ int	finalize_map(t_map *map, char **temp_map)
 	i = 0;
 	while (i < map->height)
 	{
-		map->map[i] = temp_map[i];
+		map->map[i] = malloc(sizeof(char) * (map->width + 1));
+		if (!map->map[i])
+			return (perror("Malloc failed for final map row"), 1);
+		j = 0;
+		while (temp_map[i][j])
+		{
+			map->map[i][j] = temp_map[i][j];
+			j++;
+		}
+		while (j < map->width)
+			map->map[i][j++] = ' ';
+		map->map[i][j] = '\0';
+		free(temp_map[i]); // libère l'ancienne ligne copiée
 		i++;
 	}
 	map->map[i] = NULL;
@@ -217,38 +165,40 @@ int	read_map_lines(int fd, t_map *map)
 	return (0);
 }
 
-int	validate_map(t_map *map)
-{
-	if (check_top_bot(map))
-	{
-		perror("Error: map not closed on top or bottom");
-		return (1);
-	}
-	printf("Top and bottom borders validated.\n");
-	if (check_left_right(map))
-	{
-		perror("Error: map not closed on left or right");
-		return (1);
-	}
-	printf("Left and right borders validated.\n");
-	return (0);
-}
-
 int	parse_map(t_map *map, char *file_path)
 {
 	int	fd;
 
+	printf("=== Starting map parsing ===\n");
 	fd = open_map_file(file_path);
 	if (fd < 0)
+	{
+		printf("Error: Failed to open file %s\n", file_path);
 		return (1);
+	}
+	printf("Successfully opened %s (fd=%d)\n", file_path, fd);
 	if (read_map_lines(fd, map))
 	{
+		printf("Error reading map lines\n");
 		close(fd);
 		return (1);
 	}
 	close(fd);
+	printf("Map reading complete - Dimensions: %dx%d\n", map->width,
+		map->height);
 	if (validate_map(map))
+	{
+		printf("Error: Map validation failed\n");
 		return (1);
-	printf("Map parsing completed successfully.\n");
+	}
+	printf("Map validated successfully\n");
+	if (find_player_position(map))
+	{
+		printf("Error: Player position not found\n");
+		return (1);
+	}
+	printf("Player found at (%d, %d) facing %c\n", map->player_x, map->player_y,
+		map->player_dir);
+	printf("=== Map parsing completed successfully ===\n");
 	return (0);
 }
