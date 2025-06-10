@@ -6,7 +6,7 @@
 #    By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/04 17:01:27 by jbanchon          #+#    #+#              #
-#    Updated: 2025/06/10 14:55:36 by leaugust         ###   ########.fr        #
+#    Updated: 2025/06/10 15:54:29 by leaugust         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,9 +22,10 @@ OBJ_DIR = objs
 
 SRCS = \
 	srcs/main.c \
-	srcs/parsing/parse_map.c \
+	srcs/parsing/map_loader.c \
+	srcs/parsing/map_parser.c \
+	srcs/parsing/map_checker.c \
 	srcs/parsing/player_pos.c \
-	srcs/parsing/map_enclosure.c \
 	$(GNL_DIR)/get_next_line.c \
 	$(GNL_DIR)/get_next_line_utils.c \
 
