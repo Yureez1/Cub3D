@@ -6,7 +6,7 @@
 /*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 15:50:52 by leaugust          #+#    #+#             */
-/*   Updated: 2025/06/10 15:51:42 by leaugust         ###   ########.fr       */
+/*   Updated: 2025/06/10 16:04:10 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	open_map_file(char *file_path)
 }
 
 // int	store_map_line(char **temp_map, char *line, int *max_width,
-// int line_#include "../inc/cub3d.h"count)
+// int line_count)
 // {
 // 	int	len;
 
@@ -66,7 +66,7 @@ int	fill_temp_map(int fd, char **temp_map, int *height, int *max_width)
 	int		started;
 
 	started = 0;
-	line = N#include "../inc/cub3d.h"ULL;
+	line = NULL;
 	while ((line = get_next_line(fd, line)))
 	{
 		line_len = ft_strlen(line);
@@ -82,7 +82,7 @@ int	fill_temp_map(int fd, char **temp_map, int *height, int *max_width)
 		}
 		if (line[line_len - 1] == '\n')
 			line[line_len - 1] = '\0';
-		if (#include "../inc/cub3d.h"(int)ft_strlen(line) > *max_width)
+		if ((int)ft_strlen(line) > *max_width)
 			*max_width = ft_strlen(line);
 		temp_map[*height] = ft_strdup(line);
 		if (!temp_map[*height])
