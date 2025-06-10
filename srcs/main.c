@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 13:33:11 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/06/06 17:02:14 by leaugust         ###   ########.fr       */
+/*   Updated: 2025/06/10 13:11:21 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	main(int argc, char **argv)
 		free(map);
 		return (EXIT_FAILURE);
 	}
+	printf("Je segfault\n");
 	if (init_window(&mlx, &mlx_win) != 0)
 	{
 		free(map);

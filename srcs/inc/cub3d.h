@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 13:33:09 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/06/06 16:23:46 by leaugust         ###   ########.fr       */
+/*   Updated: 2025/06/10 10:41:12 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,18 @@
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
+
+typedef struct s_textures
+{
+	char *NO;
+	char *SO;
+	char *WE;
+	char *EA;
+	char *floor;
+	char *ceiling;
+	
+}	t_textures;
+
 
 typedef struct		s_map
 {

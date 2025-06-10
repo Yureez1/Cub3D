@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 13:50:26 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/06/06 17:01:53 by leaugust         ###   ########.fr       */
+/*   Updated: 2025/06/10 13:38:37 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,12 @@ static int	check_top_bot(t_map *map)
 					if (c != '1')
 						return (1);
 				}
-				if (map->map[map->y + 1][map->x] == ' ' || map->map[map->y
-					- 1][map->x] == ' ')
-					return (1);
+				if (map->y > 0 && map->y < map->height - 1)
+				{
+					if (map->map[map->y][map->x + 1] == ' '
+						|| map->map[map->y][map->x - 1] == ' ')
+						return (1);
+				}
 			}
 			map->x++;
 		}
@@ -73,14 +76,17 @@ static int	check_left_right(t_map *map)
 					if (c != '1')
 						return (1);
 				}
-				if (map->map[map->y][map->x + 1] == ' '
-					|| map->map[map->y][map->x - 1] == ' ')
-					return (1);
+				if (map->x > 0 && map->x < map->width - 1)
+				{
+					if (map->map[map->y][map->x + 1] == ' '
+						|| map->map[map->y][map->x - 1] == ' ')
+						return (1);
+				}
 			}
 			map->x++;
 		}
 		map->y++;
-	}
+	}-
 	return (0);
 }
 
@@ -98,23 +104,24 @@ int	open_map_file(char *file_path)
 	return (fd);
 }
 
-int	store_map_line(char **temp_map, char *line, int *max_width, int line_count)
-{
-	int	len;
+// int	store_map_line(char **temp_map, char *line, int *max_width,
+// int line_count)
+// {
+// 	int	len;
 
-	len = ft_strlen(line);
-	if (line[len - 1] == '\n')
-		line[len - 1] = '\0';
-	if ((int)ft_strlen(line) > *max_width)
-		*max_width = ft_strlen(line);
-	temp_map[line_count] = ft_strdup(line);
-	if (!temp_map[line_count])
-	{
-		perror("Failed to duplicate line");
-		return (1);
-	}
-	return (0);
-}
+// 	len = ft_strlen(line);
+// 	if (line[len - 1] == '\n')
+// 		line[len - 1] = '\0';
+// 	if ((int)ft_strlen(line) > *max_width)
+// 		*max_width = ft_strlen(line);
+// 	temp_map[line_count] = ft_strdup(line);
+// 	if (!temp_map[line_count])
+// 	{
+// 		perror("Failed to duplicate line");
+// 		return (1);
+// 	}
+// 	return (0);
+// }
 
 char	**allocate_temp_map(void)
 {
@@ -134,11 +141,23 @@ int	fill_temp_map(int fd, char **temp_map, int *height, int *max_width)
 {
 	char	*line;
 	int		line_len;
+	int		started;
 
+	started = 0;
 	line = NULL;
 	while ((line = get_next_line(fd, line)))
 	{
 		line_len = ft_strlen(line);
+		if (!started)
+		{
+			if (line[0] == ' ' || line[0] == '1')
+				started = 1;
+			else
+			{
+				free(line);
+				continue ;
+			}
+		}
 		if (line[line_len - 1] == '\n')
 			line[line_len - 1] = '\0';
 		if ((int)ft_strlen(line) > *max_width)
