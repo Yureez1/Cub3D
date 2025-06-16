@@ -6,7 +6,7 @@
 /*   By: jbanchon <jbanchon@student42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 13:33:09 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/06/14 21:29:16 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/06/16 13:59:38 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ typedef struct s_map
 
 int			init_struct(t_map *map);
 int			parse_map(t_map *map, char *file_path);
+int check_invalid_char(t_map *map);
+int	destroy_textures(t_textures *textures);
 
 /*==== map_checker.c ====*/
 

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+         #
+#    By: jbanchon <jbanchon@student42.fr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/04 17:01:27 by jbanchon          #+#    #+#              #
-#    Updated: 2025/06/10 16:11:06 by leaugust         ###   ########.fr        #
+#    Updated: 2025/06/16 13:57:05 by jbanchon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,9 @@ SRCS = \
 	srcs/parsing/map_parser.c \
 	srcs/parsing/map_checker.c \
 	srcs/parsing/player_pos.c \
+	srcs/parsing/print_map.c \
+	srcs/parsing/parse_char.c \
+	srcs/parsing/map_textures.c \
 	$(GNL_DIR)/get_next_line.c \
 	$(GNL_DIR)/get_next_line_utils.c \
 

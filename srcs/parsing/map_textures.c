@@ -6,7 +6,7 @@
 /*   By: jbanchon <jbanchon@student42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 10:39:40 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/06/14 22:08:33 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/06/16 13:59:06 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,11 @@ int	parse_textures(t_textures *textures, char *file_path)
 	{
 		if (ft_strncmp(line, "NO", 3) == 0)
 			textures->no = ft_strtrim(line + 3, " \n");
-		else if (ft_strncmp(line, "SO", 3) == 0)
+		else if (ft_strncmp(line, "so", 3) == 0)
 			textures->so = ft_strtrim(line + 3, " \n");
-		else if (ft_strncmp(line, "WE", 3) == 0)
+		else if (ft_strncmp(line, "we", 3) == 0)
 			textures->we = ft_strtrim(line + 3, " \n");
-		else if (ft_strncmp(line, "EA", 3) == 0)
+		else if (ft_strncmp(line, "ea", 3) == 0)
 			textures->ea = ft_strtrim(line + 3, " \n");
 		free(line);
 		line = get_next_line(fd);
@@ -64,6 +64,7 @@ int	handle_color_line(t_textures *textures, char *line)
 		if (!textures->ceiling)
 			return (perror("Failed to allocate memory : ceiling color"), 1);
 	}
+	return (0);
 }
 
 int	parse_color(t_textures *textures, char *file_path)
@@ -98,6 +99,12 @@ int	parse_textures_colors(t_textures *textures, char *file_path)
 		destroy_textures(textures);
 		return (perror("Failed to parse textures or colors"), 1);
 	}
+	if (!textures->no || !textures->so || !textures->we || !textures->ea || 
+		!textures->floor || !textures->ceiling)
+	{
+		destroy_textures(textures);
+		return (perror("Missing texture paths"), 1);
+	}
 	return (0);
 }
 
@@ -105,14 +112,14 @@ int	destroy_textures(t_textures *textures)
 {
 	if (textures == NULL)
 		return (perror("textures is NULL"), 1);
-	if (textures->NO)
-		free(textures->NO);
-	if (textures->SO)
-		free(textures->SO);
-	if (textures->WE)
-		free(textures->WE);
-	if (textures->EA)
-		free(textures->EA);
+	if (textures->no)
+		free(textures->no);
+	if (textures->so)
+		free(textures->so);
+	if (textures->we)
+		free(textures->we);
+	if (textures->ea)
+		free(textures->ea);
 	if (textures->floor)
 		free(textures->floor);
 	if (textures->ceiling)
