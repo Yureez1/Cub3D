@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbanchon <jbanchon@student42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 13:33:09 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/06/10 16:00:19 by leaugust         ###   ########.fr       */
+/*   Updated: 2025/06/14 21:29:16 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@
 
 typedef struct s_textures
 {
-	char	*NO;
-	char	*SO;
-	char	*WE;
-	char	*EA;
+	char	*no;
+	char	*so;
+	char	*we;
+	char	*ea;
 	char	*floor;
 	char	*ceiling;
 
@@ -55,7 +55,7 @@ int			parse_map(t_map *map, char *file_path);
 /*==== map_checker.c ====*/
 
 int			is_out_of_bounds(int x, int y, int width, int height);
-int			is_touching_void(char **map, int x, int y, int width, int height);
+int			is_touching_void(t_map *map, int x, int y);
 int			validate_void_surroundings(t_map *map);
 void		fill_voids_with_walls(t_map *map);
 int			validate_map(t_map *map);

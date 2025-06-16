@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_checker.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbanchon <jbanchon@student42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 14:49:24 by leaugust          #+#    #+#             */
-/*   Updated: 2025/06/10 16:04:08 by leaugust         ###   ########.fr       */
+/*   Updated: 2025/06/14 21:29:42 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,26 +17,30 @@ int	is_out_of_bounds(int x, int y, int width, int height)
 	return (x < 0 || y < 0 || x >= width || y >= height);
 }
 
-int	is_touching_void(char **map, int x, int y, int width, int height)
+int	is_touching_void(t_map *map, int x, int y)
 {
-	int		dx[] = {-1, 1, 0, 0};
-	int		dy[] = {0, 0, -1, 1};
-	int		i;
-	int		nx;
-	int		ny;
-	char	neighbor;
+	int	i;
+	int	nx;
+	int	ny;
 
 	i = 0;
 	while (i < 4)
 	{
-		nx = x + dx[i];
-		ny = y + dy[i];
-		if (!is_out_of_bounds(nx, ny, width, height))
-		{
-			neighbor = map[ny][nx];
-			if (neighbor == ' ')
-				return (1);
-		}
+		if (i == 0)
+			nx = x - 1;
+		else if (i == 1)
+			nx = x + 1;
+		else
+			nx = x;
+		if (i == 2)
+			ny = y - 1;
+		else if (i == 3)
+			ny = y + 1;
+		else
+			ny = y;
+		if (!is_out_of_bounds(nx, ny, map->width, map->height)
+			&& map->map[ny][nx] == ' ')
+			return (1);
 		i++;
 	}
 	return (0);
@@ -57,7 +61,7 @@ int	validate_void_surroundings(t_map *map)
 			c = map->map[y][x];
 			if (c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W')
 			{
-				if (is_touching_void(map->map, x, y, map->width, map->height))
+				if (is_touching_void(map, x, y))
 					return (1);
 			}
 			x++;
@@ -84,34 +88,4 @@ void	fill_voids_with_walls(t_map *map)
 		}
 		y++;
 	}
-}
-
-static void	print_map(t_map *map)
-{
-	int	y;
-
-	y = 0;
-	printf("=== MAP ===\n");
-	while (y < map->height)
-	{
-		printf("%s\n", map->map[y]);
-		y++;
-	}
-	printf("===========\n");
-}
-
-int	validate_map(t_map *map)
-{
-	printf("Map before filling:\n");
-	print_map(map);
-	if (validate_void_surroundings(map))
-	{
-		printf("Error: map not closed (0 or player touches space)\n");
-		return (1);
-	}
-	printf("Void surroundings validated.\n");
-	fill_voids_with_walls(map);
-	printf("Map after filling:\n");
-	print_map(map);
-	return (0);
 }

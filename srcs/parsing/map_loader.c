@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_loader.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbanchon <jbanchon@student42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 15:50:52 by leaugust          #+#    #+#             */
-/*   Updated: 2025/06/10 16:04:10 by leaugust         ###   ########.fr       */
+/*   Updated: 2025/06/14 22:08:23 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,25 +26,6 @@ int	open_map_file(char *file_path)
 	return (fd);
 }
 
-// int	store_map_line(char **temp_map, char *line, int *max_width,
-// int line_count)
-// {
-// 	int	len;
-
-// 	len = ft_strlen(line);
-// 	if (line[len - 1] == '\n')
-// 		line[len - 1] = '\0';
-// 	if ((int)ft_strlen(line) > *max_width)
-// 		*max_width = ft_strlen(line);
-// 	temp_map[line_count] = ft_strdup(line);
-// 	if (!temp_map[line_count])
-// 	{
-// 		perror("Failed to duplicate line");
-// 		return (1);
-// 	}
-// 	return (0);
-// }
-
 char	**allocate_temp_map(void)
 {
 	char	**temp_map;
@@ -59,17 +40,37 @@ char	**allocate_temp_map(void)
 	return (temp_map);
 }
 
+int	process_map_line(char *line, char **temp_map, int *height, int *max_width)
+{
+	int	len;
+
+	len = ft_strlen(line);
+	if (line[len - 1] == '\n')
+		line[len - 1] = '\0';
+	len = ft_strlen(line);
+	if (len > *max_width)
+		*max_width = len;
+	temp_map[*height] = ft_strdup(line);
+	if (temp_map[*height] == NULL)
+	{
+		perror("Strdup failed");
+		free(line);
+		return (1);
+	}
+	(*height)++;
+	free(line);
+	return (0);
+}
+
 int	fill_temp_map(int fd, char **temp_map, int *height, int *max_width)
 {
 	char	*line;
-	int		line_len;
 	int		started;
 
 	started = 0;
-	line = NULL;
-	while ((line = get_next_line(fd, line)))
+	line = get_next_line(fd);
+	while (line)
 	{
-		line_len = ft_strlen(line);
 		if (!started)
 		{
 			if (line[0] == ' ' || line[0] == '1')
@@ -77,25 +78,14 @@ int	fill_temp_map(int fd, char **temp_map, int *height, int *max_width)
 			else
 			{
 				free(line);
+				line = get_next_line(fd);
 				continue ;
 			}
 		}
-		if (line[line_len - 1] == '\n')
-			line[line_len - 1] = '\0';
-		if ((int)ft_strlen(line) > *max_width)
-			*max_width = ft_strlen(line);
-		temp_map[*height] = ft_strdup(line);
-		if (!temp_map[*height])
-		{
-			perror("Strdup failed");
-			free(line);
-			return (1);
-		}
-		/*printf("Line %d read: \"%s\" (length=%d)\n", *height,
-			temp_map[*height],
-			(int)ft_strlen(temp_map[*height]));*/
-		(*height)++;
+		if (process_map_line(line, temp_map, height, max_width))
+			return (free(line), 1);
 		free(line);
+		line = get_next_line(fd);
 	}
 	printf("Total lines read: %d, max width: %d\n", *height, *max_width);
 	return (0);
@@ -124,7 +114,7 @@ int	finalize_map(t_map *map, char **temp_map)
 		while (j < map->width)
 			map->map[i][j++] = ' ';
 		map->map[i][j] = '\0';
-		free(temp_map[i]); // libère l'ancienne ligne copiée
+		free(temp_map[i]);
 		i++;
 	}
 	map->map[i] = NULL;

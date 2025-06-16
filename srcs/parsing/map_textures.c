@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_textures.c                                   :+:      :+:    :+:   */
+/*   map_textures.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbanchon <jbanchon@student42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 10:39:40 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/06/10 11:57:26 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/06/14 22:08:33 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 int	init_textures(t_textures *textures)
 {
-	textures->NO = NULL;
-	textures->SO = NULL;
-	textures->WE = NULL;
-	textures->EA = NULL;
+	textures->no = NULL;
+	textures->so = NULL;
+	textures->we = NULL;
+	textures->ea = NULL;
 	textures->floor = NULL;
 	textures->ceiling = NULL;
 	return (0);
@@ -33,19 +33,37 @@ int	parse_textures(t_textures *textures, char *file_path)
 	fd = open(file_path, O_RDONLY);
 	if (fd < 0)
 		return (perror("Error opening texture file"), 1);
-	while ((line = get_next_line(fd)))
+	line = get_next_line(fd);
+	while (line)
 	{
 		if (ft_strncmp(line, "NO", 3) == 0)
-			textures->NO = ft_strtrim(line + 3, " \n");
+			textures->no = ft_strtrim(line + 3, " \n");
 		else if (ft_strncmp(line, "SO", 3) == 0)
-			textures->SO = ft_strtrim(line + 3, " \n");
+			textures->so = ft_strtrim(line + 3, " \n");
 		else if (ft_strncmp(line, "WE", 3) == 0)
-			textures->WE = ft_strtrim(line + 3, " \n");
+			textures->we = ft_strtrim(line + 3, " \n");
 		else if (ft_strncmp(line, "EA", 3) == 0)
-			textures->EA = ft_strtrim(line + 3, " \n");
+			textures->ea = ft_strtrim(line + 3, " \n");
 		free(line);
+		line = get_next_line(fd);
 	}
 	return (close(fd), 0);
+}
+
+int	handle_color_line(t_textures *textures, char *line)
+{
+	if (ft_strncmp(line, "F ", 2) == 0)
+	{
+		textures->floor = ft_strtrim(line + 2, " \n");
+		if (!textures->floor)
+			return (perror("Failed to allocate memory : floor color"), 1);
+	}
+	else if (ft_strncmp(line, "C ", 2) == 0)
+	{
+		textures->ceiling = ft_strtrim(line + 2, " \n");
+		if (!textures->ceiling)
+			return (perror("Failed to allocate memory : ceiling color"), 1);
+	}
 }
 
 int	parse_color(t_textures *textures, char *file_path)
@@ -58,21 +76,17 @@ int	parse_color(t_textures *textures, char *file_path)
 	fd = open(file_path, O_RDONLY);
 	if (fd < 0)
 		return (perror("Error opening color file"), 1);
-	while ((line = get_next_line(fd)))
+	line = get_next_line(fd);
+	while (line)
 	{
-		if (ft_strncmp(line, "F ", 2) == 0)
+		if (handle_color_line(textures, line))
 		{
-			textures->floor = ft_strtrim(line + 2, " \n");
-			if (!textures->floor)
-				return (perror("Failed to allocate memory : floor color"), 1);
-		}
-		else if (ft_strncmp(line, "C ", 2) == 0)
-		{
-			textures->ceiling = ft_strtrim(line + 2, " \n");
-			if (!textures->ceiling)
-				return (perror("Failed to allocate memory : ceiling color"), 1);
+			free(line);
+			close(fd);
+			return (1);
 		}
 		free(line);
+		line = get_next_line(fd);
 	}
 	return (close(fd), 0);
 }

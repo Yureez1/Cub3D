@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbanchon <jbanchon@student42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 17:00:31 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/06/06 15:38:30 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/06/14 22:07:17 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-char	*get_next_line(int fd, char *line);
+char	*get_next_line(int fd);
 char	*ft_fill_buffer(int fd, char *buf, char *stash);
 char	*ft_define_line(char *line_buf);
 char	*ft_substr(const char *s, size_t start, size_t len);

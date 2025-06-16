@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbanchon <jbanchon@student42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 15:57:17 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/06/06 15:59:37 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/06/14 22:09:47 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,15 @@
 
 void	free_stash(void)
 {
-	get_next_line(-23, NULL);
+	get_next_line(-23);
 }
 
-char	*get_next_line(int fd, char *line)
+char	*get_next_line(int fd)
 {
 	static char	*stash;
 	char		*buf;
-	
+	char		*line;
+
 	if (fd < -0 || BUFFER_SIZE <= 0)
 	{
 		if (stash)
