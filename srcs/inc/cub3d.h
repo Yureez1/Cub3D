@@ -6,7 +6,7 @@
 /*   By: jbanchon <jbanchon@student42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 13:33:09 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/06/16 13:59:38 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/06/16 20:30:24 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,6 @@ int			read_map_lines(int fd, t_map *map);
 
 int			set_player_position(t_map *map, int x, int y);
 int			find_player_position(t_map *map);
+int check_single_player(t_map *map);
 
 #endif

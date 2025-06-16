@@ -3,14 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   player_pos.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbanchon <jbanchon@student42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 14:47:21 by leaugust          #+#    #+#             */
-/*   Updated: 2025/06/10 14:58:02 by leaugust         ###   ########.fr       */
+/*   Updated: 2025/06/16 20:30:09 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
+
+int check_single_player(t_map *map)
+{
+	int count;
+	int y;
+	int x;
+
+	count = 0;
+	y = 0;
+	x = 0;
+	while (y < map->height)
+	{
+		while (x < map->width && map->map[y][x])
+		{
+			if (map->map[y][x] == 'N' || map->map[y][x] == 'S' || map->map[y][x] == 'E' || map->map[y][x] == 'W')
+				count++;
+			x++;
+		}
+		y++;
+	}
+	if (count == 0)
+		return (perror("No player position found in map"), 1);
+	if (count > 1)
+		perror("Multiple player positions found in map");
+		return (perror("Multiple player positions found in map"), 1);
+	return (0);
+}
 
 int	set_player_position(t_map *map, int x, int y)
 {

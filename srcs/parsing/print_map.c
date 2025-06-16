@@ -6,7 +6,7 @@
 /*   By: jbanchon <jbanchon@student42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 21:28:20 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/06/16 13:52:39 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/06/16 20:29:48 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,11 @@ int	validate_map(t_map *map)
     if (check_invalid_char(map))
     {
         printf("Error: Invalid character in map\n");
+        return (1);
+    }
+    if (check_single_player(map))
+    {
+        printf("Error: Invalid player position\n");
         return (1);
     }
 	if (validate_void_surroundings(map))
