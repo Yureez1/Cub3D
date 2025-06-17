@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_loader.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbanchon <jbanchon@student42.fr>           +#+  +:+       +#+        */
+/*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 15:50:52 by leaugust          #+#    #+#             */
-/*   Updated: 2025/06/14 22:08:23 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/06/17 10:50:58 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,9 @@ int	fill_temp_map(int fd, char **temp_map, int *height, int *max_width)
 		}
 		if (process_map_line(line, temp_map, height, max_width))
 			return (free(line), 1);
-		free(line);
 		line = get_next_line(fd);
 	}
+	free(line);
 	printf("Total lines read: %d, max width: %d\n", *height, *max_width);
 	return (0);
 }

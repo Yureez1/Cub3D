@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_char.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbanchon <jbanchon@student42.fr>           +#+  +:+       +#+        */
+/*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 13:46:12 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/06/16 14:03:06 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/06/17 10:48:34 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ int check_invalid_char(t_map *map)
     int x;
     int y;
 
-    x = 0;
     y = 0;
     while (y < map->height)
     {
+        x = 0;
         while (x < map->width && map->map[y][x])
         {
             if (parse_char(map->map[y][x]))

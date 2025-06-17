@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_pos.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbanchon <jbanchon@student42.fr>           +#+  +:+       +#+        */
+/*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 14:47:21 by leaugust          #+#    #+#             */
-/*   Updated: 2025/06/16 20:30:09 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/06/17 10:54:09 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ int check_single_player(t_map *map)
 
 	count = 0;
 	y = 0;
-	x = 0;
 	while (y < map->height)
 	{
+		x = 0;
 		while (x < map->width && map->map[y][x])
 		{
 			if (map->map[y][x] == 'N' || map->map[y][x] == 'S' || map->map[y][x] == 'E' || map->map[y][x] == 'W')
@@ -34,7 +34,6 @@ int check_single_player(t_map *map)
 	if (count == 0)
 		return (perror("No player position found in map"), 1);
 	if (count > 1)
-		perror("Multiple player positions found in map");
 		return (perror("Multiple player positions found in map"), 1);
 	return (0);
 }
