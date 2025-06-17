@@ -3,30 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   map_textures.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbanchon <jbanchon@student42.fr>           +#+  +:+       +#+        */
+/*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 10:39:40 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/06/16 13:59:06 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/06/17 16:34:22 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-int	init_textures(t_textures *textures)
-{
-	textures->no = NULL;
-	textures->so = NULL;
-	textures->we = NULL;
-	textures->ea = NULL;
-	textures->floor = NULL;
-	textures->ceiling = NULL;
-	return (0);
-}
-
 int	parse_textures(t_textures *textures, char *file_path)
 {
 	char	*line;
 	int		fd;
+	char	*trimmed_line;
 
 	if (init_textures(textures) || file_path == NULL)
 		return (perror("textures or file_path is NULL"), 1);
@@ -36,14 +26,15 @@ int	parse_textures(t_textures *textures, char *file_path)
 	line = get_next_line(fd);
 	while (line)
 	{
-		if (ft_strncmp(line, "NO", 3) == 0)
-			textures->no = ft_strtrim(line + 3, " \n");
-		else if (ft_strncmp(line, "so", 3) == 0)
-			textures->so = ft_strtrim(line + 3, " \n");
-		else if (ft_strncmp(line, "we", 3) == 0)
-			textures->we = ft_strtrim(line + 3, " \n");
-		else if (ft_strncmp(line, "ea", 3) == 0)
-			textures->ea = ft_strtrim(line + 3, " \n");
+		trimmed_line = ft_strtrim(line, " \t");
+		if (ft_strncmp(line, "NO", 2) == 0)
+			textures->no = ft_strtrim(line + 2, " \t\n");
+		else if (ft_strncmp(line, "so", 2) == 0)
+			textures->so = ft_strtrim(line + 2, " \t\n");
+		else if (ft_strncmp(line, "we", 2) == 0)
+			textures->we = ft_strtrim(line + 2, " \t\n");
+		else if (ft_strncmp(line, "ea", 2) == 0)
+			textures->ea = ft_strtrim(line + 2, " \t\n");
 		free(line);
 		line = get_next_line(fd);
 	}
@@ -99,8 +90,8 @@ int	parse_textures_colors(t_textures *textures, char *file_path)
 		destroy_textures(textures);
 		return (perror("Failed to parse textures or colors"), 1);
 	}
-	if (!textures->no || !textures->so || !textures->we || !textures->ea || 
-		!textures->floor || !textures->ceiling)
+	if (!textures->no || !textures->so || !textures->we || !textures->ea
+		|| !textures->floor || !textures->ceiling)
 	{
 		destroy_textures(textures);
 		return (perror("Missing texture paths"), 1);

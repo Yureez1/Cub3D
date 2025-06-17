@@ -6,17 +6,58 @@
 /*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 14:47:21 by leaugust          #+#    #+#             */
-/*   Updated: 2025/06/17 10:54:09 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/06/17 16:35:10 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-int check_single_player(t_map *map)
+int	init_player_dir(t_map *map)
 {
-	int count;
-	int y;
-	int x;
+	char	spawn_dir;
+
+	spawn_dir = map->player_dir;
+	if (spawn_dir == 'N')
+	{
+		map->dir_x = 0;
+		map->dir_y = -1;
+		map->plane_x = 0.66;
+		map->plane_y = 0;
+	}
+	else if (spawn_dir == 'S')
+	{
+		map->dir_x = 0;
+		map->dir_y = 1;
+		map->plane_x = -0.66;
+		map->plane_y = 0;
+	}
+	else if (spawn_dir == 'E')
+	{
+		map->dir_x = 1;
+		map->dir_y = 0;
+		map->plane_x = 0;
+		map->plane_y = -0.66;
+	}
+	else if (spawn_dir == 'W')
+	{
+		map->dir_x = -1;
+		map->dir_y = 0;
+		map->plane_x = 0;
+		map->plane_y = 0.66;
+	}
+	else
+	{
+		perror("Invalid player direction");
+		return (1);
+	}
+	return (0);
+}
+
+int	check_single_player(t_map *map)
+{
+	int	count;
+	int	y;
+	int	x;
 
 	count = 0;
 	y = 0;
@@ -25,7 +66,8 @@ int check_single_player(t_map *map)
 		x = 0;
 		while (x < map->width && map->map[y][x])
 		{
-			if (map->map[y][x] == 'N' || map->map[y][x] == 'S' || map->map[y][x] == 'E' || map->map[y][x] == 'W')
+			if (map->map[y][x] == 'N' || map->map[y][x] == 'S'
+				|| map->map[y][x] == 'E' || map->map[y][x] == 'W')
 				count++;
 			x++;
 		}

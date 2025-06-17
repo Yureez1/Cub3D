@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbanchon <jbanchon@student42.fr>           +#+  +:+       +#+        */
+/*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 13:33:09 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/06/16 20:30:24 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/06/17 16:35:40 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,30 @@ typedef struct s_map
 	int		y;
 	int		width;
 	int		height;
-	int		player_x;
-	int		player_y;
+	double	player_x;
+	double	player_y;
 	char	player_dir;
 	double	player_angle;
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
+	void	*mlx;
+	void	*mlx_win;
 }			t_map;
 
-/*==== map_parser.c ====*/
+/*==== init_mlx.c ====*/
 
+int			init_mlx(t_map *map);
+void		destroy_mlx(t_map *map);
+void		destroy_map(t_map *map);
+
+/*==== mlx_moves.c ====*/
+
+/*==== init_struct.c ====*/
+
+int			init_textures(t_textures *textures);
 int			init_struct(t_map *map);
-int			parse_map(t_map *map, char *file_path);
-int check_invalid_char(t_map *map);
-int	destroy_textures(t_textures *textures);
 
 /*==== map_checker.c ====*/
 
@@ -60,20 +72,44 @@ int			is_out_of_bounds(int x, int y, int width, int height);
 int			is_touching_void(t_map *map, int x, int y);
 int			validate_void_surroundings(t_map *map);
 void		fill_voids_with_walls(t_map *map);
-int			validate_map(t_map *map);
 
 /*==== map_loader.c ====*/
 
 int			open_map_file(char *file_path);
 char		**allocate_temp_map(void);
+int			process_map_line(char *line, char **temp_map, int *height,
+				int *max_width);
 int			fill_temp_map(int fd, char **temp_map, int *height, int *max_width);
 int			finalize_map(t_map *map, char **temp_map);
 int			read_map_lines(int fd, t_map *map);
 
+/*==== map_parser.c ====*/
+
+int			parse_map(t_map *map, char *file_path);
+
 /*==== map_textures.c ====*/
 
+int			parse_textures(t_textures *textures, char *file_path);
+int			handle_color_line(t_textures *textures, char *line);
+int			parse_color(t_textures *textures, char *file_path);
+int			parse_textures_colors(t_textures *textures, char *file_path);
+int			destroy_textures(t_textures *textures);
+int			convert_rgb(unsigned int r, unsigned int g, unsigned int b);
+
+/*==== parse_char.c ====*/
+
+int			check_invalid_char(t_map *map);
+
+/*==== player_pos.c ====*/
+
+int			init_player_dir(t_map *map);
+int			check_single_player(t_map *map);
 int			set_player_position(t_map *map, int x, int y);
 int			find_player_position(t_map *map);
-int check_single_player(t_map *map);
+
+/*==== print_map.c ====*/
+
+int			validate_map(t_map *map);
+
 
 #endif

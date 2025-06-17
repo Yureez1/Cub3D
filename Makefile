@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jbanchon <jbanchon@student42.fr>           +#+  +:+       +#+         #
+#    By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/04 17:01:27 by jbanchon          #+#    #+#              #
-#    Updated: 2025/06/16 13:57:05 by jbanchon         ###   ########.fr        #
+#    Updated: 2025/06/17 16:29:55 by jbanchon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,8 @@ SRCS = \
 	srcs/parsing/print_map.c \
 	srcs/parsing/parse_char.c \
 	srcs/parsing/map_textures.c \
+	srcs/cub_mlx/init_mlx.c \
+	srcs/init/init_struct.c \
 	$(GNL_DIR)/get_next_line.c \
 	$(GNL_DIR)/get_next_line_utils.c \
 
