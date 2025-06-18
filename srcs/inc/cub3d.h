@@ -6,7 +6,7 @@
 /*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 13:33:09 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/06/18 12:20:07 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/06/18 15:09:19 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,8 @@ int				parse_textures_colors(t_textures *textures, char *file_path);
 int				destroy_textures(t_textures *textures);
 int				convert_rgb(unsigned int r, unsigned int g, unsigned int b);
 int				parse_rgb(const char *str, int *res);
+int				check_xpm_file(const char *file_path);
+int				check_exist_textures(t_textures *textures);
 
 /*==== parse_char.c ====*/
 

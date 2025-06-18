@@ -6,7 +6,7 @@
 /*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 13:50:26 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/06/18 14:03:16 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/06/18 14:05:23 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ int	parse_map(t_map *map, char *file_path)
 	if (fd < 0)
 		return (printf("Error: Failed to open file %s\n", file_path), 1);
 	printf("Successfully opened %s (fd=%d)\n", file_path, fd);
-	// if (parse_textures_colors(map->textures, file_path))
-	// 	return ((close(fd), printf("Error parsing textures and colors\n")), 1);
-	// close(fd);
-	// fd = open_map_file(file_path);
+	if (parse_textures_colors(map->textures, file_path))
+		return ((close(fd), printf("Error parsing textures and colors\n")), 1);
+	close(fd);
+	fd = open_map_file(file_path);
 	if (read_map_lines(fd, map))
 		return ((close(fd), printf("Error reading map lines\n")), 1);
 	close(fd);

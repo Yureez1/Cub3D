@@ -6,7 +6,7 @@
 /*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 10:39:40 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/06/18 13:52:58 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/06/18 15:55:34 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,24 +43,32 @@ int	handle_texture_line(t_textures *textures, char *line)
 
 int	handle_color_line(t_textures *textures, char *line)
 {
-	if (!ft_strncmp(line, "F ", 1))
+	char	*trimmed_line;
+
+	if (!ft_strncmp(line, "F ", 2))
 	{
 		if (textures->floor)
 			return (perror("Duplicate F"), 1);
-		textures->floor = ft_strtrim(line + 1, " \t\n");
+		trimmed_line = ft_strtrim(line + 1, " \t\n");
+		if (!trimmed_line)
+			return (perror("Invalid floor color format"), 1);
+		textures->floor = trimmed_line;
+		if (parse_rgb(trimmed_line, &textures->floor_rgb))
+			return (free(trimmed_line), 1);
+		textures->floor = trimmed_line;
 	}
-	else if (!ft_strncmp(line, "C ", 1))
+	else if (!ft_strncmp(line, "C ", 2))
 	{
 		if (textures->ceiling)
 			return (perror("Duplicate C"), 1);
-		textures->ceiling = ft_strtrim(line + 1, " \t\n");
+		trimmed_line = ft_strtrim(line + 1, " \t\n");
+		if (!trimmed_line)
+			return (perror("Invalid ceiling color format"), 1);
+		textures->ceiling = trimmed_line;
+		if (parse_rgb(trimmed_line, &textures->ceiling_rgb))
+			return (free(trimmed_line), 1);
+		textures->ceiling = trimmed_line;
 	}
-	if (parse_rgb(textures->floor, &textures->floor_rgb))
-		return (1);
-	if (parse_rgb(textures->ceiling, &textures->ceiling_rgb))
-		return (1);
-	else
-		return (0);
 	return (0);
 }
 
@@ -82,14 +90,19 @@ int	parse_line(t_textures *textures, char *line)
 	return (free(trimmed_line), 0);
 }
 
+/* Mettre en commentaire check_exist_textures
+	+ check_xpm si on veut tester code*/
+
 int	check_textures(t_textures *textures)
 {
 	if (!textures->no || !textures->so || !textures->we || !textures->ea
 		|| !textures->floor || !textures->ceiling)
-	{
-		perror("Missing texture paths");
+		return (perror("Missing texture paths"), 1);
+	if (check_exist_textures(textures))
 		return (1);
-	}
+	if (check_xpm_file(textures->no) || check_xpm_file(textures->so)
+		|| check_xpm_file(textures->we) || check_xpm_file(textures->ea))
+		return (1);
 	return (0);
 }
 
@@ -171,5 +184,42 @@ int	parse_rgb(const char *str, int *res)
 		i++;
 	}
 	free(rgb);
+	return (0);
+}
+
+int	check_exist_textures(t_textures *textures)
+{
+	int	fd;
+
+	fd = open(textures->no, O_RDONLY);
+	if (fd < 0)
+		return (perror("Error opening NO texture file"), 1);
+	close(fd);
+	fd = open(textures->so, O_RDONLY);
+	if (fd < 0)
+		return (perror("Error opening SO texture file"), 1);
+	close(fd);
+	fd = open(textures->we, O_RDONLY);
+	if (fd < 0)
+		return (perror("Error opening WE texture file"), 1);
+	close(fd);
+	fd = open(textures->ea, O_RDONLY);
+	if (fd < 0)
+		return (perror("Error opening EA texture file"), 1);
+	close(fd);
+	return (0);
+}
+
+int	check_xpm_file(const char *file_path)
+{
+	size_t		len;
+	const char	*ext;
+
+	len = ft_strlen(file_path);
+	ext = file_path + len - 4;
+	if (!file_path || ft_strlen(file_path) < 4)
+		return (perror("Invalid file path"), 1);
+	if (ft_strncmp(ext, ".xpm", 4) != 0 && ft_strncmp(ext, ".XPM", 4) != 0)
+		return (perror("File is not a valid XPM file"), 1);
 	return (0);
 }
