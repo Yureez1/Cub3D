@@ -6,26 +6,24 @@
 /*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:01:02 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/06/17 16:32:19 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/06/18 11:22:12 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-int	init_mlx(t_map *map)
+int	init_window(void *mlx, void **mlx_win)
 {
-	if (!map)
-		return (perror("Map structure is NULL"), 1);
-	map->mlx = mlx_init();
-	if (!map->mlx)
+	mlx = mlx_init();
+	if (!mlx)
 		return (perror("Failed to initialize mlx"), 1);
-	map->mlx_win = mlx_new_window(map->mlx, 800, 600, "Cub3D Window");
-	if (!map->mlx_win)
+	*mlx_win = mlx_new_window(mlx, 800, 600, "Cub3D Window");
+	if (!*mlx_win)
 	{
-		mlx_destroy_display(map->mlx);
-		free(map->mlx);
+		mlx_destroy_window(mlx, *mlx_win);
 		return (perror("Failed to create window"), 1);
 	}
+	mlx_loop(mlx);
 	return (0);
 }
 
@@ -63,4 +61,5 @@ void	destroy_map(t_map *map)
 	map->map = NULL;
 	if (map->mlx)
 		destroy_mlx(map);
+	destroy_textures(map->textures);
 }

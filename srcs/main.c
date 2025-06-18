@@ -6,26 +6,11 @@
 /*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 13:33:11 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/06/17 16:02:11 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/06/18 11:20:51 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "inc/cub3d.h"
-
-int	init_window(void *mlx, void **mlx_win)
-{
-	mlx = mlx_init();
-	if (!mlx)
-		return (perror("Failed to initialize mlx"), 1);
-	*mlx_win = mlx_new_window(mlx, 800, 600, "Cub3D Window");
-	if (!*mlx_win)
-	{
-		mlx_destroy_window(mlx, *mlx_win);
-		return (perror("Failed to create window"), 1);
-	}
-	mlx_loop(mlx);
-	return (0);
-}
 
 int	main(int argc, char **argv)
 {
