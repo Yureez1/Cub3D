@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_textures.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 10:39:40 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/06/18 15:55:34 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/06/20 13:54:38 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,11 +98,11 @@ int	check_textures(t_textures *textures)
 	if (!textures->no || !textures->so || !textures->we || !textures->ea
 		|| !textures->floor || !textures->ceiling)
 		return (perror("Missing texture paths"), 1);
-	if (check_exist_textures(textures))
-		return (1);
-	if (check_xpm_file(textures->no) || check_xpm_file(textures->so)
-		|| check_xpm_file(textures->we) || check_xpm_file(textures->ea))
-		return (1);
+	// if (check_exist_textures(textures))
+	// 	return (1);
+	// if (check_xpm_file(textures->no) || check_xpm_file(textures->so)
+	// 	|| check_xpm_file(textures->we) || check_xpm_file(textures->ea))
+	// 	return (1);
 	return (0);
 }
 
