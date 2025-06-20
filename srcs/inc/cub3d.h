@@ -6,7 +6,7 @@
 /*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 13:33:09 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/06/20 14:22:10 by leaugust         ###   ########.fr       */
+/*   Updated: 2025/06/20 15:38:36 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,10 @@
 
 # define WIDTH 1280
 # define HEIGHT 1080
+# define MOVE_SPEED 0.15
+# define ROTATE_SPEED 0.05
+# define TILE_SIZE 25
+# define PLAYER_SIZE 25
 
 typedef struct s_textures
 {
@@ -77,6 +81,13 @@ typedef struct s_map
 	t_textures		*textures;
 }					t_map;
 
+/*==== main.c ====*/
+
+void				put_pixel(int x, int y, int color, t_game *game);
+void				draw_square(t_rect rect, t_game *game);
+void				draw_minimap(t_map *map);
+void				set_direction(t_map *map);
+
 /*==== init_mlx.c ====*/
 
 int					init_window(t_game *game);
@@ -92,6 +103,7 @@ void				move_left(t_map *map);
 void				move_right(t_map *map);
 void				rotate_left(t_map *map);
 void				rotate_right(t_map *map);
+void				redraw(t_map *map);
 int					handle_keypress(int keycode, t_map *map);
 
 /*==== init_struct.c ====*/

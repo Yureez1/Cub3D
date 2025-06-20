@@ -6,7 +6,7 @@
 #    By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/04 17:01:27 by jbanchon          #+#    #+#              #
-#    Updated: 2025/06/20 13:49:05 by leaugust         ###   ########.fr        #
+#    Updated: 2025/06/20 15:29:47 by leaugust         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ SRCS = \
 	srcs/cub_mlx/init_mlx.c \
 	srcs/cub_mlx/mlx_moves.c \
 	srcs/init/init_struct.c \
+	srcs/minimap/draw_map.c \
 	$(GNL_DIR)/get_next_line.c \
 	$(GNL_DIR)/get_next_line_utils.c \
 
