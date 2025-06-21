@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 13:33:09 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/06/20 15:38:36 by leaugust         ###   ########.fr       */
+/*   Updated: 2025/06/21 10:38:00 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ void				set_direction(t_map *map);
 int					init_window(t_game *game);
 void				destroy_map(t_map *map);
 void				destroy_mlx(t_game *game);
+void				start_game_loop(t_map *map);
 
 /*==== mlx_moves.c ====*/
 
