@@ -6,7 +6,7 @@
 /*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:01:02 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/06/21 11:42:22 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/06/21 12:03:22 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,26 +27,6 @@ int	init_window(t_game *game)
 	game->data = mlx_get_data_addr(game->mlx_img, &game->bpp, &game->size_line,
 			&game->endian);
 	return (0);
-}
-
-void	start_game_loop(t_map *map)
-{
-	t_game	*game;
-	t_rect	rect;
-
-	game = map->game;
-	if (!map || !map->game)
-		return ;
-	rect.x = (int)(map->player_x * TILE_SIZE);
-	rect.y = (int)(map->player_y * TILE_SIZE);
-	rect.size = PLAYER_SIZE;
-	rect.color = 0xFF0000;
-	redraw(map);
-	mlx_put_image_to_window(game->mlx, game->mlx_win, game->mlx_img, 0, 0);
-	mlx_hook(game->mlx_win, 2, 1L << 0, handle_keypress, map);
-	mlx_hook(game->mlx_win, 3, 1L << 1, handle_keyrelease, map);
-	mlx_loop_hook(game->mlx, game_loop, map);
-	mlx_loop(game->mlx);
 }
 
 void	destroy_mlx(t_game *game)

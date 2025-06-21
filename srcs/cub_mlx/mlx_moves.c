@@ -6,7 +6,7 @@
 /*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:09:21 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/06/21 12:02:00 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/06/21 12:11:41 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,89 +25,7 @@ int	is_walkable(t_map *map, double x, double y)
 	return (map->map[grid_y][grid_x] != '1');
 }
 
-void	rotate_left(t_map *map)
-{
-	double	old_dir_x;
-	double	old_plane_x;
-
-	old_dir_x = map->dir_x;
-	old_plane_x = map->plane_x;
-	map->dir_x = map->dir_x * cos(-ROTATE_SPEED) - map->dir_y
-		* sin(-ROTATE_SPEED);
-	map->dir_y = old_dir_x * sin(-ROTATE_SPEED) + map->dir_y
-		* cos(-ROTATE_SPEED);
-	map->plane_x = map->plane_x * cos(-ROTATE_SPEED) - map->plane_y
-		* sin(-ROTATE_SPEED);
-	map->plane_y = old_plane_x * sin(-ROTATE_SPEED) + map->plane_y
-		* cos(-ROTATE_SPEED);
-	printf("Rotated right to (%.2f, %.2f)\n", map->player_x, map->player_y);
-}
-
-void	rotate_right(t_map *map)
-{
-	double	old_dir_x;
-	double	old_plane_x;
-
-	old_dir_x = map->dir_x;
-	old_plane_x = map->plane_x;
-	map->dir_x = map->dir_x * cos(ROTATE_SPEED) - map->dir_y
-		* sin(ROTATE_SPEED);
-	map->dir_y = old_dir_x * sin(ROTATE_SPEED) + map->dir_y * cos(ROTATE_SPEED);
-	map->plane_x = map->plane_x * cos(ROTATE_SPEED) - map->plane_y
-		* sin(ROTATE_SPEED);
-	map->plane_y = old_plane_x * sin(ROTATE_SPEED) + map->plane_y
-		* cos(ROTATE_SPEED);
-	printf("Rotated left to (%.2f, %.2f)\n", map->player_x, map->player_y);
-}
-
-static void	accumulate_vector(t_map *map, double *v_x, double *v_y)
-{
-	t_game	*game;
-
-	game = map->game;
-	*v_x = 0;
-	*v_y = 0;
-	if (game->key[MOVE_FWD])
-	{
-		*v_x += map->dir_x * MOVE_SPEED;
-		*v_y += map->dir_y * MOVE_SPEED;
-	}
-	if (game->key[MOVE_BWD])
-	{
-		*v_x -= map->dir_x * MOVE_SPEED;
-		*v_y -= map->dir_y * MOVE_SPEED;
-	}
-	if (game->key[MOVE_LEFT])
-	{
-		*v_x -= map->plane_x * MOVE_SPEED;
-		*v_y -= map->plane_y * MOVE_SPEED;
-	}
-	if (game->key[MOVE_RIGHT])
-	{
-		*v_x += map->plane_x * MOVE_SPEED;
-		*v_y += map->plane_y * MOVE_SPEED;
-	}
-}
-
-static void normalize_vector(double *v_x, double *v_y)
-{
-	double mag;
-
-	mag = sqrt((*v_x) * (*v_x) + (*v_y) * (*v_y));
-	if (mag > 0.0)
-	{
-		*v_x = (*v_x / mag) * MOVE_SPEED;
-		*v_y = (*v_y / mag) * MOVE_SPEED;
-	}
-}
-
-static void calc_move_vector(t_map *map, double *v_x, double *v_y)
-{
-	accumulate_vector(map, v_x, v_y);
-	normalize_vector(v_x, v_y);
-}
-
-static void	apply_move(t_map *map, double v_x, double v_y)
+void	apply_move(t_map *map, double v_x, double v_y)
 {
 	if (is_walkable(map, map->player_x + v_x, map->player_y))
 		map->player_x += v_x;
@@ -115,7 +33,7 @@ static void	apply_move(t_map *map, double v_x, double v_y)
 		map->player_y += v_y;
 }
 
-static void	apply_rotation(t_map *map)
+void	apply_rotation(t_map *map)
 {
 	t_game	*game;
 
@@ -124,22 +42,6 @@ static void	apply_rotation(t_map *map)
 		rotate_left(map);
 	else if (game->key[ROTATE_RIGHT])
 		rotate_right(map);
-}
-
-void	redraw(t_map *map)
-{
-	t_rect	player_rect;
-
-	ft_bzero(map->game->data, WIDTH * HEIGHT * 4);
-	draw_minimap(map);
-	player_rect.x = (int)(map->player_x * TILE_SIZE) - PLAYER_SIZE / 2;
-	player_rect.y = (int)(map->player_y * TILE_SIZE) - PLAYER_SIZE / 2;
-	player_rect.size = PLAYER_SIZE;
-	player_rect.color = 0x00FF00;
-	draw_square(player_rect, map->game);
-	set_direction(map);
-	mlx_put_image_to_window(map->game->mlx, map->game->mlx_win,
-		map->game->mlx_img, 0, 0);
 }
 
 int	handle_keypress(int keycode, t_map *map)
@@ -184,17 +86,5 @@ int	handle_keyrelease(int keycode, t_map *map)
 		game->key[ROTATE_LEFT] = 0;
 	else if (keycode == KEY_RIGHT)
 		game->key[ROTATE_RIGHT] = 0;
-	return (0);
-}
-
-int	game_loop(t_map *map)
-{
-	double	v_x;
-	double	v_y;
-
-	calc_move_vector(map, &v_x, &v_y);
-	apply_move(map, v_x, v_y);
-	apply_rotation(map);
-	redraw(map);
 	return (0);
 }

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+         #
+#    By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/04 17:01:27 by jbanchon          #+#    #+#              #
-#    Updated: 2025/06/20 15:29:47 by leaugust         ###   ########.fr        #
+#    Updated: 2025/06/21 12:07:16 by jbanchon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,10 +30,12 @@ SRCS = \
 	srcs/parsing/print_map.c \
 	srcs/parsing/parse_char.c \
 	srcs/parsing/map_textures.c \
-	srcs/cub_mlx/init_mlx.c \
-	srcs/cub_mlx/mlx_moves.c \
 	srcs/init/init_struct.c \
 	srcs/minimap/draw_map.c \
+	srcs/cub_mlx/init_mlx.c \
+	srcs/cub_mlx/mlx_moves.c \
+	srcs/cub_mlx/calculate_vector.c \
+	srcs/cub_mlx/game_loop.c \
 	$(GNL_DIR)/get_next_line.c \
 	$(GNL_DIR)/get_next_line_utils.c \
 

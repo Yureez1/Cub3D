@@ -6,7 +6,7 @@
 /*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 13:33:09 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/06/21 11:42:48 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/06/21 12:11:55 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,20 @@ typedef struct s_map
 	t_textures		*textures;
 }					t_map;
 
+/*==== calculate_vector.c ====*/
+
+void				accumulate_vector(t_map *map, double *v_x, double *v_y);
+void				normalize_vector(double *v_x, double *v_y);
+void				calc_move_vector(t_map *map, double *v_x, double *v_y);
+void				rotate_left(t_map *map);
+void				rotate_right(t_map *map);
+
+/*==== game_loop.c ====*/
+
+void				start_game_loop(t_map *map);
+int					game_loop(t_map *map);
+void				redraw(t_map *map);
+
 /*==== main.c ====*/
 
 void				put_pixel(int x, int y, int color, t_game *game);
@@ -113,21 +127,14 @@ void				set_direction(t_map *map);
 int					init_window(t_game *game);
 void				destroy_map(t_map *map);
 void				destroy_mlx(t_game *game);
-void				start_game_loop(t_map *map);
 
 /*==== mlx_moves.c ====*/
 
 int					is_walkable(t_map *map, double x, double y);
-void				move_forward(t_map *map);
-void				move_backward(t_map *map);
-void				move_left(t_map *map);
-void				move_right(t_map *map);
-void				rotate_left(t_map *map);
-void				rotate_right(t_map *map);
-void				redraw(t_map *map);
+void				apply_move(t_map *map, double v_x, double v_y);
+void				apply_rotation(t_map *map);
 int					handle_keypress(int keycode, t_map *map);
 int					handle_keyrelease(int keycode, t_map *map);
-int					game_loop(t_map *map);
 
 /*==== init_struct.c ====*/
 
