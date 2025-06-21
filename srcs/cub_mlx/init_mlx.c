@@ -6,7 +6,7 @@
 /*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:01:02 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/06/21 10:39:03 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/06/21 11:42:22 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,19 +32,21 @@ int	init_window(t_game *game)
 void	start_game_loop(t_map *map)
 {
 	t_game	*game;
+	t_rect	rect;
 
 	game = map->game;
 	if (!map || !map->game)
 		return ;
-    t_rect rect;
-    rect.x = (int)(map->player_x * TILE_SIZE);
-    rect.y = (int)(map->player_y * TILE_SIZE);
-    rect.size = PLAYER_SIZE;
-    rect.color = 0xFF0000;
-    redraw(map);
-    mlx_put_image_to_window(game->mlx, game->mlx_win, game->mlx_img, 0, 0);
-    mlx_hook(game->mlx_win, 2, 1L << 0, handle_keypress, map);
-    mlx_loop(game->mlx);
+	rect.x = (int)(map->player_x * TILE_SIZE);
+	rect.y = (int)(map->player_y * TILE_SIZE);
+	rect.size = PLAYER_SIZE;
+	rect.color = 0xFF0000;
+	redraw(map);
+	mlx_put_image_to_window(game->mlx, game->mlx_win, game->mlx_img, 0, 0);
+	mlx_hook(game->mlx_win, 2, 1L << 0, handle_keypress, map);
+	mlx_hook(game->mlx_win, 3, 1L << 1, handle_keyrelease, map);
+	mlx_loop_hook(game->mlx, game_loop, map);
+	mlx_loop(game->mlx);
 }
 
 void	destroy_mlx(t_game *game)
@@ -57,6 +59,7 @@ void	destroy_mlx(t_game *game)
 		game->mlx_win = NULL;
 	}
 	mlx_destroy_display(game->mlx);
+	free(game->key);
 	free(game->mlx);
 	game->mlx = NULL;
 	game->mlx_win = NULL;

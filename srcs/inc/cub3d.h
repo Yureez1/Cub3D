@@ -6,7 +6,7 @@
 /*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 13:33:09 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/06/21 10:38:00 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/06/21 11:42:48 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,25 @@
 # define TILE_SIZE 25
 # define PLAYER_SIZE 25
 
+# define KEY_ESC 65307
+# define KEY_W 119
+# define KEY_S 115
+# define KEY_A 97
+# define KEY_D 100
+# define KEY_LEFT 65361
+# define KEY_RIGHT 65363
+
+typedef enum e_action
+{
+	MOVE_FWD,
+	MOVE_BWD,
+	MOVE_LEFT,
+	MOVE_RIGHT,
+	ROTATE_LEFT,
+	ROTATE_RIGHT,
+	COUNT_ACT
+}					t_action;
+
 typedef struct s_textures
 {
 	char			*no;
@@ -52,6 +71,7 @@ typedef struct s_game
 	int				size_line;
 	char			*data;
 	int				endian;
+	int				key[COUNT_ACT];
 }					t_game;
 
 typedef struct s_rect
@@ -106,6 +126,8 @@ void				rotate_left(t_map *map);
 void				rotate_right(t_map *map);
 void				redraw(t_map *map);
 int					handle_keypress(int keycode, t_map *map);
+int					handle_keyrelease(int keycode, t_map *map);
+int					game_loop(t_map *map);
 
 /*==== init_struct.c ====*/
 
