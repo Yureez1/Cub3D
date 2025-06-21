@@ -6,7 +6,7 @@
 #    By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/04 17:01:27 by jbanchon          #+#    #+#              #
-#    Updated: 2025/06/21 12:07:16 by jbanchon         ###   ########.fr        #
+#    Updated: 2025/06/21 15:01:24 by jbanchon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ SRCS = \
 	srcs/cub_mlx/mlx_moves.c \
 	srcs/cub_mlx/calculate_vector.c \
 	srcs/cub_mlx/game_loop.c \
+	srcs/cub_mlx/laser.c \
 	$(GNL_DIR)/get_next_line.c \
 	$(GNL_DIR)/get_next_line_utils.c \
 

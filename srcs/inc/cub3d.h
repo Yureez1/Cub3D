@@ -6,7 +6,7 @@
 /*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 13:33:09 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/06/21 12:11:55 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/06/21 15:17:16 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # define ROTATE_SPEED 0.05
 # define TILE_SIZE 25
 # define PLAYER_SIZE 25
+# define RAY_STEP (1.0 / TILE_SIZE)
 
 # define KEY_ESC 65307
 # define KEY_W 119
@@ -100,6 +101,8 @@ typedef struct s_map
 	struct s_game	*game;
 	t_textures		*textures;
 }					t_map;
+
+int					touch(t_map *map, double ray_x, double ray_y);
 
 /*==== calculate_vector.c ====*/
 

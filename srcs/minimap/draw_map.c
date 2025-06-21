@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 15:28:54 by leaugust          #+#    #+#             */
-/*   Updated: 2025/06/20 15:33:42 by leaugust         ###   ########.fr       */
+/*   Updated: 2025/06/21 15:29:56 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,24 +70,22 @@ void	draw_minimap(t_map *map)
 
 void	set_direction(t_map *map)
 {
-	int		i;
-	int		len;
-	double	x;
-	double	y;
-	double	dx;
-	double	dy;
+	double	ray_x;
+	double	ray_y;
+	int		player_x;
+	int		player_y;
 
-	i = 0;
-	len = 16;
-	x = map->player_x * TILE_SIZE;
-	y = map->player_y * TILE_SIZE;
-	dx = map->dir_x;
-	dy = map->dir_y;
-	while (i < len)
+	ray_x = map->player_x;
+	ray_y = map->player_y;
+	while (!touch(map, ray_x, ray_y))
 	{
-		int	px = (int)(x + dx * i);
-		int	py = (int)(y + dy * i);
-		put_pixel(px, py, 0xFF0000, map->game); // rouge
-		i++;
+		player_x = (int)(ray_x * TILE_SIZE);
+		player_y = (int)(ray_y * TILE_SIZE);
+		put_pixel(player_x, player_y, 0xFF0000, map->game);
+		ray_x += map->dir_x * RAY_STEP;
+		ray_y += map->dir_y * RAY_STEP;
 	}
+	player_x = (int)(ray_x * TILE_SIZE);
+	player_y = (int)(ray_y * TILE_SIZE);
+	put_pixel(player_x, player_y, 0xFF0000, map->game);
 }

@@ -6,7 +6,7 @@
 /*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 12:03:12 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/06/21 12:09:33 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/06/21 15:30:07 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,6 @@ void	redraw(t_map *map)
 	player_rect.color = 0x00FF00;
 	draw_square(player_rect, map->game);
 	set_direction(map);
-	mlx_put_image_to_window(map->game->mlx, map->game->mlx_win,
-		map->game->mlx_img, 0, 0);
+    mlx_put_image_to_window(map->game->mlx, map->game->mlx_win,
+        map->game->mlx_img, 0, 0);
 }
