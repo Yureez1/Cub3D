@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 12:03:12 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/06/26 14:34:56 by leaugust         ###   ########.fr       */
+/*   Updated: 2025/06/26 17:06:36 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,16 @@ int	game_loop(t_map *map)
 
 void	redraw(t_map *map)
 {
-	t_rect	player_rect;
-
+	// t_rect	player_rect;
+	if (!map || !map->game || !map->game->data)
+		return ;
 	ft_bzero(map->game->data, WIDTH * HEIGHT * 4);
 	draw_minimap(map);
-	player_rect.x = (int)(map->player_x * TILE_SIZE) - PLAYER_SIZE / 2;
-	player_rect.y = (int)(map->player_y * TILE_SIZE) - PLAYER_SIZE / 2;
-	player_rect.size = PLAYER_SIZE;
-	player_rect.color = 0x00FF00;
-	draw_square(player_rect, map->game);
+	// player_rect.x = (int)(map->player_x * TILE_SIZE) - PLAYER_SIZE / 2;
+	// player_rect.y = (int)(map->player_y * TILE_SIZE) - PLAYER_SIZE / 2;
+	// player_rect.size = PLAYER_SIZE;
+	// player_rect.color = 0x00FF00;
+	// draw_square(player_rect, map->game);
 	set_direction(map);
 	mlx_put_image_to_window(map->game->mlx, map->game->mlx_win,
 		map->game->mlx_img, 0, 0);

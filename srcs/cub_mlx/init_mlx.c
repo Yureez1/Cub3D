@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:01:02 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/06/26 14:46:11 by leaugust         ###   ########.fr       */
+/*   Updated: 2025/06/26 17:08:05 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,12 @@ int	init_window(t_game *game)
 	}
 	game->data = mlx_get_data_addr(game->mlx_img, &game->bpp, &game->size_line,
 			&game->endian);
+	if (!game->data)
+	{
+		mlx_destroy_image(game->mlx, game->mlx_img);
+		mlx_destroy_window(game->mlx, game->mlx_win);
+		return (perror("Failed to get image data"), 1);
+	}
 	return (0);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 13:33:09 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/06/26 14:45:03 by leaugust         ###   ########.fr       */
+/*   Updated: 2025/06/26 17:19:20 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,11 @@
 # include <unistd.h>
 
 # define WIDTH 1280
-# define HEIGHT 1080
-# define MOVE_SPEED 0.15
-# define ROTATE_SPEED 0.05
-# define TILE_SIZE 25
-# define PLAYER_SIZE 25
-# define RAY_STEP (1.0 / TILE_SIZE)
+# define HEIGHT 720
+# define MOVE_SPEED 1
+# define ROTATE_SPEED 0.1
+# define TILE_SIZE 64
+# define PLAYER_SIZE 10
 # define PI 3.141592653589793
 # define FOV (PI / 3.0)
 
@@ -102,12 +101,12 @@ typedef struct s_map
 	int				height;
 	double			player_x;
 	double			player_y;
-	char			player_dir;
-	double			player_angle;
 	double			dir_x;
 	double			dir_y;
 	double			plane_x;
 	double			plane_y;
+	double			player_angle;
+	int				player_dir;
 	struct s_game	*game;
 	t_textures		*textures;
 }					t_map;
@@ -131,7 +130,8 @@ int					is_position_free(t_map *map, double px, double py);
 
 /*==== draw_map.c =====*/
 
-void				draw_line(t_map *map, t_game *game, double start_x, int i);
+void				draw_line(t_map *map, t_game *game, double ray_x,
+						double ray_y, int i);
 
 /*==== main.c ====*/
 

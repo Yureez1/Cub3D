@@ -3,55 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   player_pos.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 14:47:21 by leaugust          #+#    #+#             */
-/*   Updated: 2025/06/26 14:16:42 by leaugust         ###   ########.fr       */
+/*   Updated: 2025/06/26 17:19:37 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
-
-int	init_player_dir(t_map *map)
-{
-	char	spawn_dir;
-
-	spawn_dir = map->player_dir;
-	if (spawn_dir == 'N')
-	{
-		map->dir_x = 0;
-		map->dir_y = -1;
-		map->plane_x = 0.66;
-		map->plane_y = 0;
-	}
-	else if (spawn_dir == 'S')
-	{
-		map->dir_x = 0;
-		map->dir_y = 1;
-		map->plane_x = -0.66;
-		map->plane_y = 0;
-	}
-	else if (spawn_dir == 'E')
-	{
-		map->dir_x = 1;
-		map->dir_y = 0;
-		map->plane_x = 0;
-		map->plane_y = -0.66;
-	}
-	else if (spawn_dir == 'W')
-	{
-		map->dir_x = -1;
-		map->dir_y = 0;
-		map->plane_x = 0;
-		map->plane_y = 0.66;
-	}
-	else
-	{
-		perror("Invalid player direction");
-		return (1);
-	}
-	return (0);
-}
 
 int	check_single_player(t_map *map)
 {
@@ -98,8 +57,6 @@ int	set_player_position(t_map *map, int x, int y)
 		map->player_angle = 0;
 	else if (c == 'W')
 		map->player_angle = M_PI;
-	printf("Player at (%d, %d), facing '%c', angle %.2f rad\n", x, y, c,
-		map->player_angle);
 	return (1);
 }
 
