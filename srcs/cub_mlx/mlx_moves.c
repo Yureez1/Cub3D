@@ -3,26 +3,67 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_moves.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:09:21 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/06/21 12:11:41 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/06/26 14:39:55 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-int	is_walkable(t_map *map, double x, double y)
+void	get_bounding_cells(double px, double py, t_bounds *bounds)
 {
-	int	grid_x;
-	int	grid_y;
+	int	left;
+	int	right;
+	int	top;
+	int	bottom;
 
-	grid_x = (int)x;
-	grid_y = (int)y;
-	if (grid_x < 0 || grid_x >= map->width || grid_y < 0
-		|| grid_y >= map->height)
+	left = (int)(px * TILE_SIZE) - PLAYER_SIZE / 2;
+	right = (int)(px * TILE_SIZE) + PLAYER_SIZE / 2;
+	top = (int)(py * TILE_SIZE) - PLAYER_SIZE / 2;
+	bottom = (int)(py * TILE_SIZE) + PLAYER_SIZE / 2;
+	bounds->left_cell = left / TILE_SIZE;
+	bounds->right_cell = right / TILE_SIZE;
+	bounds->top_cell = top / TILE_SIZE;
+	bounds->bottom_cell = bottom / TILE_SIZE;
+}
+
+int	is_cell_walkable(t_map *map, int x, int y)
+{
+	if (y < 0)
 		return (0);
-	return (map->map[grid_y][grid_x] != '1');
+	if (y >= map->height)
+		return (0);
+	if (x < 0)
+		return (0);
+	if (x >= map->width)
+		return (0);
+	if (map->map[y][x] == '1')
+		return (0);
+	return (1);
+}
+
+int	is_walkable(t_map *map, double px, double py)
+{
+	t_bounds	bounds;
+	int			x;
+	int			y;
+
+	get_bounding_cells(px, py, &bounds);
+	y = bounds.top_cell;
+	while (y <= bounds.bottom_cell)
+	{
+		x = bounds.left_cell;
+		while (x <= bounds.right_cell)
+		{
+			if (!is_cell_walkable(map, x, y))
+				return (0);
+			x++;
+		}
+		y++;
+	}
+	return (1);
 }
 
 void	apply_move(t_map *map, double v_x, double v_y)

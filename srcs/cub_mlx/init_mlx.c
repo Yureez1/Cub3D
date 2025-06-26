@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:01:02 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/06/21 12:03:22 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/06/26 14:46:11 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,36 +33,53 @@ void	destroy_mlx(t_game *game)
 {
 	if (!game || !game->mlx)
 		return ;
+	if (game->mlx_img)
+	{
+		mlx_destroy_image(game->mlx, game->mlx_img);
+		game->mlx_img = NULL;
+	}
 	if (game->mlx_win)
 	{
 		mlx_destroy_window(game->mlx, game->mlx_win);
 		game->mlx_win = NULL;
 	}
 	mlx_destroy_display(game->mlx);
-	free(game->key);
 	free(game->mlx);
 	game->mlx = NULL;
-	game->mlx_win = NULL;
 }
 
-void	destroy_map(t_map *map)
+void	free_map_grid(t_map *map)
 {
 	int	y;
 
 	if (!map || !map->map)
 		return ;
-	if (map->map)
+	y = 0;
+	while (y < map->height)
 	{
-		y = 0;
-		while (y < map->height)
-		{
+		if (map->map[y])
 			free(map->map[y]);
-			y++;
-		}
+		y++;
 	}
 	free(map->map);
 	map->map = NULL;
+}
+
+void	destroy_map(t_map *map)
+{
+	if (!map)
+		return ;
+	free_map_grid(map);
 	if (map->game)
+	{
 		destroy_mlx(map->game);
-	destroy_textures(map->textures);
+		free(map->game);
+		map->game = NULL;
+	}
+	if (map->textures)
+	{
+		destroy_textures(map->textures);
+		map->textures = NULL;
+	}
+	free(map);
 }

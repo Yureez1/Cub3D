@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 13:33:09 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/06/26 11:55:35 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/06/26 14:45:03 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,14 @@ typedef enum e_action
 	ROTATE_RIGHT,
 	COUNT_ACT
 }					t_action;
+
+typedef struct s_bounds
+{
+	int				left_cell;
+	int				right_cell;
+	int				top_cell;
+	int				bottom_cell;
+}					t_bounds;
 
 typedef struct s_textures
 {
@@ -119,6 +127,7 @@ void				rotate_right(t_map *map);
 void				start_game_loop(t_map *map);
 int					game_loop(t_map *map);
 void				redraw(t_map *map);
+int					is_position_free(t_map *map, double px, double py);
 
 /*==== draw_map.c =====*/
 
@@ -136,10 +145,13 @@ void				set_direction(t_map *map);
 int					init_window(t_game *game);
 void				destroy_map(t_map *map);
 void				destroy_mlx(t_game *game);
+void				free_map_grid(t_map *map);
 
 /*==== mlx_moves.c ====*/
 
-int					is_walkable(t_map *map, double x, double y);
+int					is_cell_walkable(t_map *map, int x, int y);
+void				get_bounding_cells(double px, double py, t_bounds *bounds);
+int					is_walkable(t_map *map, double px, double py);
 void				apply_move(t_map *map, double v_x, double v_y);
 void				apply_rotation(t_map *map);
 int					handle_keypress(int keycode, t_map *map);
