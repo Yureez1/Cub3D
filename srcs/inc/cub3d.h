@@ -6,7 +6,7 @@
 /*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 13:33:09 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/06/21 15:17:16 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/06/26 11:55:35 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@
 # define TILE_SIZE 25
 # define PLAYER_SIZE 25
 # define RAY_STEP (1.0 / TILE_SIZE)
+# define PI 3.141592653589793
+# define FOV (PI / 3.0)
 
 # define KEY_ESC 65307
 # define KEY_W 119
@@ -117,6 +119,10 @@ void				rotate_right(t_map *map);
 void				start_game_loop(t_map *map);
 int					game_loop(t_map *map);
 void				redraw(t_map *map);
+
+/*==== draw_map.c =====*/
+
+void				draw_line(t_map *map, t_game *game, double start_x, int i);
 
 /*==== main.c ====*/
 

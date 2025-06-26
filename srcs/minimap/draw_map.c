@@ -6,7 +6,7 @@
 /*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 15:28:54 by leaugust          #+#    #+#             */
-/*   Updated: 2025/06/21 15:29:56 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/06/26 12:15:57 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ void	draw_minimap(t_map *map)
 			rect.y = y * TILE_SIZE;
 			rect.size = TILE_SIZE;
 			if (map->map[y][x] == '1')
-				rect.color = 0x0000FF; // Bleu pour mur
+				rect.color = 0x0000FF;
 			else
-				rect.color = 0xCCCCCC; // Gris clair pour sol
+				rect.color = 0xCCCCCC;
 			draw_square(rect, map->game);
 			x++;
 		}
@@ -74,18 +74,43 @@ void	set_direction(t_map *map)
 	double	ray_y;
 	int		player_x;
 	int		player_y;
+	double	fraction;
+	double	start_x;
+	int		i;
 
+	ray_x = map->player_x;
+	ray_y = map->player_y;
+	i = 0;
+	fraction = FOV / WIDTH;
+	start_x = map->player_angle - (FOV / 2);
+	while (i < WIDTH)
+	{
+		draw_line(map, map->game, start_x, i);
+		start_x += fraction;
+		i++;
+	}
+	player_x = (int)(ray_x * TILE_SIZE);
+	player_y = (int)(ray_y * TILE_SIZE);
+	put_pixel(player_x, player_y, 0x00FF00, map->game);
+}
+
+void	draw_line(t_map *map, t_game *game, double start_x, int i)
+{
+	double	cos_angle;
+	double	sin_angle;
+	double	ray_x;
+	double	ray_y;
+
+	(void)i;
+	cos_angle = cos(start_x);
+	sin_angle = sin(start_x);
 	ray_x = map->player_x;
 	ray_y = map->player_y;
 	while (!touch(map, ray_x, ray_y))
 	{
-		player_x = (int)(ray_x * TILE_SIZE);
-		player_y = (int)(ray_y * TILE_SIZE);
-		put_pixel(player_x, player_y, 0xFF0000, map->game);
-		ray_x += map->dir_x * RAY_STEP;
-		ray_y += map->dir_y * RAY_STEP;
+		put_pixel((int)(ray_x * TILE_SIZE), (int)(ray_y * TILE_SIZE), 0xFF0000,
+			game);
+		ray_x += cos_angle * RAY_STEP;
+		ray_y += sin_angle * RAY_STEP;
 	}
-	player_x = (int)(ray_x * TILE_SIZE);
-	player_y = (int)(ray_y * TILE_SIZE);
-	put_pixel(player_x, player_y, 0xFF0000, map->game);
 }

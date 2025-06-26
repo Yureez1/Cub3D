@@ -6,7 +6,7 @@
 /*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 12:04:48 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/06/21 12:08:57 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/06/26 12:00:48 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ void	accumulate_vector(t_map *map, double *v_x, double *v_y)
 	}
 }
 
-void normalize_vector(double *v_x, double *v_y)
+void	normalize_vector(double *v_x, double *v_y)
 {
-	double mag;
+	double	mag;
 
 	mag = sqrt((*v_x) * (*v_x) + (*v_y) * (*v_y));
 	if (mag > 0.0)
@@ -53,7 +53,7 @@ void normalize_vector(double *v_x, double *v_y)
 	}
 }
 
-void calc_move_vector(t_map *map, double *v_x, double *v_y)
+void	calc_move_vector(t_map *map, double *v_x, double *v_y)
 {
 	accumulate_vector(map, v_x, v_y);
 	normalize_vector(v_x, v_y);
@@ -74,6 +74,7 @@ void	rotate_left(t_map *map)
 		* sin(-ROTATE_SPEED);
 	map->plane_y = old_plane_x * sin(-ROTATE_SPEED) + map->plane_y
 		* cos(-ROTATE_SPEED);
+	map->player_angle = atan2(map->dir_y, map->dir_x);
 	printf("Rotated right to (%.2f, %.2f)\n", map->player_x, map->player_y);
 }
 
@@ -91,5 +92,6 @@ void	rotate_right(t_map *map)
 		* sin(ROTATE_SPEED);
 	map->plane_y = old_plane_x * sin(ROTATE_SPEED) + map->plane_y
 		* cos(ROTATE_SPEED);
+	map->player_angle = atan2(map->dir_y, map->dir_x);
 	printf("Rotated left to (%.2f, %.2f)\n", map->player_x, map->player_y);
 }
