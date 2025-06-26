@@ -1,0 +1,84 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rgb_utils.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/26 21:12:10 by leaugust          #+#    #+#             */
+/*   Updated: 2025/06/26 22:19:36 by leaugust         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../inc/cub3d.h"
+
+int	convert_rgb(unsigned int r, unsigned int g, unsigned int b)
+{
+	if (r > 255 || g > 255 || b > 255)
+		return (perror("RGB values must be between 0 and 255"), -1);
+	return ((r << 16) | (g << 8) | b);
+}
+
+int	parse_rgb(const char *str, int *res)
+{
+	char	**rgb;
+	int		r;
+	int		g;
+	int		b;
+	int		i;
+
+	rgb = ft_split(str, ',');
+	if (!rgb || !rgb[0] || !rgb[1] || !rgb[2] || rgb[3])
+		return (perror("Invalid RGB format"), 1);
+	r = ft_atoi(rgb[0]);
+	g = ft_atoi(rgb[1]);
+	b = ft_atoi(rgb[2]);
+	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
+		return (perror("RGB values must be between 0 and 255"), 1);
+	*res = convert_rgb(r, g, b);
+	i = 0;
+	while (rgb[i])
+	{
+		free(rgb[i]);
+		i++;
+	}
+	free(rgb);
+	return (0);
+}
+
+int	check_exist_textures(t_textures *textures)
+{
+	int	fd;
+
+	fd = open(textures->no, O_RDONLY);
+	if (fd < 0)
+		return (perror("Error opening NO texture file"), 1);
+	close(fd);
+	fd = open(textures->so, O_RDONLY);
+	if (fd < 0)
+		return (perror("Error opening SO texture file"), 1);
+	close(fd);
+	fd = open(textures->we, O_RDONLY);
+	if (fd < 0)
+		return (perror("Error opening WE texture file"), 1);
+	close(fd);
+	fd = open(textures->ea, O_RDONLY);
+	if (fd < 0)
+		return (perror("Error opening EA texture file"), 1);
+	close(fd);
+	return (0);
+}
+
+int	check_xpm_file(const char *file_path)
+{
+	size_t		len;
+	const char	*ext;
+
+	len = ft_strlen(file_path);
+	ext = file_path + len - 4;
+	if (!file_path || ft_strlen(file_path) < 4)
+		return (perror("Invalid file path"), 1);
+	if (ft_strncmp(ext, ".xpm", 4) != 0 && ft_strncmp(ext, ".XPM", 4) != 0)
+		return (perror("File is not a valid XPM file"), 1);
+	return (0);
+}

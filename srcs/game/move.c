@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_moves.c                                        :+:      :+:    :+:   */
+/*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/17 16:09:21 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/06/26 14:39:55 by leaugust         ###   ########.fr       */
+/*   Created: 2025/06/26 20:16:43 by leaugust          #+#    #+#             */
+/*   Updated: 2025/06/26 20:17:25 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,49 +83,4 @@ void	apply_rotation(t_map *map)
 		rotate_left(map);
 	else if (game->key[ROTATE_RIGHT])
 		rotate_right(map);
-}
-
-int	handle_keypress(int keycode, t_map *map)
-{
-	t_game	*game;
-
-	game = map->game;
-	if (keycode == KEY_ESC)
-	{
-		destroy_map(map);
-		exit(0);
-	}
-	else if (keycode == KEY_W)
-		game->key[MOVE_FWD] = 1;
-	else if (keycode == KEY_S)
-		game->key[MOVE_BWD] = 1;
-	else if (keycode == KEY_A)
-		game->key[MOVE_LEFT] = 1;
-	else if (keycode == KEY_D)
-		game->key[MOVE_RIGHT] = 1;
-	else if (keycode == KEY_LEFT)
-		game->key[ROTATE_LEFT] = 1;
-	else if (keycode == KEY_RIGHT)
-		game->key[ROTATE_RIGHT] = 1;
-	return (0);
-}
-
-int	handle_keyrelease(int keycode, t_map *map)
-{
-	t_game	*game;
-
-	game = map->game;
-	if (keycode == KEY_W)
-		game->key[MOVE_FWD] = 0;
-	else if (keycode == KEY_S)
-		game->key[MOVE_BWD] = 0;
-	else if (keycode == KEY_A)
-		game->key[MOVE_LEFT] = 0;
-	else if (keycode == KEY_D)
-		game->key[MOVE_RIGHT] = 0;
-	else if (keycode == KEY_LEFT)
-		game->key[ROTATE_LEFT] = 0;
-	else if (keycode == KEY_RIGHT)
-		game->key[ROTATE_RIGHT] = 0;
-	return (0);
 }

@@ -1,43 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   player_pos.c                                       :+:      :+:    :+:   */
+/*   player_init.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 14:47:21 by leaugust          #+#    #+#             */
-/*   Updated: 2025/06/26 17:19:37 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/06/26 22:11:10 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
-
-int	check_single_player(t_map *map)
-{
-	int	count;
-	int	y;
-	int	x;
-
-	count = 0;
-	y = 0;
-	while (y < map->height)
-	{
-		x = 0;
-		while (x < map->width && map->map[y][x])
-		{
-			if (map->map[y][x] == 'N' || map->map[y][x] == 'S'
-				|| map->map[y][x] == 'E' || map->map[y][x] == 'W')
-				count++;
-			x++;
-		}
-		y++;
-	}
-	if (count == 0)
-		return (perror("No player position found in map"), 1);
-	if (count > 1)
-		return (perror("Multiple player positions found in map"), 1);
-	return (0);
-}
 
 int	set_player_position(t_map *map, int x, int y)
 {
@@ -60,7 +33,7 @@ int	set_player_position(t_map *map, int x, int y)
 	return (1);
 }
 
-int	find_player_position(t_map *map)
+void	fill_voids_with_walls(t_map *map)
 {
 	int	y;
 	int	x;
@@ -71,12 +44,10 @@ int	find_player_position(t_map *map)
 		x = 0;
 		while (x < map->width)
 		{
-			if (set_player_position(map, x, y))
-				return (0);
+			if (map->map[y][x] == ' ')
+				map->map[y][x] = '1';
 			x++;
 		}
 		y++;
 	}
-	printf("Error: No player position found in map.\n");
-	return (1);
 }

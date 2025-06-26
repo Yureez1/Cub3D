@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   laser.c                                            :+:      :+:    :+:   */
+/*   char_validation.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/21 14:50:24 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/06/26 12:06:06 by jbanchon         ###   ########.fr       */
+/*   Created: 2025/06/26 22:10:55 by leaugust          #+#    #+#             */
+/*   Updated: 2025/06/26 22:11:15 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-int	touch(t_map *map, double ray_x, double ray_y)
+int	parse_char(char c)
 {
-	int	x;
-	int	y;
-
-	x = (int)(ray_x);
-	y = (int)(ray_y);
-	if (x < 0 || x >= map->width || y < 0 || y >= map->height)
+	if ((c >= 9 && c <= 13) || c == '0' || c == '1' || c == ' ' || c == 'N'
+		|| c == 'S' || c == 'E' || c == 'W')
+		return (0);
+	else if (c == '\n')
 		return (1);
-	return (map->map[y][x] == '1');
+	else
+	{
+		fprintf(stderr, "Error: Invalid character '%c' in map\n", c);
+		return (1);
+	}
+	return (0);
 }

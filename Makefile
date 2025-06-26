@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+         #
+#    By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/04 17:01:27 by jbanchon          #+#    #+#              #
-#    Updated: 2025/06/21 15:01:24 by jbanchon         ###   ########.fr        #
+#    Updated: 2025/06/26 22:20:29 by leaugust         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,20 +23,29 @@ OBJ_DIR = objs
 
 SRCS = \
 	srcs/main.c \
-	srcs/parsing/map_loader.c \
-	srcs/parsing/map_parser.c \
-	srcs/parsing/map_checker.c \
-	srcs/parsing/player_pos.c \
-	srcs/parsing/print_map.c \
-	srcs/parsing/parse_char.c \
-	srcs/parsing/map_textures.c \
-	srcs/init/init_struct.c \
-	srcs/minimap/draw_map.c \
-	srcs/cub_mlx/init_mlx.c \
-	srcs/cub_mlx/mlx_moves.c \
-	srcs/cub_mlx/calculate_vector.c \
-	srcs/cub_mlx/game_loop.c \
-	srcs/cub_mlx/laser.c \
+	srcs/parsing/char_validation.c\
+	srcs/parsing/map_utils.c\
+	srcs/parsing/map_validation.c\
+	srcs/parsing/parse_map.c\
+	srcs/parsing/player_init.c\
+	srcs/parsing/print.c\
+	srcs/textures/parse_textures.c\
+	srcs/textures/rgb_utils.c\
+	srcs/textures/texture_utils.c\
+	srcs/raycasting/minimap.c\
+	srcs/raycasting/raycasting.c\
+	srcs/raycasting/raycaster.c\
+	srcs/raycasting/render_walls.c\
+	srcs/init/init_structs.c \
+	srcs/init/init_directions.c \
+	srcs/game/collision.c\
+	srcs/game/game_loop.c\
+	srcs/game/input_handling.c\
+	srcs/game/map_management.c\
+	srcs/game/move_vector.c\
+	srcs/game/move.c\
+	srcs/game/rotation.c\
+	srcs/game/window_management.c\
 	$(GNL_DIR)/get_next_line.c \
 	$(GNL_DIR)/get_next_line_utils.c \
 

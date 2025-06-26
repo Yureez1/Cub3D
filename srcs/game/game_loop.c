@@ -3,14 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   game_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 12:03:12 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/06/26 17:06:36 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/06/26 22:22:58 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
+
+int	close_window(t_map *map)
+{
+	destroy_map(map);
+	exit(0);
+	return (0);
+}
 
 void	start_game_loop(t_map *map)
 {
@@ -28,6 +35,7 @@ void	start_game_loop(t_map *map)
 	mlx_put_image_to_window(game->mlx, game->mlx_win, game->mlx_img, 0, 0);
 	mlx_hook(game->mlx_win, 2, 1L << 0, handle_keypress, map);
 	mlx_hook(game->mlx_win, 3, 1L << 1, handle_keyrelease, map);
+	mlx_hook(game->mlx_win, 17, 0, close_window, map);
 	mlx_loop_hook(game->mlx, game_loop, map);
 	mlx_loop(game->mlx);
 }
@@ -55,7 +63,7 @@ void	redraw(t_map *map)
 	// player_rect.y = (int)(map->player_y * TILE_SIZE) - PLAYER_SIZE / 2;
 	// player_rect.size = PLAYER_SIZE;
 	// player_rect.color = 0x00FF00;
-	// draw_square(player_rect, map->game);
+	// draw_player(player_rect, map->game);
 	set_direction(map);
 	mlx_put_image_to_window(map->game->mlx, map->game->mlx_win,
 		map->game->mlx_img, 0, 0);
