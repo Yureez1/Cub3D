@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 21:17:17 by leaugust          #+#    #+#             */
-/*   Updated: 2025/06/26 21:50:09 by leaugust         ###   ########.fr       */
+/*   Updated: 2025/06/27 16:04:58 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int	parse_map(t_map *map, char *file_path)
 	if (fd < 0)
 		return (printf("Error: Failed to open file %s\n", file_path), 1);
 	printf("Successfully opened %s (fd=%d)\n", file_path, fd);
-	if (parse_textures_colors(map->textures, file_path))
-		return ((close(fd), printf("Error parsing textures and colors\n")), 1);
+	if (parse_textures_colors(map->texpath, file_path))
+		return ((close(fd), printf(" textures and colors\n")), 1);
 	close(fd);
 	fd = open_map_file(file_path);
 	if (read_map_lines(fd, map))

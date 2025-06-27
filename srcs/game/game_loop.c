@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 12:03:12 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/06/26 22:22:58 by leaugust         ###   ########.fr       */
+/*   Updated: 2025/06/27 16:01:48 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,17 @@ void	start_game_loop(t_map *map)
 	rect.y = (int)(map->player_y * TILE_SIZE);
 	rect.size = PLAYER_SIZE;
 	rect.color = 0xFF0000;
+	if (init_window(game))
+	{
+		exit(EXIT_FAILURE);
+		destroy_map(map);
+	}
+	if (load_textures(map))
+	{
+		perror("Failed to load textures");
+		destroy_map(map);
+		exit(EXIT_FAILURE);
+	}
 	redraw(map);
 	mlx_put_image_to_window(game->mlx, game->mlx_win, game->mlx_img, 0, 0);
 	mlx_hook(game->mlx_win, 2, 1L << 0, handle_keypress, map);
@@ -54,17 +65,12 @@ int	game_loop(t_map *map)
 
 void	redraw(t_map *map)
 {
-	// t_rect	player_rect;
 	if (!map || !map->game || !map->game->data)
 		return ;
 	ft_bzero(map->game->data, WIDTH * HEIGHT * 4);
+	// set_direction(map);
+	render_walls(map);
 	draw_minimap(map);
-	// player_rect.x = (int)(map->player_x * TILE_SIZE) - PLAYER_SIZE / 2;
-	// player_rect.y = (int)(map->player_y * TILE_SIZE) - PLAYER_SIZE / 2;
-	// player_rect.size = PLAYER_SIZE;
-	// player_rect.color = 0x00FF00;
-	// draw_player(player_rect, map->game);
-	set_direction(map);
 	mlx_put_image_to_window(map->game->mlx, map->game->mlx_win,
 		map->game->mlx_img, 0, 0);
 }

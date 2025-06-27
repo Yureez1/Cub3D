@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 20:27:44 by leaugust          #+#    #+#             */
-/*   Updated: 2025/06/26 22:35:16 by leaugust         ###   ########.fr       */
+/*   Updated: 2025/06/27 11:48:47 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,10 @@ void	draw_minimap(t_map *map)
 	int	offset_x;
 	int	offset_y;
 
-	offset_x = WIDTH - map->width * MINIMAP_SCALE - MINIMAP_PADDING;
-	offset_y = HEIGHT - map->height * MINIMAP_SCALE - MINIMAP_PADDING;
+	// offset_x = WIDTH - map->width * MINIMAP_SCALE - MINIMAP_PADDING;
+	// offset_y = HEIGHT - map->height * MINIMAP_SCALE - MINIMAP_PADDING;
+	offset_x = MINIMAP_PADDING;
+	offset_y = MINIMAP_PADDING;
 	draw_minimap_cells(map, offset_x, offset_y);
 	draw_minimap_player(map, offset_x, offset_y);
 }

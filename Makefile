@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+         #
+#    By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/04 17:01:27 by jbanchon          #+#    #+#              #
-#    Updated: 2025/06/26 22:20:29 by leaugust         ###   ########.fr        #
+#    Updated: 2025/06/27 12:33:19 by jbanchon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3d
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I$(MLX_DIR) -I$(GNL_DIR) -I$(LIBFT_DIR)
+CFLAGS = -Wall -Wextra -g -Werror -I$(MLX_DIR) -I$(GNL_DIR) -I$(LIBFT_DIR)
 LDFLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lbsd -L$(LIBFT_DIR) -lft
 
 GNL_DIR = ./gnl
@@ -46,6 +46,7 @@ SRCS = \
 	srcs/game/move.c\
 	srcs/game/rotation.c\
 	srcs/game/window_management.c\
+	srcs/game_textures/load_textures.c\
 	$(GNL_DIR)/get_next_line.c \
 	$(GNL_DIR)/get_next_line_utils.c \
 

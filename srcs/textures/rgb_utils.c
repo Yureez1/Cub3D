@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rgb_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 21:12:10 by leaugust          #+#    #+#             */
-/*   Updated: 2025/06/26 22:19:36 by leaugust         ###   ########.fr       */
+/*   Updated: 2025/06/27 14:08:21 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,23 +46,23 @@ int	parse_rgb(const char *str, int *res)
 	return (0);
 }
 
-int	check_exist_textures(t_textures *textures)
+int	check_exist_textures(t_texpath *texpath)
 {
 	int	fd;
 
-	fd = open(textures->no, O_RDONLY);
+	fd = open(texpath->no, O_RDONLY);
 	if (fd < 0)
 		return (perror("Error opening NO texture file"), 1);
 	close(fd);
-	fd = open(textures->so, O_RDONLY);
+	fd = open(texpath->so, O_RDONLY);
 	if (fd < 0)
 		return (perror("Error opening SO texture file"), 1);
 	close(fd);
-	fd = open(textures->we, O_RDONLY);
+	fd = open(texpath->we, O_RDONLY);
 	if (fd < 0)
 		return (perror("Error opening WE texture file"), 1);
 	close(fd);
-	fd = open(textures->ea, O_RDONLY);
+	fd = open(texpath->ea, O_RDONLY);
 	if (fd < 0)
 		return (perror("Error opening EA texture file"), 1);
 	close(fd);

@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   texture_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 21:12:16 by leaugust          #+#    #+#             */
-/*   Updated: 2025/06/26 22:19:38 by leaugust         ###   ########.fr       */
+/*   Updated: 2025/06/27 16:06:42 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-int	handle_ceiling(t_textures *textures, char *line)
+int	handle_ceiling(t_texpath *texpath, char *line)
 {
 	char	*trimmed;
 
-	if (textures->ceiling)
+	if (texpath->ceiling)
 	{
 		perror("Duplicate C");
 		return (1);
@@ -27,20 +27,20 @@ int	handle_ceiling(t_textures *textures, char *line)
 		perror("Invalid ceiling color format");
 		return (1);
 	}
-	if (parse_rgb(trimmed, &textures->ceiling_rgb))
+	if (parse_rgb(trimmed, &texpath->ceiling_rgb))
 	{
 		free(trimmed);
 		return (1);
 	}
-	textures->ceiling = trimmed;
+	texpath->ceiling = trimmed;
 	return (0);
 }
 
-int	handle_floor(t_textures *textures, char *line)
+int	handle_floor(t_texpath *texpath, char *line)
 {
 	char	*trimmed;
 
-	if (textures->floor)
+	if (texpath->floor)
 	{
 		perror("Duplicate F");
 		return (1);
@@ -51,47 +51,47 @@ int	handle_floor(t_textures *textures, char *line)
 		perror("Invalid floor color format");
 		return (1);
 	}
-	if (parse_rgb(trimmed, &textures->floor_rgb))
+	if (parse_rgb(trimmed, &texpath->floor_rgb))
 	{
 		free(trimmed);
 		return (1);
 	}
-	textures->floor = trimmed;
+	texpath->floor = trimmed;
 	return (0);
 }
 
-int	destroy_textures(t_textures *textures)
+int	destroy_texpath(t_texpath *texpath)
 {
-	if (textures == NULL)
-		return (perror("textures is NULL"), 1);
-	if (textures->no)
-		free(textures->no);
-	if (textures->so)
-		free(textures->so);
-	if (textures->we)
-		free(textures->we);
-	if (textures->ea)
-		free(textures->ea);
-	if (textures->floor)
-		free(textures->floor);
-	if (textures->ceiling)
-		free(textures->ceiling);
-	free(textures);
+	if (texpath == NULL)
+		return (perror("texpath is NULL"), 1);
+	if (texpath->no)
+		free(texpath->no);
+	if (texpath->so)
+		free(texpath->so);
+	if (texpath->we)
+		free(texpath->we);
+	if (texpath->ea)
+		free(texpath->ea);
+	if (texpath->floor)
+		free(texpath->floor);
+	if (texpath->ceiling)
+		free(texpath->ceiling);
+	// free(texpath);
 	return (0);
 }
 
-/* Mettre en commentaire check_exist_textures
+/* Mettre en commentaire check_exist_texpath
 	+ check_xpm si on veut tester code*/
 
-int	check_textures(t_textures *textures)
+int	check_textures(t_texpath *texpath)
 {
-	if (!textures->no || !textures->so || !textures->we || !textures->ea
-		|| !textures->floor || !textures->ceiling)
+	if (!texpath->no || !texpath->so || !texpath->we || !texpath->ea
+		|| !texpath->floor || !texpath->ceiling)
 		return (perror("Missing texture paths"), 1);
-	// if (check_exist_textures(textures))
-	// 	return (1);
-	// if (check_xpm_file(textures->no) || check_xpm_file(textures->so)
-	// 	|| check_xpm_file(textures->we) || check_xpm_file(textures->ea))
-	// 	return (1);
+	if (check_exist_textures(texpath))
+		return (1);
+	if (check_xpm_file(texpath->no) || check_xpm_file(texpath->so)
+		|| check_xpm_file(texpath->we) || check_xpm_file(texpath->ea))
+		return (1);
 	return (0);
 }

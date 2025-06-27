@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 13:33:09 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/06/26 22:35:47 by leaugust         ###   ########.fr       */
+/*   Updated: 2025/06/27 14:18:19 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <string.h>
 # include <unistd.h>
 
+# define NB_TEXTURES 4
 # define WIDTH 1280
 # define HEIGHT 720
 # define MOVE_SPEED 0.1
@@ -53,6 +54,14 @@ typedef enum e_action
 	COUNT_ACT
 }					t_action;
 
+enum				e_tex_index
+{
+	TEX_NO = 0,
+	TEX_SO,
+	TEX_WE,
+	TEX_EA,
+};
+
 typedef struct s_bounds
 {
 	int				left_cell;
@@ -61,7 +70,7 @@ typedef struct s_bounds
 	int				bottom_cell;
 }					t_bounds;
 
-typedef struct s_textures
+typedef struct s_texpath
 {
 	char			*no;
 	char			*so;
@@ -71,6 +80,17 @@ typedef struct s_textures
 	char			*ceiling;
 	int				floor_rgb;
 	int				ceiling_rgb;
+}					t_texpath;
+
+typedef struct s_textures
+{
+	void			*img;
+	int				*data;
+	int				width;
+	int				height;
+	int				bpp;
+	int				line_size;
+	int				endian;
 
 }					t_textures;
 
@@ -79,11 +99,12 @@ typedef struct s_game
 	void			*mlx;
 	void			*mlx_win;
 	void			*mlx_img;
+	char			*data;
 	int				bpp;
 	int				size_line;
-	char			*data;
 	int				endian;
 	int				key[COUNT_ACT];
+	t_textures		textures[NB_TEXTURES];
 }					t_game;
 
 typedef struct s_rect
@@ -111,6 +132,7 @@ typedef struct s_map
 	int				player_dir;
 	struct s_game	*game;
 	t_textures		*textures;
+	t_texpath		*texpath;
 }					t_map;
 
 typedef struct s_ray
@@ -188,6 +210,7 @@ int					init_player_dir(t_map *map);
 /*==== init_structs.c ====*/
 
 int					init_textures(t_textures *textures);
+int					init_texpath(t_texpath *texpath);
 int					init_game_struct(t_game *game);
 int					init_struct(t_map *map);
 
@@ -254,6 +277,7 @@ void				calc_perp_dist(t_map *map, t_ray *ray);
 /*==== raycaster.c ====*/
 
 void				set_direction(t_map *map);
+void				render_walls(t_map *map);
 
 /*==== render_walls.c ====*/
 
@@ -263,26 +287,29 @@ void				draw_line(t_map *map, double ray_x, double ray_y, int i);
 
 /* TEXTURES */
 
+/*==== load_textures.c*/
+
+int					load_textures(t_map *map);
+
 /*==== parse_textures.c ====*/
 
-int					parse_textures_colors(t_textures *textures,
-						char *file_path);
-int					parse_line(t_textures *textures, char *line);
-int					handle_texture_line(t_textures *textures, char *line);
-int					handle_color_line(t_textures *textures, char *line);
+int					parse_textures_colors(t_texpath *texpath, char *file_path);
+int					parse_line(t_texpath *texpath, char *line);
+int					handle_texture_line(t_texpath *texpath, char *line);
+int					handle_color_line(t_texpath *texpath, char *line);
 
 /*==== rgb_utils.c ====*/
 
 int					convert_rgb(unsigned int r, unsigned int g, unsigned int b);
 int					parse_rgb(const char *str, int *res);
-int					check_exist_textures(t_textures *textures);
+int					check_exist_textures(t_texpath *texpath);
 int					check_xpm_file(const char *file_path);
 
 /*==== texture_utils.c ====*/
 
-int					handle_ceiling(t_textures *textures, char *line);
-int					handle_floor(t_textures *textures, char *line);
-int					destroy_textures(t_textures *textures);
-int					check_textures(t_textures *textures);
+int					handle_ceiling(t_texpath *texpath, char *line);
+int					handle_floor(t_texpath *texpath, char *line);
+int					destroy_texpath(t_texpath *texpath);
+int					check_textures(t_texpath *texpath);
 
 #endif

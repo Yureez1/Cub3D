@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_management.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 20:19:34 by leaugust          #+#    #+#             */
-/*   Updated: 2025/06/26 20:19:55 by leaugust         ###   ########.fr       */
+/*   Updated: 2025/06/27 14:22:36 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,11 @@ void	destroy_map(t_map *map)
 		free(map->game);
 		map->game = NULL;
 	}
-	if (map->textures)
+	if (map->texpath)
 	{
-		destroy_textures(map->textures);
-		map->textures = NULL;
+		destroy_texpath(map->texpath);
+		free(map->texpath);
+		map->texpath = NULL;
 	}
 	free(map);
 }
