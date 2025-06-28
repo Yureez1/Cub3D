@@ -1,0 +1,69 @@
+# ✅ Checklist de correction - Cub3D
+
+## 🛠️ Nom de l’exécutable
+- ✅ Le projet compile sans erreur avec `make`
+- ✅ L’exécutable s’appelle **cub3D**
+- ✅ Pas de relink inutile au `make`
+- ⚠️ Si erreur → **flag : invalid compilation**
+
+---
+
+## 📝 Fichier de configuration `.cub`
+### Éléments requis :
+- [ ] Texture nord (`NO`)
+- [ ] Texture sud (`SO`)
+- [ ] Texture est (`EA`)
+- [ ] Texture ouest (`WE`)
+- [ ] Couleur du sol (`F`)
+- [ ] Couleur du plafond (`C`)
+- [ ] La map (format correct)
+
+### Gestion des erreurs :
+- [ ] Clé inconnue → erreur
+- [ ] Clé en double → erreur
+- ✅ Chemin invalide → erreur
+- ✅ Fichier sans extension `.cub` → erreur
+- ❌ Sinon → **flag : crash / incomplete work**
+
+---
+
+## 🖼️ Affichage technique
+- ✅ Une fenêtre s’ouvre au lancement
+- ✅ L’image d’un labyrinthe est affichée
+- [ ] Masquage, réduction et agrandissement → le rendu reste correct
+
+---
+
+## 🎮 Événements utilisateur
+- ✅ Clique sur la croix → fenêtre fermée proprement
+- ✅ Touche ESC (ou Q) → fermeture propre
+- ✅ Touches de mouvement (WASD ou ZQSD) → effet visible
+
+---
+
+## 🚶‍♂️ Mouvements
+- ✅ Orientation de départ correcte (N, S, E, W)
+- ✅ Flèche gauche → rotation à gauche
+- ✅ Flèche droite → rotation à droite
+- ✅ W/Z → avancer, S → reculer (ligne droite)
+- ✅ A/Q → gauche, D → droite (ligne droite)
+- ✅ Mouvement fluide et jouable
+
+---
+
+## 🧱 Murs
+- [ ] Textures différentes selon la direction (N/S/E/O)
+- ✅ Changement de chemin texture → changement de rendu
+- [ ] Chemin inexistant → lève une erreur
+- ✅ Les couleurs du sol/plafond changent bien via `.cub`
+
+---
+
+## 🧪 Gestion des erreurs
+- [ ] Arguments aléatoires → pas de crash
+- [ ] Pas de fuite mémoire (vérifié avec `leaks`, `valgrind`, etc.)
+- [ ] Appuis aléatoires sur le clavier → comportement stable
+- [ ] Map bien formée → fonctionne / Mal formée → erreur propre
+
+---
+

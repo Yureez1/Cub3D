@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+         #
+#    By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/04 17:01:27 by jbanchon          #+#    #+#              #
-#    Updated: 2025/06/28 13:40:38 by jbanchon         ###   ########.fr        #
+#    Updated: 2025/06/28 17:01:03 by leaugust         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = cub3d
+NAME = cub3D
 CC = cc
 CFLAGS = -Wall -Wextra -g -Werror -I$(MLX_DIR) -I$(GNL_DIR) -I$(LIBFT_DIR)
 LDFLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lbsd -L$(LIBFT_DIR) -lft
