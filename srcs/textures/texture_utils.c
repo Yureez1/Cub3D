@@ -6,7 +6,7 @@
 /*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 21:12:16 by leaugust          #+#    #+#             */
-/*   Updated: 2025/06/27 16:06:42 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/06/28 13:41:24 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,8 @@ int	destroy_texpath(t_texpath *texpath)
 		free(texpath->floor);
 	if (texpath->ceiling)
 		free(texpath->ceiling);
-	// free(texpath);
 	return (0);
 }
-
-/* Mettre en commentaire check_exist_texpath
-	+ check_xpm si on veut tester code*/
 
 int	check_textures(t_texpath *texpath)
 {

@@ -6,7 +6,7 @@
 /*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 12:15:55 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/06/27 16:02:49 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/06/28 13:42:18 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,14 @@
 
 int	load_textures(t_map *map)
 {
-	char		*paths[NB_TEXTURES] = {map->texpath->no, map->texpath->so,
-				map->texpath->we, map->texpath->ea};
+	char		*paths[NB_TEXTURES];
 	int			i;
 	t_textures	*tex;
 
+	paths[TEX_NO] = map->texpath->no;
+	paths[TEX_SO] = map->texpath->so;
+	paths[TEX_WE] = map->texpath->we;
+	paths[TEX_EA] = map->texpath->ea;
 	i = 0;
 	while (i < NB_TEXTURES)
 	{

@@ -6,7 +6,7 @@
 /*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 12:03:12 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/06/27 16:01:48 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/06/28 13:44:27 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,29 @@ int	close_window(t_map *map)
 	destroy_map(map);
 	exit(0);
 	return (0);
+}
+
+static void	init_and_load(t_map *map)
+{
+	t_game	*game;
+
+	game = map->game;
+	if (!map || !game)
+	{
+		perror("Map or game structure is NULL");
+		exit(EXIT_FAILURE);
+	}
+	if (init_window(game))
+	{
+		exit(EXIT_FAILURE);
+		destroy_map(map);
+	}
+	if (load_textures(map))
+	{
+		perror("Failed to load textures");
+		destroy_map(map);
+		exit(EXIT_FAILURE);
+	}
 }
 
 void	start_game_loop(t_map *map)
@@ -31,17 +54,7 @@ void	start_game_loop(t_map *map)
 	rect.y = (int)(map->player_y * TILE_SIZE);
 	rect.size = PLAYER_SIZE;
 	rect.color = 0xFF0000;
-	if (init_window(game))
-	{
-		exit(EXIT_FAILURE);
-		destroy_map(map);
-	}
-	if (load_textures(map))
-	{
-		perror("Failed to load textures");
-		destroy_map(map);
-		exit(EXIT_FAILURE);
-	}
+	init_and_load(map);
 	redraw(map);
 	mlx_put_image_to_window(game->mlx, game->mlx_win, game->mlx_img, 0, 0);
 	mlx_hook(game->mlx_win, 2, 1L << 0, handle_keypress, map);
@@ -68,7 +81,6 @@ void	redraw(t_map *map)
 	if (!map || !map->game || !map->game->data)
 		return ;
 	ft_bzero(map->game->data, WIDTH * HEIGHT * 4);
-	// set_direction(map);
 	render_walls(map);
 	draw_minimap(map);
 	mlx_put_image_to_window(map->game->mlx, map->game->mlx_win,

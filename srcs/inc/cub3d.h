@@ -6,7 +6,7 @@
 /*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 13:33:09 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/06/27 14:18:19 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/06/28 13:39:48 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,16 @@ typedef struct s_ray
 	int				step_x;
 	int				step_y;
 	int				side;
+	int				line_h;
+	int				draw_s;
+	int				draw_end;
 	double			perp_dist;
+	double			step_tex;
+	double			tex_pos;
+	int				ty;
+	char			*row;
+	int				color;
+	int				y;
 }					t_ray;
 
 /* GAME */
@@ -276,7 +285,6 @@ void				calc_perp_dist(t_map *map, t_ray *ray);
 
 /*==== raycaster.c ====*/
 
-void				set_direction(t_map *map);
 void				render_walls(t_map *map);
 
 /*==== render_walls.c ====*/
@@ -284,6 +292,24 @@ void				render_walls(t_map *map);
 void				put_pixel(int x, int y, int color, t_game *game);
 void				draw_wall_column(t_game *game, int i, t_ray *ray);
 void				draw_line(t_map *map, double ray_x, double ray_y, int i);
+
+/*==== ray_init.c ====*/
+
+void				compute_camera_ray(t_map *map, t_ray *ray, int x);
+void				compute_delta_distances(t_ray *ray);
+void				compute_step_and_side(t_map *map, t_ray *ray);
+void				init_ray(t_map *map, t_ray *ray, int x);
+
+/*==== ray_projection.c ====*/
+
+void				calc_projection(t_map *map, t_ray *ray);
+int					compute_texx(t_map *map, t_ray *ray);
+
+/*==== ray_texture.c ====*/
+
+int					select_texture(t_ray *ray);
+void				draw_textures(t_map *map, t_ray *ray, int x, int texx);
+void				draw_column(t_map *map, t_ray *ray, int x);
 
 /* TEXTURES */
 

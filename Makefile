@@ -6,7 +6,7 @@
 #    By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/04 17:01:27 by jbanchon          #+#    #+#              #
-#    Updated: 2025/06/27 12:33:19 by jbanchon         ###   ########.fr        #
+#    Updated: 2025/06/28 13:40:38 by jbanchon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,9 @@ SRCS = \
 	srcs/raycasting/raycasting.c\
 	srcs/raycasting/raycaster.c\
 	srcs/raycasting/render_walls.c\
+	srcs/raycasting/ray_texture.c\
+	srcs/raycasting/ray_projection.c\
+	srcs/raycasting/ray_init.c\
 	srcs/init/init_structs.c \
 	srcs/init/init_directions.c \
 	srcs/game/collision.c\
