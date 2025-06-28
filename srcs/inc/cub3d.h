@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 13:33:09 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/06/28 13:39:48 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/06/28 15:04:04 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 # define PLAYER_SIZE 10
 # define PI 3.141592653589793
 # define FOV 1.0471975
-# define MINIMAP_SCALE 6
+# define MINIMAP_SCALE 12
 # define MINIMAP_PADDING 10
 
 # define KEY_ESC 65307
@@ -133,6 +133,8 @@ typedef struct s_map
 	struct s_game	*game;
 	t_textures		*textures;
 	t_texpath		*texpath;
+	int				floor_color;
+	int				ceiling_color;
 }					t_map;
 
 typedef struct s_ray
@@ -161,6 +163,7 @@ typedef struct s_ray
 }					t_ray;
 
 /* GAME */
+void	draw_floor_ceiling_column(t_map *map, int x, int start, int end);
 
 /*==== collision.c ====*/
 int					touch(t_map *map, double ray_x, double ray_y);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 20:27:44 by leaugust          #+#    #+#             */
-/*   Updated: 2025/06/27 11:48:47 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/06/28 14:22:35 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ void	draw_minimap_cells(t_map *map, int offset_x, int offset_y)
 			rect.y = offset_y + y * MINIMAP_SCALE;
 			rect.size = MINIMAP_SCALE;
 			if (map->map[y][x] == '1')
-				rect.color = 0x0000FF;
+				rect.color = 0x00000000;
 			else
-				rect.color = 0xCCCCCC;
+				rect.color = 0x00FFFFFF;
 			draw_player(rect, map->game);
 			x++;
 		}
