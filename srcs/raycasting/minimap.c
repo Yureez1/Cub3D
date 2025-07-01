@@ -6,7 +6,7 @@
 /*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 20:27:44 by leaugust          #+#    #+#             */
-/*   Updated: 2025/06/28 14:22:35 by leaugust         ###   ########.fr       */
+/*   Updated: 2025/07/01 15:19:31 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	draw_minimap_player(t_map *map, int offset_x, int offset_y)
 	t_rect	rect;
 
 	rect.size = MINIMAP_SCALE / 2;
-	rect.color = 0xFF0000;
+	rect.color = 0xCC5500;
 	rect.x = offset_x + map->player_x * MINIMAP_SCALE - rect.size / 2;
 	rect.y = offset_y + map->player_y * MINIMAP_SCALE - rect.size / 2;
 	draw_player(rect, map->game);
@@ -57,9 +57,9 @@ void	draw_minimap_cells(t_map *map, int offset_x, int offset_y)
 			rect.y = offset_y + y * MINIMAP_SCALE;
 			rect.size = MINIMAP_SCALE;
 			if (map->map[y][x] == '1')
-				rect.color = 0x00000000;
+				rect.color = 0x000F1625;
 			else
-				rect.color = 0x00FFFFFF;
+				rect.color = 0x002D3C23;
 			draw_player(rect, map->game);
 			x++;
 		}

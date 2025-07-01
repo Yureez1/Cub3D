@@ -1,10 +1,10 @@
-NO textures/North.xpm
-SO textures/South.xpm
-WE textures/Ouest.xpm
-EA textures/East.xpm
+NO textures/no.xpm
+SO textures/so.xpm
+WE textures/we.xpm
+EA textures/ea.xpm
 
-F 255, 255, 255
-C 255, 255, 255
+F 30, 40, 25
+C 20, 28, 48
 
 11111111111111111111
 10000000000000001001

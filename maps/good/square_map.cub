@@ -1,17 +1,17 @@
-   WE                            textures/spiral.xpm 
-NO      textures/spiral.xpm
+   WE                            textures/we.xpm 
+NO      textures/no.xpm
 
 
 
-SO textures/spiral.xpm
+SO textures/so.xpm
 
-F   255,255,255
+F   30, 40, 25
 
-EA textures/spiral.xpm
+EA textures/ea.xpm
 
 
 
-C 255,255,255
+C 20, 28, 48
 
 111111111111111111111111
 100000000000000000000001

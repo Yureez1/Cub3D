@@ -6,7 +6,7 @@
 /*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 13:33:09 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/06/28 15:04:04 by leaugust         ###   ########.fr       */
+/*   Updated: 2025/07/01 15:20:14 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@
 # define NB_TEXTURES 4
 # define WIDTH 1280
 # define HEIGHT 720
-# define MOVE_SPEED 0.1
-# define ROTATE_SPEED 0.1
+# define MOVE_SPEED 0.05
+# define ROTATE_SPEED 0.05
 # define TILE_SIZE 64
 # define PLAYER_SIZE 10
 # define PI 3.141592653589793
@@ -163,7 +163,8 @@ typedef struct s_ray
 }					t_ray;
 
 /* GAME */
-void	draw_floor_ceiling_column(t_map *map, int x, int start, int end);
+void				draw_floor_ceiling_column(t_map *map, int x, int start,
+						int end);
 
 /*==== collision.c ====*/
 int					touch(t_map *map, double ray_x, double ray_y);

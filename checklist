@@ -10,9 +10,9 @@
 
 ## 📝 Fichier de configuration `.cub`
 ### Éléments requis :
-- [ ] Texture nord (`NO`)
-- [ ] Texture sud (`SO`)
-- [ ] Texture est (`EA`)
+- ✅ Texture nord (`NO`)
+- ✅ Texture sud (`SO`)
+- ✅ Texture est (`EA`)
 - [ ] Texture ouest (`WE`)
 - [ ] Couleur du sol (`F`)
 - [ ] Couleur du plafond (`C`)
@@ -30,7 +30,7 @@
 ## 🖼️ Affichage technique
 - ✅ Une fenêtre s’ouvre au lancement
 - ✅ L’image d’un labyrinthe est affichée
-- [ ] Masquage, réduction et agrandissement → le rendu reste correct
+- ✅ Masquage, réduction et agrandissement → le rendu reste correct
 
 ---
 
@@ -52,9 +52,9 @@
 ---
 
 ## 🧱 Murs
-- [ ] Textures différentes selon la direction (N/S/E/O)
+- ✅ Textures différentes selon la direction (N/S/E/O)
 - ✅ Changement de chemin texture → changement de rendu
-- [ ] Chemin inexistant → lève une erreur
+- ✅ Chemin inexistant → lève une erreur
 - ✅ Les couleurs du sol/plafond changent bien via `.cub`
 
 ---
