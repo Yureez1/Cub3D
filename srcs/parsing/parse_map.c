@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 21:17:17 by leaugust          #+#    #+#             */
-/*   Updated: 2025/06/28 14:08:22 by leaugust         ###   ########.fr       */
+/*   Updated: 2025/07/01 13:41:53 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,6 @@ int	fill_temp_map(int fd, char **temp_map, int *height, int *max_width)
 		line = get_next_line(fd);
 	}
 	free(line);
-	printf("Total lines read: %d, max width: %d\n", *height, *max_width);
+	// printf("Total lines read: %d, max width: %d\n", *height, *max_width);
 	return (0);
 }

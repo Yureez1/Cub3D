@@ -6,7 +6,7 @@
 /*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 13:37:55 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/06/28 13:41:00 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/06/28 17:15:25 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,10 @@ void	draw_column(t_map *map, t_ray *ray, int x)
 	int	texx;
 
 	texx = compute_texx(map, ray);
+	// printf("Drawing column at x=%d, texx=%d\n", x, texx);
+	if (texx < 0)
+		texx = 0;
+	if (texx >= map->game->textures[select_texture(ray)].width)
+		texx = map->game->textures[select_texture(ray)].width - 1;
 	draw_textures(map, ray, x, texx);
 }

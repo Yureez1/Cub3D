@@ -6,7 +6,7 @@
 /*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 12:15:55 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/06/28 13:42:18 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/06/28 17:13:13 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	load_textures(t_map *map)
 		tex = &map->game->textures[i];
 		tex->img = mlx_xpm_file_to_image(map->game->mlx, paths[i], &tex->width,
 				&tex->height);
+		printf("Texture %d loaded: %dx%d\n", i, tex->width, tex->height);
 		if (!tex->img)
 		{
 			perror("Failed to load texture");

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 19:29:22 by leaugust          #+#    #+#             */
-/*   Updated: 2025/06/26 20:29:52 by leaugust         ###   ########.fr       */
+/*   Updated: 2025/07/01 13:40:25 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,14 +85,25 @@ int	perform_dda(t_map *map, t_ray *ray)
 		if (map->map[ray->map_y][ray->map_x] == '1')
 			return (1);
 	}
+	return (0);
 }
 
 void	calc_perp_dist(t_map *map, t_ray *ray)
 {
 	if (ray->side == 0)
-		ray->perp_dist = (ray->map_x - map->player_x + (1.0
-					- (double)ray->step_x) / 2.0) / ray->dir_x;
+	{
+		if (ray->side != 0)
+			ray->perp_dist = (ray->map_x - map->player_x + (1.0
+						- (double)ray->step_x) / 2.0) / ray->dir_x;
+		else
+			ray->perp_dist = 1e30;
+	}
 	else
-		ray->perp_dist = (ray->map_y - map->player_y + (1.0
-					- (double)ray->step_y) / 2.0) / ray->dir_y;
+	{
+		if (ray->dir_y != 0)
+			ray->perp_dist = (ray->map_y - map->player_y + (1.0
+						- (double)ray->step_y) / 2.0) / ray->dir_y;
+		else
+			ray->perp_dist = 1e30;
+	}
 }
