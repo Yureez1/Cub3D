@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 13:33:09 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/07/03 11:50:55 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/07/04 14:14:32 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,6 +162,13 @@ typedef struct s_ray
 	int				y;
 }					t_ray;
 
+/* MAIN */
+
+int					has_cub_extension(const char *filename);
+int					check_args(int argc, char **argv);
+t_map				*init_map(void);
+void				cleanup_and_exit(t_map *map);
+
 /* GAME */
 void				draw_floor_ceiling_column(t_map *map, int x, int start,
 						int end);
@@ -239,8 +246,6 @@ int					process_map_line(char *line, char **temp_map, int *height,
 						int *max_width);
 int					copy_map_row(t_map *map, char **temp_map, int i);
 int					finalize_map(t_map *map, char **temp_map);
-int					is_out_of_bounds(int x, int y, int width, int height);
-int					is_touching_void(t_map *map, int x, int y);
 
 /*==== map_validation.c ====*/
 
@@ -269,6 +274,12 @@ void				print_map(t_map *map);
 
 int					set_player_position(t_map *map, int x, int y);
 void				fill_voids_with_walls(t_map *map);
+
+/*==== void_check.c ====*/
+
+int					is_out_of_bounds(int x, int y, int width, int height);
+int					check_void_at(t_map *map, int x, int y);
+int					is_touching_void(t_map *map, int x, int y);
 
 /* RAYCASTING */
 

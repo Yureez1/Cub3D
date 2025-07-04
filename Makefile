@@ -6,7 +6,7 @@
 #    By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/04 17:01:27 by jbanchon          #+#    #+#              #
-#    Updated: 2025/06/28 17:01:03 by leaugust         ###   ########.fr        #
+#    Updated: 2025/07/04 14:05:01 by leaugust         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ SRCS = \
 	srcs/parsing/parse_map.c\
 	srcs/parsing/player_init.c\
 	srcs/parsing/print.c\
+	srcs/parsing/void_check.c\
 	srcs/textures/parse_textures.c\
 	srcs/textures/rgb_utils.c\
 	srcs/textures/texture_utils.c\
