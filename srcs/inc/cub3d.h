@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 13:33:09 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/07/01 15:20:14 by leaugust         ###   ########.fr       */
+/*   Updated: 2025/07/03 11:50:55 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -249,6 +249,8 @@ int					check_invalid_char(t_map *map);
 int					check_single_player(t_map *map);
 int					find_player_position(t_map *map);
 int					validate_void_surroundings(t_map *map);
+int					check_surroundings(t_map *map, int x, int y);
+int					is_hole(t_map *map, int x, int y);
 
 /*==== parse_map.c ====*/
 

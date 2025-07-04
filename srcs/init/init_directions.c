@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_direction.c                                   :+:      :+:    :+:   */
+/*   init_directions.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 20:01:37 by leaugust          #+#    #+#             */
-/*   Updated: 2025/06/26 21:52:13 by leaugust         ###   ########.fr       */
+/*   Updated: 2025/07/03 12:02:21 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	init_dir_east(t_map *map)
 	map->dir_x = 1;
 	map->dir_y = 0;
 	map->plane_x = 0;
-	map->plane_y = -0.66;
+	map->plane_y = 0.66;
 }
 
 void	init_dir_west(t_map *map)
@@ -41,7 +41,7 @@ void	init_dir_west(t_map *map)
 	map->dir_x = -1;
 	map->dir_y = 0;
 	map->plane_x = 0;
-	map->plane_y = 0.66;
+	map->plane_y = -0.66;
 }
 
 int	init_player_dir(t_map *map)
