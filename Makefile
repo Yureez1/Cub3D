@@ -6,12 +6,11 @@
 #    By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/04 17:01:27 by jbanchon          #+#    #+#              #
-#    Updated: 2025/07/05 16:06:38 by jbanchon         ###   ########.fr        #
+#    Updated: 2025/07/05 16:36:11 by jbanchon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
-NAME_BONUS = cub3D_bonus
 CC = cc
 CFLAGS = -Wall -Wextra -g -Werror -I$(MLX_DIR) -I$(GNL_DIR) -I$(LIBFT_DIR)
 LDFLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lbsd -L$(LIBFT_DIR) -lft
@@ -24,70 +23,24 @@ OBJ_DIR = objs
 BONUS_OBJ_DIR = objs_bonus
 
 SRCS = \
-	srcs/main.c \
-	srcs/parsing/char_validation.c\
-	srcs/parsing/map_utils.c\
-	srcs/parsing/map_validation.c\
-	srcs/parsing/parse_map.c\
-	srcs/parsing/player_init.c\
-	srcs/parsing/print.c\
-	srcs/parsing/void_check.c\
-	srcs/textures/parse_textures.c\
-	srcs/textures/rgb_utils.c\
-	srcs/textures/texture_utils.c\
-	srcs/raycasting/minimap.c\
-	srcs/raycasting/raycasting.c\
-	srcs/raycasting/raycaster.c\
-	srcs/raycasting/render_walls.c\
-	srcs/raycasting/ray_texture.c\
-	srcs/raycasting/ray_projection.c\
-	srcs/raycasting/ray_init.c\
-	srcs/init/init_structs.c \
-	srcs/init/init_directions.c \
-	srcs/game/collision.c\
-	srcs/game/game_loop.c\
-	srcs/game/input_handling.c\
-	srcs/game/map_management.c\
-	srcs/game/move_vector.c\
-	srcs/game/move.c\
-	srcs/game/rotation.c\
-	srcs/game/window_management.c\
-	srcs/game_textures/load_textures.c\
-	$(GNL_DIR)/get_next_line.c \
-	$(GNL_DIR)/get_next_line_utils.c \
+	srcs/main.c srcs/parsing/char_validation.c srcs/parsing/map_utils.c srcs/parsing/map_validation.c srcs/parsing/parse_map.c\
+	srcs/parsing/player_init.c srcs/parsing/print.c srcs/parsing/void_check.c srcs/textures/parse_textures.c\
+	srcs/textures/rgb_utils.c srcs/textures/texture_utils.c srcs/raycasting/minimap.c srcs/raycasting/raycasting.c\
+	srcs/raycasting/raycaster.c srcs/raycasting/render_walls.c srcs/raycasting/ray_texture.c srcs/raycasting/ray_projection.c\
+	srcs/raycasting/ray_init.c srcs/init/init_structs.c srcs/init/init_directions.c srcs/game/collision.c\
+	srcs/game/game_loop.c srcs/game/input_handling.c srcs/game/map_management.c srcs/game/move_vector.c\
+	srcs/game/move.c srcs/game/rotation.c srcs/game/window_management.c srcs/game_textures/load_textures.c\
+	$(GNL_DIR)/get_next_line.c $(GNL_DIR)/get_next_line_utils.c \
 
 BONUS_SRCS = \
-	srcs/main.c \
-	srcs/parsing/char_validation.c\
-	srcs/parsing/map_utils.c\
-	srcs/parsing/map_validation.c\
-	srcs/parsing/parse_map.c\
-	srcs/parsing/player_init.c\
-	srcs/parsing/print.c\
-	srcs/parsing/void_check.c\
-	srcs/textures/parse_textures.c\
-	srcs/textures/rgb_utils.c\
-	srcs/textures/texture_utils.c\
-	bonus/raycasting/minimap_bonus.c\
-	srcs/raycasting/raycasting.c\
-	srcs/raycasting/raycaster.c\
-	srcs/raycasting/render_walls.c\
-	srcs/raycasting/ray_texture.c\
-	srcs/raycasting/ray_projection.c\
-	srcs/raycasting/ray_init.c\
-	srcs/init/init_structs.c \
-	srcs/init/init_directions.c \
-	bonus/game/collision_bonus.c\
-	srcs/game/game_loop.c\
-	srcs/game/input_handling.c\
-	srcs/game/map_management.c\
-	srcs/game/move_vector.c\
-	bonus/game/move_bonus.c\
-	srcs/game/rotation.c\
-	srcs/game/window_management.c\
-	srcs/game_textures/load_textures.c\
-	$(GNL_DIR)/get_next_line.c \
-	$(GNL_DIR)/get_next_line_utils.c \
+	srcs/main.c srcs/parsing/char_validation.c srcs/parsing/map_utils.c srcs/parsing/map_validation.c\
+	srcs/parsing/parse_map.c srcs/parsing/player_init.c srcs/parsing/print.c srcs/parsing/void_check.c\
+	srcs/textures/parse_textures.c srcs/textures/rgb_utils.c srcs/textures/texture_utils.c srcs/raycasting/raycasting.c\
+	srcs/raycasting/raycaster.c srcs/raycasting/render_walls.c srcs/raycasting/ray_texture.c srcs/raycasting/ray_projection.c\
+	srcs/raycasting/ray_init.c srcs/init/init_structs.c srcs/init/init_directions.c srcs/game/game_loop.c\
+	srcs/game/input_handling.c srcs/game/map_management.c srcs/game/move_vector.c srcs/game/rotation.c\
+	srcs/game/window_management.c srcs/game_textures/load_textures.c bonus/game/collision_bonus.c bonus/game/move_bonus.c\
+	bonus/raycasting/minimap_bonus.c $(GNL_DIR)/get_next_line.c $(GNL_DIR)/get_next_line_utils.c \
 
 OBJS = $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRCS))
 BONUS_OBJS = $(patsubst %.c, $(BONUS_OBJ_DIR)/%.o, $(BONUS_SRCS))
@@ -103,11 +56,11 @@ $(NAME): $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) -o $(NAME)
 	@echo "$(GREEN)Cub3D compiled successfully!$(NC)"
 
-bonus: libft $(NAME_BONUS)
-
-$(NAME_BONUS): $(BONUS_OBJS)
-	@echo "$(LILA)Compiling Cub3D (bonus)...$(NC)"
-	@$(CC) $(CFLAGS) $(BONUS_OBJS) $(LDFLAGS) -o $(NAME_BONUS)
+bonus: libft $(BONUS_OBJS)
+	@echo "$(LILA)Cleaning normal version and compiling bonus version...$(NC)"
+	@rm -f $(NAME)
+	@rm -rf $(OBJ_DIR)
+	@$(CC) $(CFLAGS) $(BONUS_OBJS) $(LDFLAGS) -o $(NAME)
 	@echo "$(GREEN)Cub3D bonus compiled successfully!$(NC)"
 
 $(OBJ_DIR)/%.o: %.c
@@ -131,7 +84,7 @@ clean:
 
 fclean: clean
 	@echo "$(LILA)Cleaning up all files...$(NC)"
-	@rm -f $(NAME) $(NAME_BONUS)
+	@rm -f $(NAME)
 	@$(MAKE) -s -C $(LIBFT_DIR) fclean > /dev/null
 	@echo "$(GREEN)All files cleaned!$(NC)"
 
