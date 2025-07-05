@@ -6,7 +6,7 @@
 /*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 20:20:25 by leaugust          #+#    #+#             */
-/*   Updated: 2025/07/03 12:03:41 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/07/05 16:05:34 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,14 @@ void	rotate_right(t_map *map)
 		* cos(ROTATE_SPEED);
 	map->player_angle = atan2(map->dir_y, map->dir_x);
 	printf("Rotated right to (%.2f, %.2f)\n", map->player_x, map->player_y);
+}
+void	apply_rotation(t_map *map)
+{
+	t_game	*game;
+
+	game = map->game;
+	if (game->key[ROTATE_LEFT])
+		rotate_left(map);
+	else if (game->key[ROTATE_RIGHT])
+		rotate_right(map);
 }

@@ -6,7 +6,7 @@
 /*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 13:33:09 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/07/05 12:59:16 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/07/05 15:53:10 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,6 +204,7 @@ void				calc_move_vector(t_map *map, double *v_x, double *v_y);
 void				get_bounding_cells(double px, double py, t_bounds *bounds);
 int					is_cell_walkable(t_map *map, int x, int y);
 int					is_walkable(t_map *map, double px, double py);
+int					is_player_out_of_bounds(t_map *map);
 void				apply_move(t_map *map, double v_x, double v_y);
 void				apply_rotation(t_map *map);
 
