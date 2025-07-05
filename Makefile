@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+         #
+#    By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/04 17:01:27 by jbanchon          #+#    #+#              #
-#    Updated: 2025/07/05 16:36:11 by jbanchon         ###   ########.fr        #
+#    Updated: 2025/07/05 16:48:20 by leaugust         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ BONUS_OBJ_DIR = objs_bonus
 
 SRCS = \
 	srcs/main.c srcs/parsing/char_validation.c srcs/parsing/map_utils.c srcs/parsing/map_validation.c srcs/parsing/parse_map.c\
-	srcs/parsing/player_init.c srcs/parsing/print.c srcs/parsing/void_check.c srcs/textures/parse_textures.c\
+	srcs/parsing/player_init.c srcs/parsing/void_check.c srcs/textures/parse_textures.c\
 	srcs/textures/rgb_utils.c srcs/textures/texture_utils.c srcs/raycasting/minimap.c srcs/raycasting/raycasting.c\
 	srcs/raycasting/raycaster.c srcs/raycasting/render_walls.c srcs/raycasting/ray_texture.c srcs/raycasting/ray_projection.c\
 	srcs/raycasting/ray_init.c srcs/init/init_structs.c srcs/init/init_directions.c srcs/game/collision.c\
@@ -34,7 +34,7 @@ SRCS = \
 
 BONUS_SRCS = \
 	srcs/main.c srcs/parsing/char_validation.c srcs/parsing/map_utils.c srcs/parsing/map_validation.c\
-	srcs/parsing/parse_map.c srcs/parsing/player_init.c srcs/parsing/print.c srcs/parsing/void_check.c\
+	srcs/parsing/parse_map.c srcs/parsing/player_init.c srcs/parsing/void_check.c\
 	srcs/textures/parse_textures.c srcs/textures/rgb_utils.c srcs/textures/texture_utils.c srcs/raycasting/raycasting.c\
 	srcs/raycasting/raycaster.c srcs/raycasting/render_walls.c srcs/raycasting/ray_texture.c srcs/raycasting/ray_projection.c\
 	srcs/raycasting/ray_init.c srcs/init/init_structs.c srcs/init/init_directions.c srcs/game/game_loop.c\

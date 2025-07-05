@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 21:17:17 by leaugust          #+#    #+#             */
-/*   Updated: 2025/07/01 13:41:53 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/07/05 16:49:52 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,11 @@ int	parse_map(t_map *map, char *file_path)
 {
 	int	fd;
 
-	printf("=== Starting map parsing ===\n");
 	fd = open_map_file(file_path);
 	if (fd < 0)
 		return (printf("Error: Failed to open file %s\n", file_path), 1);
-	printf("Successfully opened %s (fd=%d)\n", file_path, fd);
 	if (parse_textures_colors(map->texpath, file_path))
-		return ((close(fd), printf(" textures and colors\n")), 1);
+		return ((close(fd), printf("Error: Textures and/or colors\n")), 1);
 	map->floor_color = map->texpath->floor_rgb;
 	map->ceiling_color = map->texpath->ceiling_rgb;
 	close(fd);
@@ -30,13 +28,8 @@ int	parse_map(t_map *map, char *file_path)
 	if (read_map_lines(fd, map))
 		return ((close(fd), printf("Error reading map lines\n")), 1);
 	close(fd);
-	printf("Map reading complete - Dimensions: %dx%d\n", map->width,
-		map->height);
 	if (validate_map(map))
 		return (printf("Error: Map validation failed\n"), 1);
-	printf("Player found at (%f, %f) facing %c\n", map->player_x, map->player_y,
-		map->player_dir);
-	printf("=== Map parsing completed successfully ===\n");
 	return (0);
 }
 
@@ -50,7 +43,6 @@ int	open_map_file(char *file_path)
 		perror("Error opening file");
 		return (-1);
 	}
-	printf("File '%s' opened successfully, fd=%d\n", file_path, fd);
 	return (fd);
 }
 
@@ -84,7 +76,6 @@ char	**allocate_temp_map(void)
 		perror("Malloc failed for temp_map");
 		return (NULL);
 	}
-	printf("Temporary map allocated.\n");
 	return (temp_map);
 }
 
@@ -113,6 +104,5 @@ int	fill_temp_map(int fd, char **temp_map, int *height, int *max_width)
 		line = get_next_line(fd);
 	}
 	free(line);
-	// printf("Total lines read: %d, max width: %d\n", *height, *max_width);
 	return (0);
 }

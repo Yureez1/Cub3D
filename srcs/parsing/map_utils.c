@@ -6,7 +6,7 @@
 /*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 10:39:40 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/07/04 14:04:18 by leaugust         ###   ########.fr       */
+/*   Updated: 2025/07/05 16:47:20 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,5 @@ int	finalize_map(t_map *map, char **temp_map)
 	}
 	map->map[i] = NULL;
 	free(temp_map);
-	printf("Map finalized: height=%d, width=%d\n", map->height, map->width);
 	return (0);
 }

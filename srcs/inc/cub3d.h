@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 13:33:09 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/07/05 15:53:10 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/07/05 16:48:05 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -267,10 +267,6 @@ int					read_map_lines(int fd, t_map *map);
 char				**allocate_temp_map(void);
 int					fill_temp_map(int fd, char **temp_map, int *height,
 						int *max_width);
-
-/*==== print.c ====*/
-
-void				print_map(t_map *map);
 
 /*==== player_init.c ====*/
 

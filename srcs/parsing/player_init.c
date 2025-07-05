@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_init.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 14:47:21 by leaugust          #+#    #+#             */
-/*   Updated: 2025/07/01 13:39:46 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/07/05 16:50:13 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ int	set_player_position(t_map *map, int x, int y)
 	else if (c == 'W')
 		map->player_angle = M_PI;
 	map->map[y][x] = '0';
-	printf("Player init at (%.2f, %.2f), map char: %c\n", map->player_x,
-		map->player_y, map->map[(int)map->player_y][(int)map->player_x]);
 	return (1);
 }
 

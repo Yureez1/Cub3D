@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 12:03:12 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/06/28 17:18:00 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/07/05 16:47:38 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ static void	init_and_load(t_map *map)
 		exit(EXIT_FAILURE);
 		destroy_map(map);
 	}
-	printf("Image buffer: %p\n", game->data);
 	if (load_textures(map))
 	{
 		perror("Failed to load textures");
