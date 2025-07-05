@@ -6,11 +6,51 @@
 /*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 12:15:55 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/06/28 17:13:13 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/07/05 13:04:03 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
+
+static void	init_texture_paths(char **paths, t_texpath *texpath)
+{
+	paths[TEX_NO] = texpath->no;
+	paths[TEX_SO] = texpath->so;
+	paths[TEX_WE] = texpath->we;
+	paths[TEX_EA] = texpath->ea;
+}
+
+static int	load_single_texture(t_game *game, t_textures *tex, char *path,
+		int index)
+{
+	tex->img = mlx_xpm_file_to_image(game->mlx, path, &tex->width,
+			&tex->height);
+	printf("Texture %d loaded: %dx%d\n", index, tex->width, tex->height);
+	if (!tex->img)
+	{
+		perror("Failed to load texture");
+		return (1);
+	}
+	tex->data = (int *)mlx_get_data_addr(tex->img, &tex->bpp, &tex->line_size,
+			&tex->endian);
+	return (0);
+}
+
+static void	cleanup_loaded_textures(t_game *game, int count)
+{
+	int	i;
+
+	i = 0;
+	while (i < count)
+	{
+		if (game->textures[i].img)
+		{
+			mlx_destroy_image(game->mlx, game->textures[i].img);
+			game->textures[i].img = NULL;
+		}
+		i++;
+	}
+}
 
 int	load_textures(t_map *map)
 {
@@ -18,24 +58,16 @@ int	load_textures(t_map *map)
 	int			i;
 	t_textures	*tex;
 
-	paths[TEX_NO] = map->texpath->no;
-	paths[TEX_SO] = map->texpath->so;
-	paths[TEX_WE] = map->texpath->we;
-	paths[TEX_EA] = map->texpath->ea;
+	init_texture_paths(paths, map->texpath);
 	i = 0;
 	while (i < NB_TEXTURES)
 	{
 		tex = &map->game->textures[i];
-		tex->img = mlx_xpm_file_to_image(map->game->mlx, paths[i], &tex->width,
-				&tex->height);
-		printf("Texture %d loaded: %dx%d\n", i, tex->width, tex->height);
-		if (!tex->img)
+		if (load_single_texture(map->game, tex, paths[i], i))
 		{
-			perror("Failed to load texture");
+			cleanup_loaded_textures(map->game, i);
 			return (1);
 		}
-		tex->data = (int *)mlx_get_data_addr(tex->img, &tex->bpp,
-				&tex->line_size, &tex->endian);
 		i++;
 	}
 	return (0);

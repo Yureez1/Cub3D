@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 13:33:09 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/07/04 14:14:32 by leaugust         ###   ########.fr       */
+/*   Updated: 2025/07/05 12:59:16 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,6 +216,7 @@ void				rotate_right(t_map *map);
 
 int					init_window(t_game *game);
 void				destroy_mlx(t_game *game);
+void				destroy_textures(t_game *game);
 
 /* INIT */
 

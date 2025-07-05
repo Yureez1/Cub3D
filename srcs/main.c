@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 13:33:11 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/07/04 14:13:55 by leaugust         ###   ########.fr       */
+/*   Updated: 2025/07/05 12:56:49 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,6 @@ int	has_cub_extension(const char *filename)
 void	cleanup_and_exit(t_map *map)
 {
 	destroy_map(map);
-	free(map->texpath);
-	free(map->game);
-	free(map);
 }
 
 t_map	*init_map(void)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window_management.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 20:18:58 by leaugust          #+#    #+#             */
-/*   Updated: 2025/06/26 20:19:24 by leaugust         ###   ########.fr       */
+/*   Updated: 2025/07/05 13:00:54 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	destroy_mlx(t_game *game)
 {
 	if (!game || !game->mlx)
 		return ;
+	destroy_textures(game);
 	if (game->mlx_img)
 	{
 		mlx_destroy_image(game->mlx, game->mlx_img);
@@ -52,4 +53,20 @@ void	destroy_mlx(t_game *game)
 	mlx_destroy_display(game->mlx);
 	free(game->mlx);
 	game->mlx = NULL;
+}
+
+void	destroy_textures(t_game *game)
+{
+	int	i;
+
+	i = 0;
+	while (i < NB_TEXTURES)
+	{
+		if (game->textures[i].img)
+		{
+			mlx_destroy_image(game->mlx, game->textures[i].img);
+			game->textures[i].img = NULL;
+		}
+		i++;
+	}
 }
