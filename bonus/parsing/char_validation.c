@@ -1,21 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   move_bonus.c                                       :+:      :+:    :+:   */
+/*   char_validation.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/05 16:00:00 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/07/11 17:36:54 by leaugust         ###   ########.fr       */
+/*   Created: 2025/06/26 22:10:55 by leaugust          #+#    #+#             */
+/*   Updated: 2025/07/11 17:36:45 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d_bonus.h"
 
-void	apply_move(t_map *map, double v_x, double v_y)
+int	parse_char(char c)
 {
-	if (is_walkable(map, map->player_x + v_x, map->player_y))
-		map->player_x += v_x;
-	if (is_walkable(map, map->player_x, map->player_y + v_y))
-		map->player_y += v_y;
+	if ((c >= 9 && c <= 13) || c == '0' || c == '1' || c == ' ' || c == 'N'
+		|| c == 'S' || c == 'E' || c == 'W')
+		return (0);
+	else if (c == '\n')
+		return (1);
+	else
+	{
+		fprintf(stderr, "Error: Invalid character '%c' in map\n", c);
+		return (1);
+	}
+	return (0);
 }

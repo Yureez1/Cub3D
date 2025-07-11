@@ -6,13 +6,15 @@
 #    By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/04 17:01:27 by jbanchon          #+#    #+#              #
-#    Updated: 2025/07/05 16:48:20 by leaugust         ###   ########.fr        #
+#    Updated: 2025/07/11 17:36:30 by leaugust         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
 CC = cc
 CFLAGS = -Wall -Wextra -g -Werror -I$(MLX_DIR) -I$(GNL_DIR) -I$(LIBFT_DIR)
+CFLAGS_NORMAL = $(CFLAGS) -I./srcs/inc
+CFLAGS_BONUS = $(CFLAGS) -I./bonus/inc -DBONUS
 LDFLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lbsd -L$(LIBFT_DIR) -lft
 
 GNL_DIR = ./gnl
@@ -27,7 +29,7 @@ SRCS = \
 	srcs/parsing/player_init.c srcs/parsing/void_check.c srcs/textures/parse_textures.c\
 	srcs/textures/rgb_utils.c srcs/textures/texture_utils.c srcs/raycasting/minimap.c srcs/raycasting/raycasting.c\
 	srcs/raycasting/raycaster.c srcs/raycasting/render_walls.c srcs/raycasting/ray_texture.c srcs/raycasting/ray_projection.c\
-	srcs/raycasting/ray_init.c srcs/init/init_structs.c srcs/init/init_directions.c srcs/game/collision.c\
+	srcs/raycasting/ray_init.c srcs/init/init_structs.c srcs/init/init_directions.c\
 	srcs/game/game_loop.c srcs/game/input_handling.c srcs/game/map_management.c srcs/game/move_vector.c\
 	srcs/game/move.c srcs/game/rotation.c srcs/game/window_management.c srcs/game_textures/load_textures.c\
 	$(GNL_DIR)/get_next_line.c $(GNL_DIR)/get_next_line_utils.c \
@@ -53,23 +55,23 @@ all: libft $(NAME)
 
 $(NAME): $(OBJS)
 	@echo "$(LILA)Compiling Cub3D (normal)...$(NC)"
-	@$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) -o $(NAME)
+	@$(CC) $(CFLAGS_NORMAL) $(OBJS) $(LDFLAGS) -o $(NAME)
 	@echo "$(GREEN)Cub3D compiled successfully!$(NC)"
 
 bonus: libft $(BONUS_OBJS)
 	@echo "$(LILA)Cleaning normal version and compiling bonus version...$(NC)"
 	@rm -f $(NAME)
 	@rm -rf $(OBJ_DIR)
-	@$(CC) $(CFLAGS) $(BONUS_OBJS) $(LDFLAGS) -o $(NAME)
+	@$(CC) $(CFLAGS_BONUS) $(BONUS_OBJS) $(LDFLAGS) -o $(NAME)
 	@echo "$(GREEN)Cub3D bonus compiled successfully!$(NC)"
 
 $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(dir $@)
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS_NORMAL) -c $< -o $@
 
 $(BONUS_OBJ_DIR)/%.o: %.c
 	@mkdir -p $(dir $@)
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS_BONUS) -c $< -o $@
 
 libft:
 	@echo "$(LILA)Compiling libft...$(NC)"

@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 16:00:00 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/07/05 16:07:23 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/07/11 17:36:59 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../srcs/inc/cub3d.h"
+#include "../inc/cub3d_bonus.h"
 
-// Version bonus avec minimap complète
 void	draw_player(t_rect rect, t_game *game)
 {
 	int	i;

@@ -1,21 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   move_bonus.c                                       :+:      :+:    :+:   */
+/*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/05 16:00:00 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/07/11 17:36:54 by leaugust         ###   ########.fr       */
+/*   Created: 2025/06/26 20:27:44 by leaugust          #+#    #+#             */
+/*   Updated: 2025/07/11 17:30:35 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d_bonus.h"
 
-void	apply_move(t_map *map, double v_x, double v_y)
+// Version normale sans minimap - fonctions vides
+void	draw_player(t_rect rect, t_game *game)
 {
-	if (is_walkable(map, map->player_x + v_x, map->player_y))
-		map->player_x += v_x;
-	if (is_walkable(map, map->player_x, map->player_y + v_y))
-		map->player_y += v_y;
+	(void)rect;
+	(void)game;
+}
+
+void	draw_minimap_player(t_map *map, int offset_x, int offset_y)
+{
+	(void)map;
+	(void)offset_x;
+	(void)offset_y;
+}
+
+void	draw_minimap_cells(t_map *map, int offset_x, int offset_y)
+{
+	(void)map;
+	(void)offset_x;
+	(void)offset_y;
+}
+
+void	draw_minimap(t_map *map)
+{
+	(void)map;
 }

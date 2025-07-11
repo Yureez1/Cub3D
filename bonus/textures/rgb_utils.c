@@ -6,11 +6,11 @@
 /*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 21:12:10 by leaugust          #+#    #+#             */
-/*   Updated: 2025/07/11 17:40:01 by leaugust         ###   ########.fr       */
+/*   Updated: 2025/07/11 17:42:32 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
+#include "../inc/cub3d_bonus.h"
 
 int	convert_rgb(unsigned int r, unsigned int g, unsigned int b)
 {
