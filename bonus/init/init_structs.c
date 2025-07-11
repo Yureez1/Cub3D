@@ -6,7 +6,7 @@
 /*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:28:49 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/07/11 17:30:06 by leaugust         ###   ########.fr       */
+/*   Updated: 2025/07/11 18:05:36 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,12 @@ int	init_struct(t_map *map)
 	map->player_dir = 0;
 	map->game = malloc(sizeof(t_game));
 	if (!map->game)
-		return (perror("Failed to allocate memory for game struct"), 1);
+		return (printf("Failed to allocate memory for game struct"), 1);
 	init_game_struct(map->game);
 	init_textures(map->game->textures);
 	map->texpath = malloc(sizeof(t_texpath));
 	if (!map->texpath)
-		return (perror("Failed to allocate memory for texpath"), 1);
+		return (printf("Failed to allocate memory for texpath"), 1);
 	init_texpath(map->texpath);
 	return (0);
 }

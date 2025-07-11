@@ -6,7 +6,7 @@
 /*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 12:03:12 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/07/05 16:47:38 by leaugust         ###   ########.fr       */
+/*   Updated: 2025/07/11 18:33:38 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	init_and_load(t_map *map)
 	game = map->game;
 	if (!map || !game)
 	{
-		perror("Map or game structure is NULL");
+		printf("Map or game structure is NULL");
 		exit(EXIT_FAILURE);
 	}
 	if (init_window(game))
@@ -36,7 +36,7 @@ static void	init_and_load(t_map *map)
 	}
 	if (load_textures(map))
 	{
-		perror("Failed to load textures");
+		printf("Failed to load textures");
 		destroy_map(map);
 		exit(EXIT_FAILURE);
 	}

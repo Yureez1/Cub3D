@@ -6,7 +6,7 @@
 /*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 21:17:17 by leaugust          #+#    #+#             */
-/*   Updated: 2025/07/11 17:30:18 by leaugust         ###   ########.fr       */
+/*   Updated: 2025/07/11 19:34:11 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	parse_map(t_map *map, char *file_path)
 	if (fd < 0)
 		return (printf("Error: Failed to open file %s\n", file_path), 1);
 	if (parse_textures_colors(map->texpath, file_path))
-		return ((close(fd), printf("Error: Textures and/or colors\n")), 1);
+		return ((close(fd), printf("Error: Invalid file settings\n")), 1);
 	map->floor_color = map->texpath->floor_rgb;
 	map->ceiling_color = map->texpath->ceiling_rgb;
 	close(fd);
@@ -29,7 +29,7 @@ int	parse_map(t_map *map, char *file_path)
 		return ((close(fd), printf("Error reading map lines\n")), 1);
 	close(fd);
 	if (validate_map(map))
-		return (printf("Error: Map validation failed\n"), 1);
+		return (1);
 	return (0);
 }
 
@@ -40,7 +40,7 @@ int	open_map_file(char *file_path)
 	fd = open(file_path, O_RDONLY);
 	if (fd < 0)
 	{
-		perror("Error opening file");
+		printf("Error : Cannot open file");
 		return (-1);
 	}
 	return (fd);
@@ -73,7 +73,7 @@ char	**allocate_temp_map(void)
 	temp_map = malloc(sizeof(char *) * 1024);
 	if (!temp_map)
 	{
-		perror("Malloc failed for temp_map");
+		printf("Malloc failed for temp_map");
 		return (NULL);
 	}
 	return (temp_map);

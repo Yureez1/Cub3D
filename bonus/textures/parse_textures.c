@@ -18,10 +18,10 @@ int	parse_textures_colors(t_texpath *texpath, char *file_path)
 	char	*line;
 
 	if (texpath == NULL || file_path == NULL)
-		return (perror("texpath or file_path is NULL"), 1);
+		return (printf("texpath or file_path is NULL"), 1);
 	fd = open(file_path, O_RDONLY);
 	if (fd < 0)
-		return (perror("Error opening color file"), 1);
+		return (printf("Error : Cannot open color file"), 1);
 	line = get_next_line(fd);
 	while (line)
 	{
@@ -62,25 +62,25 @@ int	handle_texture_line(t_texpath *texpath, char *line)
 	if (!ft_strncmp(line, "NO", 2))
 	{
 		if (texpath->no)
-			return (perror("Duplicate NO"), 1);
+			return (printf("Error: Duplicate NO\n"), 1);
 		texpath->no = ft_strtrim(line + 2, " \t\n");
 	}
 	else if (!ft_strncmp(line, "SO", 2))
 	{
 		if (texpath->so)
-			return (perror("Duplicate SO"), 1);
+			return (printf("Error: Duplicate SO\n"), 1);
 		texpath->so = ft_strtrim(line + 2, " \t\n");
 	}
 	else if (!ft_strncmp(line, "WE", 2))
 	{
 		if (texpath->we)
-			return (perror("Duplicate WE"), 1);
+			return (printf("Error: Duplicate WE\n"), 1);
 		texpath->we = ft_strtrim(line + 2, " \t\n");
 	}
 	else if (!ft_strncmp(line, "EA", 2))
 	{
 		if (texpath->ea)
-			return (perror("Duplicate EA"), 1);
+			return (printf("Error: Duplicate EA\n"), 1);
 		texpath->ea = ft_strtrim(line + 2, " \t\n");
 	}
 	return (0);

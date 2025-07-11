@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 21:12:16 by leaugust          #+#    #+#             */
-/*   Updated: 2025/06/28 13:41:24 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/07/11 19:32:56 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ int	handle_ceiling(t_texpath *texpath, char *line)
 
 	if (texpath->ceiling)
 	{
-		perror("Duplicate C");
+		printf("Error: Duplicate C\n");
 		return (1);
 	}
 	trimmed = ft_strtrim(line + 1, " \t\n");
 	if (!trimmed)
 	{
-		perror("Invalid ceiling color format");
+		printf("Error: Invalid ceiling color format\n");
 		return (1);
 	}
 	if (parse_rgb(trimmed, &texpath->ceiling_rgb))
@@ -42,13 +42,13 @@ int	handle_floor(t_texpath *texpath, char *line)
 
 	if (texpath->floor)
 	{
-		perror("Duplicate F");
+		printf("Error: Duplicate F\n");
 		return (1);
 	}
 	trimmed = ft_strtrim(line + 1, " \t\n");
 	if (!trimmed)
 	{
-		perror("Invalid floor color format");
+		printf("Error: Invalid floor color format\n");
 		return (1);
 	}
 	if (parse_rgb(trimmed, &texpath->floor_rgb))
@@ -63,7 +63,7 @@ int	handle_floor(t_texpath *texpath, char *line)
 int	destroy_texpath(t_texpath *texpath)
 {
 	if (texpath == NULL)
-		return (perror("texpath is NULL"), 1);
+		return (printf("Error: Texpath is NULL\n"), 1);
 	if (texpath->no)
 		free(texpath->no);
 	if (texpath->so)
@@ -83,7 +83,7 @@ int	check_textures(t_texpath *texpath)
 {
 	if (!texpath->no || !texpath->so || !texpath->we || !texpath->ea
 		|| !texpath->floor || !texpath->ceiling)
-		return (perror("Missing texture paths"), 1);
+		return (printf("Error: Missing settings\n"), 1);
 	if (check_exist_textures(texpath))
 		return (1);
 	if (check_xpm_file(texpath->no) || check_xpm_file(texpath->so)

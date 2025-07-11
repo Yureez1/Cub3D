@@ -6,7 +6,7 @@
 /*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 13:33:09 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/07/11 17:36:21 by leaugust         ###   ########.fr       */
+/*   Updated: 2025/07/11 17:52:21 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@
 # define NB_TEXTURES 4
 # define WIDTH 1280
 # define HEIGHT 720
-# define MOVE_SPEED 0.05
-# define ROTATE_SPEED 0.05
+# define MOVE_SPEED 0.02
+# define ROTATE_SPEED 0.02
 # define TILE_SIZE 64
 # define PLAYER_SIZE 10
 # define PI 3.141592653589793

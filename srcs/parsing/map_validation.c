@@ -6,7 +6,7 @@
 /*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 21:28:20 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/07/05 16:49:07 by leaugust         ###   ########.fr       */
+/*   Updated: 2025/07/11 19:42:26 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 int	validate_map(t_map *map)
 {
 	if (check_invalid_char(map))
-		return (perror("Error: Invalid character in map\n"), 1);
+		return (printf("Error: Invalid map format\n"), 1);
 	if (check_single_player(map))
-		return (perror("Error: Invalid player position\n"), 1);
+		return (1);
 	if (find_player_position(map))
-		return (perror("Error: Failed to find player position\n"), 1);
+		return (printf("Error: Failed to find player position\n"), 1);
 	if (init_player_dir(map))
-		return (perror("Error: Failed to initialize player direction\n"), 1);
+		return (printf("Error: Failed to initialize player direction\n"), 1);
 	if (validate_void_surroundings(map))
-		return (perror("Error: map not closed (0 or player touches space)\n"),
+		return (printf("Error: Map not closed (0 or player touches space)\n"),
 			1);
 	fill_voids_with_walls(map);
 	return (0);
@@ -41,10 +41,7 @@ int	check_invalid_char(t_map *map)
 		while (x < map->width && map->map[y][x])
 		{
 			if (parse_char(map->map[y][x]))
-			{
-				perror("Invalid character in map");
 				return (1);
-			}
 			x++;
 		}
 		y++;
@@ -73,9 +70,9 @@ int	check_single_player(t_map *map)
 		y++;
 	}
 	if (count == 0)
-		return (perror("No player position found in map"), 1);
+		return (printf("Error: No player position found in map\n"), 1);
 	if (count > 1)
-		return (perror("Multiple player positions found in map"), 1);
+		return (printf("Error: Multiple player positions found in map\n"), 1);
 	return (0);
 }
 

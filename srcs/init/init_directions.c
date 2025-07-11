@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_directions.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 20:01:37 by leaugust          #+#    #+#             */
-/*   Updated: 2025/07/03 12:02:21 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/07/11 18:33:38 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	init_player_dir(t_map *map)
 		init_dir_west(map);
 	else
 	{
-		perror("Invalid player direction");
+		printf("Invalid player direction");
 		return (1);
 	}
 	return (0);

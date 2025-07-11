@@ -6,7 +6,7 @@
 /*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 12:15:55 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/07/05 16:52:22 by leaugust         ###   ########.fr       */
+/*   Updated: 2025/07/11 18:33:38 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	load_single_texture(t_game *game, t_textures *tex, char *path)
 			&tex->height);
 	if (!tex->img)
 	{
-		perror("Failed to load texture");
+		printf("Failed to load texture");
 		return (1);
 	}
 	tex->data = (int *)mlx_get_data_addr(tex->img, &tex->bpp, &tex->line_size,

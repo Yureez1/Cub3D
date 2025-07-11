@@ -6,7 +6,7 @@
 /*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 10:39:40 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/07/05 16:47:20 by leaugust         ###   ########.fr       */
+/*   Updated: 2025/07/11 18:33:38 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	process_map_line(char *line, char **temp_map, int *height, int *max_width)
 	temp_map[*height] = ft_strdup(line);
 	if (temp_map[*height] == NULL)
 	{
-		perror("Strdup failed");
+		printf("Strdup failed");
 		free(line);
 		return (1);
 	}
@@ -40,7 +40,7 @@ int	copy_map_row(t_map *map, char **temp_map, int i)
 
 	map->map[i] = malloc(sizeof(char) * (map->width + 1));
 	if (!map->map[i])
-		return (perror("Malloc failed for final map row"), 1);
+		return (printf("Malloc failed for final map row"), 1);
 	j = 0;
 	while (temp_map[i][j])
 	{
@@ -60,7 +60,7 @@ int	finalize_map(t_map *map, char **temp_map)
 
 	map->map = malloc(sizeof(char *) * (map->height + 1));
 	if (!map->map)
-		return (perror("Malloc failed for final map"), 1);
+		return (printf("Malloc failed for final map"), 1);
 	i = 0;
 	while (i < map->height)
 	{

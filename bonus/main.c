@@ -6,7 +6,7 @@
 /*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 13:33:11 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/07/11 17:31:05 by leaugust         ###   ########.fr       */
+/*   Updated: 2025/07/11 18:05:36 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_map	*init_map(void)
 	map = malloc(sizeof(*map));
 	if (!map)
 	{
-		perror("Failed to allocate memory for map");
+		printf("Failed to allocate memory for map");
 		return (NULL);
 	}
 	ft_bzero(map, sizeof(*map));
@@ -47,12 +47,12 @@ int	check_args(int argc, char **argv)
 	int	fd;
 
 	if (argc != 2)
-		return (perror("Usage: ./cub3d <map_file>"), 1);
+		return (printf("Usage: ./cub3d <map_file>"), 1);
 	if (!has_cub_extension(argv[1]))
-		return (perror("Error: file must have .cub extension"), 1);
+		return (printf("Error: file must have .cub extension"), 1);
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
-		return (perror("Error: cannot open file"), 1);
+		return (printf("Error: cannot open file"), 1);
 	close(fd);
 	return (0);
 }

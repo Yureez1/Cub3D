@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbanchon <jbanchon@student42.fr>           +#+  +:+       +#+        */
+/*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 15:57:17 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/06/14 22:09:47 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/07/11 17:50:21 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,10 @@ char	*get_next_line(int fd)
 	line = ft_fill_buffer(fd, stash, buf);
 	free(buf);
 	if (!line)
+	{
+		free(stash);
 		return (NULL);
+	}
 	stash = ft_define_line(line);
 	return (line);
 }
@@ -66,9 +69,13 @@ char	*ft_fill_buffer(int fd, char *stash, char *buf)
 		buf[read_bytes] = '\0';
 		if (!stash)
 			stash = ft_strdup("");
+		if (!stash)
+			return (NULL);
 		temp = stash;
 		stash = ft_strjoin(temp, buf);
 		free(temp);
+		if (!stash)
+			return (NULL);
 		if (ft_strchr(buf, '\n'))
 			break ;
 	}
