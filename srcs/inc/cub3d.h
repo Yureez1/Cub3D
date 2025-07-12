@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 13:33:09 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/07/11 17:52:29 by leaugust         ###   ########.fr       */
+/*   Updated: 2025/07/12 17:30:59 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -280,13 +280,6 @@ int					check_void_at(t_map *map, int x, int y);
 int					is_touching_void(t_map *map, int x, int y);
 
 /* RAYCASTING */
-
-/*==== minimap.c ====*/
-
-void				draw_player(t_rect rect, t_game *game);
-void				draw_minimap_player(t_map *map, int offset_x, int offset_y);
-void				draw_minimap_cells(t_map *map, int offset_x, int offset_y);
-void				draw_minimap(t_map *map);
 
 /*==== raycasting.c ====*/
 
