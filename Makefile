@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+         #
+#    By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/04 17:01:27 by jbanchon          #+#    #+#              #
-#    Updated: 2025/07/15 13:12:32 by jbanchon         ###   ########.fr        #
+#    Updated: 2025/07/15 14:32:28 by leaugust         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ SRCS = \
 	srcs/raycasting/ray_init.c srcs/init/init_structs.c srcs/init/init_directions.c srcs/game/collision.c\
 	srcs/game/game_loop.c srcs/game/input_handling.c srcs/game/map_management.c srcs/game/move_vector.c\
 	srcs/game/move.c srcs/game/rotation.c srcs/game/window_management.c srcs/game_textures/load_textures.c\
-	$(GNL_DIR)/get_next_line.c $(GNL_DIR)/get_next_line_utils.c \
+	$(GNL_DIR)/get_next_line.c $(GNL_DIR)/get_next_line_utils.c $(GNL_DIR)/gnl.c \
 
 BONUS_SRCS = \
 	bonus/main.c bonus/parsing/char_validation.c bonus/parsing/map_utils.c bonus/parsing/map_validation.c\
@@ -42,7 +42,7 @@ BONUS_SRCS = \
 	bonus/raycasting/ray_init.c bonus/init/init_structs.c bonus/init/init_directions.c bonus/game/game_loop_bonus.c\
 	bonus/game/input_handling.c bonus/game/map_management.c bonus/game/move_vector.c bonus/game/rotation.c\
 	bonus/game/window_management.c bonus/game_textures/load_textures.c bonus/game/collision_bonus.c bonus/game/move_bonus.c\
-	bonus/raycasting/minimap_bonus.c $(GNL_DIR)/get_next_line.c $(GNL_DIR)/get_next_line_utils.c\
+	bonus/raycasting/minimap_bonus.c $(GNL_DIR)/get_next_line.c $(GNL_DIR)/get_next_line_utils.c $(GNL_DIR)/gnl.c\
 
 OBJS = $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRCS))
 BONUS_OBJS = $(patsubst %.c, $(BONUS_OBJ_DIR)/%.o, $(BONUS_SRCS))
