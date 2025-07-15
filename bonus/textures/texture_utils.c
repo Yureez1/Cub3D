@@ -6,7 +6,7 @@
 /*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 21:12:16 by leaugust          #+#    #+#             */
-/*   Updated: 2025/07/15 13:50:24 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/07/15 13:52:33 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int	has_leading_zero(const char *str)
 
 int	is_valid_number(const char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n')
