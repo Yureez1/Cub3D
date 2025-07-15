@@ -94,3 +94,16 @@ int	handle_color_line(t_texpath *texpath, char *line)
 		return (handle_ceiling(texpath, line));
 	return (0);
 }
+
+int	check_textures(t_texpath *texpath)
+{
+	if (!texpath->no || !texpath->so || !texpath->we || !texpath->ea
+		|| !texpath->floor || !texpath->ceiling)
+		return (1);
+	if (check_exist_textures(texpath))
+		return (1);
+	if (check_xpm_file(texpath->no) || check_xpm_file(texpath->so)
+		|| check_xpm_file(texpath->we) || check_xpm_file(texpath->ea))
+		return (1);
+	return (0);
+}

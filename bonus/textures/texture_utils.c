@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 21:12:16 by leaugust          #+#    #+#             */
-/*   Updated: 2025/07/11 19:31:48 by leaugust         ###   ########.fr       */
+/*   Updated: 2025/07/15 13:50:24 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,15 +79,36 @@ int	destroy_texpath(t_texpath *texpath)
 	return (0);
 }
 
-int	check_textures(t_texpath *texpath)
+int	has_leading_zero(const char *str)
 {
-	if (!texpath->no || !texpath->so || !texpath->we || !texpath->ea
-		|| !texpath->floor || !texpath->ceiling)
-		return (1);
-	if (check_exist_textures(texpath))
-		return (1);
-	if (check_xpm_file(texpath->no) || check_xpm_file(texpath->so)
-		|| check_xpm_file(texpath->we) || check_xpm_file(texpath->ea))
+	int	i;
+
+	i = 0;
+	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n')
+		i++;
+	if (str[i] == '0' && str[i + 1] && str[i + 1] >= '0' && str[i + 1] <= '9')
 		return (1);
 	return (0);
+}
+
+int	is_valid_number(const char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n')
+		i++;
+	while (str[i])
+	{
+		if (str[i] < '0' || str[i] > '9')
+		{
+			while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n')
+				i++;
+			if (str[i] != '\0')
+				return (0);
+			break ;
+		}
+		i++;
+	}
+	return (1);
 }

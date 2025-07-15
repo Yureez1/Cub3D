@@ -6,7 +6,7 @@
 /*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 21:12:10 by leaugust          #+#    #+#             */
-/*   Updated: 2025/07/12 17:44:57 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/07/15 13:51:04 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,21 @@ int	parse_rgb(const char *str, int *res)
 
 	rgb = ft_split(str, ',');
 	if (!rgb || !rgb[0] || !rgb[1] || !rgb[2] || rgb[3])
-		return (free_split(rgb), 1);
+		return (free_split(rgb), printf("Error: Invalid RGB format\n"), 1);
+	if (has_leading_zero(rgb[0]) || has_leading_zero(rgb[1])
+		|| has_leading_zero(rgb[2]))
+		return (free_split(rgb),
+			printf("Error: RGB values cannot have leading zeros\n"), 1);
+	if (!is_valid_number(rgb[0]) || !is_valid_number(rgb[1])
+		|| !is_valid_number(rgb[2]))
+		return (free_split(rgb), printf("Error: RGB values must be numbers\n"),
+			1);
 	r = ft_atoi(rgb[0]);
 	g = ft_atoi(rgb[1]);
 	b = ft_atoi(rgb[2]);
 	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
-		return (free_split(rgb), 1);
+		return (free_split(rgb),
+			printf("Error: RGB values must be between 0 and 255\n"), 1);
 	*res = convert_rgb(r, g, b);
 	return (free_split(rgb), 0);
 }
