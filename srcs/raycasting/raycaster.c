@@ -6,7 +6,7 @@
 /*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 20:27:16 by leaugust          #+#    #+#             */
-/*   Updated: 2025/06/28 17:11:58 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/07/15 13:10:50 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	render_walls(t_map *map)
 		init_ray(map, &ray, x);
 		if (!perform_dda(map, &ray))
 		{
+			draw_floor_ceiling_column(map, x, 0, HEIGHT);
 			x++;
 			continue ;
 		}
@@ -38,6 +39,8 @@ void	draw_floor_ceiling_column(t_map *map, int x, int start, int end)
 	int	y;
 
 	y = 0;
+	if (start > end)
+		return ;
 	while (y < start)
 	{
 		put_pixel(x, y, map->ceiling_color, map->game);

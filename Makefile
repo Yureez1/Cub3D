@@ -6,7 +6,7 @@
 #    By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/04 17:01:27 by jbanchon          #+#    #+#              #
-#    Updated: 2025/07/12 17:44:31 by jbanchon         ###   ########.fr        #
+#    Updated: 2025/07/15 13:12:32 by jbanchon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ SRCS = \
 	srcs/parsing/player_init.c srcs/parsing/void_check.c srcs/textures/parse_textures.c\
 	srcs/textures/rgb_utils.c srcs/textures/texture_utils.c srcs/raycasting/raycasting.c\
 	srcs/raycasting/raycaster.c srcs/raycasting/render_walls.c srcs/raycasting/ray_texture.c srcs/raycasting/ray_projection.c\
-	srcs/raycasting/ray_init.c srcs/init/init_structs.c srcs/init/init_directions.c\
+	srcs/raycasting/ray_init.c srcs/init/init_structs.c srcs/init/init_directions.c srcs/game/collision.c\
 	srcs/game/game_loop.c srcs/game/input_handling.c srcs/game/map_management.c srcs/game/move_vector.c\
 	srcs/game/move.c srcs/game/rotation.c srcs/game/window_management.c srcs/game_textures/load_textures.c\
 	$(GNL_DIR)/get_next_line.c $(GNL_DIR)/get_next_line_utils.c \

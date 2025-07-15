@@ -6,7 +6,7 @@
 /*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 13:33:09 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/07/12 17:30:59 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/07/15 13:47:43 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -345,5 +345,7 @@ int					handle_ceiling(t_texpath *texpath, char *line);
 int					handle_floor(t_texpath *texpath, char *line);
 int					destroy_texpath(t_texpath *texpath);
 int					check_textures(t_texpath *texpath);
+int					is_valid_number(const char *str);
+int					has_leading_zero(const char *str);
 
 #endif
