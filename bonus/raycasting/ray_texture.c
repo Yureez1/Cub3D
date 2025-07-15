@@ -6,7 +6,7 @@
 /*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 13:37:55 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/07/11 17:30:42 by leaugust         ###   ########.fr       */
+/*   Updated: 2025/07/15 15:38:21 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	select_texture(t_ray *ray)
 	return (texnum);
 }
 
-void	draw_textures(t_map *map, t_ray *ray, int x, int texx)
+static void	draw_textures(t_map *map, t_ray *ray, int x, int texx)
 {
 	t_textures	*tex;
 

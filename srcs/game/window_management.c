@@ -6,11 +6,27 @@
 /*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 20:18:58 by leaugust          #+#    #+#             */
-/*   Updated: 2025/07/11 18:33:38 by leaugust         ###   ########.fr       */
+/*   Updated: 2025/07/15 15:11:41 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
+
+static void	destroy_textures(t_game *game)
+{
+	int	i;
+
+	i = 0;
+	while (i < NB_TEXTURES)
+	{
+		if (game->textures[i].img)
+		{
+			mlx_destroy_image(game->mlx, game->textures[i].img);
+			game->textures[i].img = NULL;
+		}
+		i++;
+	}
+}
 
 int	init_window(t_game *game)
 {
@@ -55,20 +71,4 @@ void	destroy_mlx(t_game *game)
 	mlx_destroy_display(game->mlx);
 	free(game->mlx);
 	game->mlx = NULL;
-}
-
-void	destroy_textures(t_game *game)
-{
-	int	i;
-
-	i = 0;
-	while (i < NB_TEXTURES)
-	{
-		if (game->textures[i].img)
-		{
-			mlx_destroy_image(game->mlx, game->textures[i].img);
-			game->textures[i].img = NULL;
-		}
-		i++;
-	}
 }

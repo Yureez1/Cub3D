@@ -6,13 +6,13 @@
 /*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 20:01:37 by leaugust          #+#    #+#             */
-/*   Updated: 2025/07/11 18:05:36 by leaugust         ###   ########.fr       */
+/*   Updated: 2025/07/15 16:47:06 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d_bonus.h"
 
-void	init_dir_north(t_map *map)
+static void	init_dir_north(t_map *map)
 {
 	map->dir_x = 0;
 	map->dir_y = -1;
@@ -20,7 +20,7 @@ void	init_dir_north(t_map *map)
 	map->plane_y = 0;
 }
 
-void	init_dir_south(t_map *map)
+static void	init_dir_south(t_map *map)
 {
 	map->dir_x = 0;
 	map->dir_y = 1;
@@ -28,7 +28,7 @@ void	init_dir_south(t_map *map)
 	map->plane_y = 0;
 }
 
-void	init_dir_east(t_map *map)
+static void	init_dir_east(t_map *map)
 {
 	map->dir_x = 1;
 	map->dir_y = 0;
@@ -36,7 +36,7 @@ void	init_dir_east(t_map *map)
 	map->plane_y = 0.66;
 }
 
-void	init_dir_west(t_map *map)
+static void	init_dir_west(t_map *map)
 {
 	map->dir_x = -1;
 	map->dir_y = 0;
@@ -59,7 +59,7 @@ int	init_player_dir(t_map *map)
 		init_dir_west(map);
 	else
 	{
-		printf("Invalid player direction");
+		printf("Error: Invalid player direction\n");
 		return (1);
 	}
 	return (0);

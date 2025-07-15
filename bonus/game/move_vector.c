@@ -6,13 +6,13 @@
 /*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 12:04:48 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/07/11 17:31:30 by leaugust         ###   ########.fr       */
+/*   Updated: 2025/07/15 14:52:55 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d_bonus.h"
 
-void	accumulate_vector(t_map *map, double *v_x, double *v_y)
+static void	accumulate_vector(t_map *map, double *v_x, double *v_y)
 {
 	t_game	*game;
 
@@ -41,7 +41,7 @@ void	accumulate_vector(t_map *map, double *v_x, double *v_y)
 	}
 }
 
-void	normalize_vector(double *v_x, double *v_y)
+static void	normalize_vector(double *v_x, double *v_y)
 {
 	double	mag;
 

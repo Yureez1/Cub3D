@@ -6,25 +6,13 @@
 /*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 16:00:00 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/07/11 17:36:50 by leaugust         ###   ########.fr       */
+/*   Updated: 2025/07/15 15:00:43 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d_bonus.h"
 
-int	touch(t_map *map, double ray_x, double ray_y)
-{
-	int	x;
-	int	y;
-
-	x = (int)(ray_x);
-	y = (int)(ray_y);
-	if (x < 0 || x >= map->width || y < 0 || y >= map->height)
-		return (1);
-	return (map->map[y][x] == '1');
-}
-
-void	get_bounding_cells(double px, double py, t_bounds *bounds)
+static void	get_bounding_cells(double px, double py, t_bounds *bounds)
 {
 	int	left;
 	int	right;
@@ -41,7 +29,7 @@ void	get_bounding_cells(double px, double py, t_bounds *bounds)
 	bounds->bottom_cell = bottom / TILE_SIZE;
 }
 
-int	is_cell_walkable(t_map *map, int x, int y)
+static int	is_cell_walkable(t_map *map, int x, int y)
 {
 	if (y < 0)
 		return (0);

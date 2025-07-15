@@ -12,52 +12,7 @@
 
 #include "../inc/cub3d_bonus.h"
 
-int	parse_textures_colors(t_texpath *texpath, char *file_path)
-{
-	int		fd;
-	char	*line;
-
-	if (texpath == NULL || file_path == NULL)
-		return (printf("texpath or file_path is NULL"), 1);
-	fd = open(file_path, O_RDONLY);
-	if (fd < 0)
-		return (printf("Error : Cannot open color file"), 1);
-	line = get_next_line(fd);
-	while (line)
-	{
-		if (parse_line(texpath, line))
-		{
-			free(line);
-			close(fd);
-			return (1);
-		}
-		free(line);
-		line = get_next_line(fd);
-	}
-	if (check_textures(texpath))
-		return (close(fd), 1);
-	return (close(fd), 0);
-}
-
-int	parse_line(t_texpath *texpath, char *line)
-{
-	char	*trimmed_line;
-	int		ret;
-
-	trimmed_line = ft_strtrim(line, " \t\n");
-	ret = 0;
-	if (!trimmed_line || trimmed_line[0] == '\0')
-		return (free(trimmed_line), 0);
-	ret = handle_texture_line(texpath, trimmed_line);
-	if (ret != 0)
-		return (free(trimmed_line), ret);
-	ret = handle_color_line(texpath, trimmed_line);
-	if (ret != 0)
-		return (free(trimmed_line), ret);
-	return (free(trimmed_line), 0);
-}
-
-int	handle_texture_line(t_texpath *texpath, char *line)
+static int	handle_texture_line(t_texpath *texpath, char *line)
 {
 	if (!ft_strncmp(line, "NO", 2))
 	{
@@ -86,7 +41,7 @@ int	handle_texture_line(t_texpath *texpath, char *line)
 	return (0);
 }
 
-int	handle_color_line(t_texpath *texpath, char *line)
+static int	handle_color_line(t_texpath *texpath, char *line)
 {
 	if (!ft_strncmp(line, "F ", 2))
 		return (handle_floor(texpath, line));
@@ -95,7 +50,25 @@ int	handle_color_line(t_texpath *texpath, char *line)
 	return (0);
 }
 
-int	check_textures(t_texpath *texpath)
+static int	parse_line(t_texpath *texpath, char *line)
+{
+	char	*trimmed_line;
+	int		ret;
+
+	trimmed_line = ft_strtrim(line, " \t\n");
+	ret = 0;
+	if (!trimmed_line || trimmed_line[0] == '\0')
+		return (free(trimmed_line), 0);
+	ret = handle_texture_line(texpath, trimmed_line);
+	if (ret != 0)
+		return (free(trimmed_line), ret);
+	ret = handle_color_line(texpath, trimmed_line);
+	if (ret != 0)
+		return (free(trimmed_line), ret);
+	return (free(trimmed_line), 0);
+}
+
+static int	check_textures(t_texpath *texpath)
 {
 	if (!texpath->no || !texpath->so || !texpath->we || !texpath->ea
 		|| !texpath->floor || !texpath->ceiling)
@@ -106,4 +79,31 @@ int	check_textures(t_texpath *texpath)
 		|| check_xpm_file(texpath->we) || check_xpm_file(texpath->ea))
 		return (1);
 	return (0);
+}
+
+int	parse_textures_colors(t_texpath *texpath, char *file_path)
+{
+	int		fd;
+	char	*line;
+
+	if (texpath == NULL || file_path == NULL)
+		return (printf("texpath or file_path is NULL"), 1);
+	fd = open(file_path, O_RDONLY);
+	if (fd < 0)
+		return (printf("Error : Cannot open color file"), 1);
+	line = get_next_line(fd);
+	while (line)
+	{
+		if (parse_line(texpath, line))
+		{
+			free(line);
+			close(fd);
+			return (1);
+		}
+		free(line);
+		line = get_next_line(fd);
+	}
+	if (check_textures(texpath))
+		return (close(fd), 1);
+	return (close(fd), 0);
 }

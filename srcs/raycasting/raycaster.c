@@ -3,14 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 20:27:16 by leaugust          #+#    #+#             */
-/*   Updated: 2025/07/15 13:10:50 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/07/15 15:05:40 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
+
+static void	draw_floor_ceiling_column(t_map *map, int x, int start, int end)
+{
+	int	y;
+
+	y = 0;
+	if (start > end)
+		return ;
+	while (y < start)
+	{
+		put_pixel(x, y, map->ceiling_color, map->game);
+		y++;
+	}
+	y = end + 1;
+	while (y < HEIGHT)
+	{
+		put_pixel(x, y, map->floor_color, map->game);
+		y++;
+	}
+}
 
 void	render_walls(t_map *map)
 {
@@ -31,25 +51,5 @@ void	render_walls(t_map *map)
 		draw_floor_ceiling_column(map, x, ray.draw_s, ray.draw_end);
 		draw_column(map, &ray, x);
 		x++;
-	}
-}
-
-void	draw_floor_ceiling_column(t_map *map, int x, int start, int end)
-{
-	int	y;
-
-	y = 0;
-	if (start > end)
-		return ;
-	while (y < start)
-	{
-		put_pixel(x, y, map->ceiling_color, map->game);
-		y++;
-	}
-	y = end + 1;
-	while (y < HEIGHT)
-	{
-		put_pixel(x, y, map->floor_color, map->game);
-		y++;
 	}
 }

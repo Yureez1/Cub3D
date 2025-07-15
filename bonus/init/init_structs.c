@@ -6,13 +6,13 @@
 /*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:28:49 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/07/11 18:05:36 by leaugust         ###   ########.fr       */
+/*   Updated: 2025/07/15 16:47:24 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d_bonus.h"
 
-int	init_textures(t_textures *textures)
+static int	init_textures(t_textures *textures)
 {
 	int	i;
 
@@ -31,7 +31,24 @@ int	init_textures(t_textures *textures)
 	return (0);
 }
 
-int	init_game_struct(t_game *game)
+static int	init_texpath(t_texpath *texpath)
+{
+	texpath->no = NULL;
+	texpath->so = NULL;
+	texpath->we = NULL;
+	texpath->ea = NULL;
+	texpath->floor = NULL;
+	texpath->ceiling = NULL;
+	texpath->floor_rgb = 0;
+	texpath->ceiling_rgb = 0;
+	return (0);
+	texpath->ceiling = NULL;
+	texpath->floor_rgb = -1;
+	texpath->ceiling_rgb = -1;
+	return (0);
+}
+
+static int	init_game_struct(t_game *game)
 {
 	int	i;
 
@@ -68,29 +85,12 @@ int	init_struct(t_map *map)
 	map->player_dir = 0;
 	map->game = malloc(sizeof(t_game));
 	if (!map->game)
-		return (printf("Failed to allocate memory for game struct"), 1);
+		return (printf("Error: Failed to allocate memory for game struct\n"), 1);
 	init_game_struct(map->game);
 	init_textures(map->game->textures);
 	map->texpath = malloc(sizeof(t_texpath));
 	if (!map->texpath)
-		return (printf("Failed to allocate memory for texpath"), 1);
+		return (printf("Error: Failed to allocate memory for texpath\n"), 1);
 	init_texpath(map->texpath);
-	return (0);
-}
-
-int	init_texpath(t_texpath *texpath)
-{
-	texpath->no = NULL;
-	texpath->so = NULL;
-	texpath->we = NULL;
-	texpath->ea = NULL;
-	texpath->floor = NULL;
-	texpath->ceiling = NULL;
-	texpath->floor_rgb = 0;
-	texpath->ceiling_rgb = 0;
-	return (0);
-	texpath->ceiling = NULL;
-	texpath->floor_rgb = -1;
-	texpath->ceiling_rgb = -1;
 	return (0);
 }

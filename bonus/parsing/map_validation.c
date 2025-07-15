@@ -6,30 +6,13 @@
 /*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 21:28:20 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/07/11 19:18:13 by leaugust         ###   ########.fr       */
+/*   Updated: 2025/07/15 15:18:07 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d_bonus.h"
 
-int	validate_map(t_map *map)
-{
-	if (check_invalid_char(map))
-		return (perror("Error: Invalid character in map\n"), 1);
-	if (check_single_player(map))
-		return (perror("Error: Invalid player position\n"), 1);
-	if (find_player_position(map))
-		return (perror("Error: Failed to find player position\n"), 1);
-	if (init_player_dir(map))
-		return (perror("Error: Failed to initialize player direction\n"), 1);
-	if (validate_void_surroundings(map))
-		return (perror("Error: map not closed (0 or player touches space)\n"),
-			1);
-	fill_voids_with_walls(map);
-	return (0);
-}
-
-int	check_invalid_char(t_map *map)
+static int	check_invalid_char(t_map *map)
 {
 	int	x;
 	int	y;
@@ -52,7 +35,7 @@ int	check_invalid_char(t_map *map)
 	return (0);
 }
 
-int	check_single_player(t_map *map)
+static int	check_single_player(t_map *map)
 {
 	int	count;
 	int	y;
@@ -79,7 +62,7 @@ int	check_single_player(t_map *map)
 	return (0);
 }
 
-int	find_player_position(t_map *map)
+static int	find_player_position(t_map *map)
 {
 	int	y;
 	int	x;
@@ -100,7 +83,7 @@ int	find_player_position(t_map *map)
 	return (1);
 }
 
-int	validate_void_surroundings(t_map *map)
+static int	validate_void_surroundings(t_map *map)
 {
 	int		y;
 	int		x;
@@ -122,5 +105,22 @@ int	validate_void_surroundings(t_map *map)
 		}
 		y++;
 	}
+	return (0);
+}
+
+int	validate_map(t_map *map)
+{
+	if (check_invalid_char(map))
+		return (perror("Error: Invalid character in map\n"), 1);
+	if (check_single_player(map))
+		return (perror("Error: Invalid player position\n"), 1);
+	if (find_player_position(map))
+		return (perror("Error: Failed to find player position\n"), 1);
+	if (init_player_dir(map))
+		return (perror("Error: Failed to initialize player direction\n"), 1);
+	if (validate_void_surroundings(map))
+		return (perror("Error: map not closed (0 or player touches space)\n"),
+			1);
+	fill_voids_with_walls(map);
 	return (0);
 }

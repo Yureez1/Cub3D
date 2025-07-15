@@ -6,34 +6,13 @@
 /*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 21:17:17 by leaugust          #+#    #+#             */
-/*   Updated: 2025/07/11 19:34:11 by leaugust         ###   ########.fr       */
+/*   Updated: 2025/07/15 15:22:22 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d_bonus.h"
 
-int	parse_map(t_map *map, char *file_path)
-{
-	int	fd;
-
-	fd = open_map_file(file_path);
-	if (fd < 0)
-		return (printf("Error: Failed to open file %s\n", file_path), 1);
-	if (parse_textures_colors(map->texpath, file_path))
-		return ((close(fd), printf("Error: Invalid file settings\n")), 1);
-	map->floor_color = map->texpath->floor_rgb;
-	map->ceiling_color = map->texpath->ceiling_rgb;
-	close(fd);
-	fd = open_map_file(file_path);
-	if (read_map_lines(fd, map))
-		return ((close(fd), printf("Error reading map lines\n")), 1);
-	close(fd);
-	if (validate_map(map))
-		return (1);
-	return (0);
-}
-
-int	open_map_file(char *file_path)
+static int	open_map_file(char *file_path)
 {
 	int	fd;
 
@@ -46,27 +25,7 @@ int	open_map_file(char *file_path)
 	return (fd);
 }
 
-int	read_map_lines(int fd, t_map *map)
-{
-	char	**temp_map;
-	int		max_width;
-	int		height;
-
-	max_width = 0;
-	height = 0;
-	temp_map = allocate_temp_map();
-	if (!temp_map)
-		return (1);
-	if (fill_temp_map(fd, temp_map, &height, &max_width))
-		return (1);
-	map->height = height;
-	map->width = max_width;
-	if (finalize_map(map, temp_map))
-		return (1);
-	return (0);
-}
-
-char	**allocate_temp_map(void)
+static char	**allocate_temp_map(void)
 {
 	char	**temp_map;
 
@@ -79,7 +38,7 @@ char	**allocate_temp_map(void)
 	return (temp_map);
 }
 
-int	fill_temp_map(int fd, char **temp_map, int *height, int *max_width)
+static int	fill_temp_map(int fd, char **temp_map, int *height, int *max_width)
 {
 	char	*line;
 	int		started;
@@ -104,5 +63,46 @@ int	fill_temp_map(int fd, char **temp_map, int *height, int *max_width)
 		line = get_next_line(fd);
 	}
 	free(line);
+	return (0);
+}
+
+static int	read_map_lines(int fd, t_map *map)
+{
+	char	**temp_map;
+	int		max_width;
+	int		height;
+
+	max_width = 0;
+	height = 0;
+	temp_map = allocate_temp_map();
+	if (!temp_map)
+		return (1);
+	if (fill_temp_map(fd, temp_map, &height, &max_width))
+		return (1);
+	map->height = height;
+	map->width = max_width;
+	if (finalize_map(map, temp_map))
+		return (1);
+	return (0);
+}
+
+int	parse_map(t_map *map, char *file_path)
+{
+	int	fd;
+
+	fd = open_map_file(file_path);
+	if (fd < 0)
+		return (printf("Error: Failed to open file %s\n", file_path), 1);
+	if (parse_textures_colors(map->texpath, file_path))
+		return ((close(fd), printf("Error: Invalid file settings\n")), 1);
+	map->floor_color = map->texpath->floor_rgb;
+	map->ceiling_color = map->texpath->ceiling_rgb;
+	close(fd);
+	fd = open_map_file(file_path);
+	if (read_map_lines(fd, map))
+		return ((close(fd), printf("Error reading map lines\n")), 1);
+	close(fd);
+	if (validate_map(map))
+		return (1);
 	return (0);
 }

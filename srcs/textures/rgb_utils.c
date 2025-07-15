@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   rgb_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 21:12:10 by leaugust          #+#    #+#             */
-/*   Updated: 2025/07/15 13:48:31 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/07/15 15:43:18 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-int	convert_rgb(unsigned int r, unsigned int g, unsigned int b)
+static int	convert_rgb(unsigned int r, unsigned int g, unsigned int b)
 {
 	if (r > 255 || g > 255 || b > 255)
 		return (-1);

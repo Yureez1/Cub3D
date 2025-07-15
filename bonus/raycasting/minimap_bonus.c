@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 16:00:00 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/07/12 17:41:26 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/07/15 16:39:41 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d_bonus.h"
 
-void	draw_player(t_rect rect, t_game *game)
+static void	draw_player(t_rect rect, t_game *game)
 {
 	int	i;
 	int	j;
@@ -30,7 +30,7 @@ void	draw_player(t_rect rect, t_game *game)
 	}
 }
 
-void	draw_minimap_player(t_map *map, int offset_x, int offset_y)
+static void	draw_minimap_player(t_map *map, int offset_x, int offset_y)
 {
 	t_rect	rect;
 
@@ -41,7 +41,7 @@ void	draw_minimap_player(t_map *map, int offset_x, int offset_y)
 	draw_player(rect, map->game);
 }
 
-void	draw_minimap_cells(t_map *map, int offset_x, int offset_y)
+static void	draw_minimap_cells(t_map *map, int offset_x, int offset_y)
 {
 	int		x;
 	int		y;

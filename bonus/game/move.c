@@ -6,36 +6,13 @@
 /*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 20:16:43 by leaugust          #+#    #+#             */
-/*   Updated: 2025/07/11 17:31:32 by leaugust         ###   ########.fr       */
+/*   Updated: 2025/07/15 16:46:25 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d_bonus.h"
 
-void	get_bounding_cells(double px, double py, t_bounds *bounds)
-{
-	(void)px;
-	(void)py;
-	(void)bounds;
-}
-
-int	is_cell_walkable(t_map *map, int x, int y)
-{
-	(void)map;
-	(void)x;
-	(void)y;
-	return (1);
-}
-
-int	is_walkable(t_map *map, double px, double py)
-{
-	(void)map;
-	(void)px;
-	(void)py;
-	return (1);
-}
-
-int	is_player_out_of_bounds(t_map *map)
+static int	is_player_out_of_bounds(t_map *map)
 {
 	int	player_x;
 	int	player_y;
@@ -54,7 +31,7 @@ void	apply_move(t_map *map, double v_x, double v_y)
 	map->player_y += v_y;
 	if (is_player_out_of_bounds(map))
 	{
-		printf("Player left the map! Exiting...\n");
+		printf("Error: Player left the map! Exiting...\n");
 		close_window(map);
 	}
 }

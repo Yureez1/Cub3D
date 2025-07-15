@@ -6,18 +6,18 @@
 /*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 14:04:04 by leaugust          #+#    #+#             */
-/*   Updated: 2025/07/11 17:30:22 by leaugust         ###   ########.fr       */
+/*   Updated: 2025/07/15 15:24:53 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d_bonus.h"
 
-int	is_out_of_bounds(int x, int y, int width, int height)
+static int	is_out_of_bounds(int x, int y, int width, int height)
 {
 	return (x < 0 || y < 0 || x >= width || y >= height);
 }
 
-int	check_void_at(t_map *map, int x, int y)
+static int	check_void_at(t_map *map, int x, int y)
 {
 	int	len;
 

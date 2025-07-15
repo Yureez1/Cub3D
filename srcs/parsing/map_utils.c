@@ -6,11 +6,23 @@
 /*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 10:39:40 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/07/11 18:33:38 by leaugust         ###   ########.fr       */
+/*   Updated: 2025/07/15 15:50:38 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
+
+int	parse_char(char c)
+{
+	if ((c >= 9 && c <= 13) || c == '0' || c == '1' || c == ' ' || c == 'N'
+		|| c == 'S' || c == 'E' || c == 'W')
+		return (0);
+	else if (c == '\n')
+		return (1);
+	else
+		return (1);
+	return (0);
+}
 
 int	process_map_line(char *line, char **temp_map, int *height, int *max_width)
 {
@@ -34,7 +46,7 @@ int	process_map_line(char *line, char **temp_map, int *height, int *max_width)
 	return (0);
 }
 
-int	copy_map_row(t_map *map, char **temp_map, int i)
+static int	copy_map_row(t_map *map, char **temp_map, int i)
 {
 	int	j;
 

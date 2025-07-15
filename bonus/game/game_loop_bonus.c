@@ -1,16 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_loop.c                                        :+:      :+:    :+:   */
+/*   game_loop_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 12:03:12 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/07/11 18:05:36 by leaugust         ###   ########.fr       */
+/*   Updated: 2025/07/15 16:46:14 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d_bonus.h"
+
+static void	redraw(t_map *map)
+{
+	if (!map || !map->game || !map->game->data)
+		return ;
+	ft_bzero(map->game->data, WIDTH * HEIGHT * 4);
+	render_walls(map);
+	draw_minimap(map);
+	mlx_put_image_to_window(map->game->mlx, map->game->mlx_win,
+		map->game->mlx_img, 0, 0);
+}
 
 int	close_window(t_map *map)
 {
@@ -26,7 +37,7 @@ static void	init_and_load(t_map *map)
 	game = map->game;
 	if (!map || !game)
 	{
-		printf("Map or game structure is NULL");
+		printf("Error: Map or game structure is NULL\n");
 		exit(EXIT_FAILURE);
 	}
 	if (init_window(game))
@@ -36,7 +47,7 @@ static void	init_and_load(t_map *map)
 	}
 	if (load_textures(map))
 	{
-		printf("Failed to load textures");
+		printf("Error: Failed to load textures\n");
 		destroy_map(map);
 		exit(EXIT_FAILURE);
 	}
@@ -74,15 +85,4 @@ int	game_loop(t_map *map)
 	apply_rotation(map);
 	redraw(map);
 	return (0);
-}
-
-void	redraw(t_map *map)
-{
-	if (!map || !map->game || !map->game->data)
-		return ;
-	ft_bzero(map->game->data, WIDTH * HEIGHT * 4);
-	render_walls(map);
-	draw_minimap(map);
-	mlx_put_image_to_window(map->game->mlx, map->game->mlx_win,
-		map->game->mlx_img, 0, 0);
 }

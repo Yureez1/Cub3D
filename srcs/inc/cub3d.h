@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 13:33:09 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/07/15 13:47:43 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/07/15 15:44:37 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,26 +162,11 @@ typedef struct s_ray
 	int				y;
 }					t_ray;
 
-/* MAIN */
-
-int					has_cub_extension(const char *filename);
-int					check_args(int argc, char **argv);
-t_map				*init_map(void);
-void				cleanup_and_exit(t_map *map);
-
-/* GAME */
-void				draw_floor_ceiling_column(t_map *map, int x, int start,
-						int end);
-
-/*==== collision.c ====*/
-int					touch(t_map *map, double ray_x, double ray_y);
-
 /*==== game_loop.c ====*/
 
 int					close_window(t_map *map);
 void				start_game_loop(t_map *map);
 int					game_loop(t_map *map);
-void				redraw(t_map *map);
 
 /*==== input_handling.c ====*/
 
@@ -190,50 +175,30 @@ int					handle_keyrelease(int keycode, t_map *map);
 
 /*==== map_management.c ====*/
 
-void				free_map_grid(t_map *map);
 void				destroy_map(t_map *map);
 
 /*==== move_vector.c ====*/
 
-void				accumulate_vector(t_map *map, double *v_x, double *v_y);
-void				normalize_vector(double *v_x, double *v_y);
 void				calc_move_vector(t_map *map, double *v_x, double *v_y);
 
 /*==== move.c ====*/
 
-void				get_bounding_cells(double px, double py, t_bounds *bounds);
-int					is_cell_walkable(t_map *map, int x, int y);
-int					is_walkable(t_map *map, double px, double py);
-int					is_player_out_of_bounds(t_map *map);
 void				apply_move(t_map *map, double v_x, double v_y);
 void				apply_rotation(t_map *map);
-
-/*==== rotation.c ====*/
-
-void				rotate_left(t_map *map);
-void				rotate_right(t_map *map);
 
 /*==== window_management.c ====*/
 
 int					init_window(t_game *game);
 void				destroy_mlx(t_game *game);
-void				destroy_textures(t_game *game);
 
 /* INIT */
 
 /*==== init_directions.c ====*/
 
-void				init_dir_north(t_map *map);
-void				init_dir_south(t_map *map);
-void				init_dir_east(t_map *map);
-void				init_dir_west(t_map *map);
 int					init_player_dir(t_map *map);
 
 /*==== init_structs.c ====*/
 
-int					init_textures(t_textures *textures);
-int					init_texpath(t_texpath *texpath);
-int					init_game_struct(t_game *game);
 int					init_struct(t_map *map);
 
 /* PARSING */
@@ -246,27 +211,15 @@ int					parse_char(char c);
 
 int					process_map_line(char *line, char **temp_map, int *height,
 						int *max_width);
-int					copy_map_row(t_map *map, char **temp_map, int i);
 int					finalize_map(t_map *map, char **temp_map);
 
 /*==== map_validation.c ====*/
 
 int					validate_map(t_map *map);
-int					check_invalid_char(t_map *map);
-int					check_single_player(t_map *map);
-int					find_player_position(t_map *map);
-int					validate_void_surroundings(t_map *map);
-int					check_surroundings(t_map *map, int x, int y);
-int					is_hole(t_map *map, int x, int y);
 
 /*==== parse_map.c ====*/
 
 int					parse_map(t_map *map, char *file_path);
-int					open_map_file(char *file_path);
-int					read_map_lines(int fd, t_map *map);
-char				**allocate_temp_map(void);
-int					fill_temp_map(int fd, char **temp_map, int *height,
-						int *max_width);
 
 /*==== player_init.c ====*/
 
@@ -275,21 +228,13 @@ void				fill_voids_with_walls(t_map *map);
 
 /*==== void_check.c ====*/
 
-int					is_out_of_bounds(int x, int y, int width, int height);
-int					check_void_at(t_map *map, int x, int y);
 int					is_touching_void(t_map *map, int x, int y);
 
 /* RAYCASTING */
 
 /*==== raycasting.c ====*/
 
-void				calc_camera_ray(double *ray_x, double *ray_y, t_map *map,
-						int i);
-void				set_ray_data(t_map *map, t_ray *ray, double ray_x,
-						double ray_y);
-void				init_dda(t_map *map, t_ray *ray);
 int					perform_dda(t_map *map, t_ray *ray);
-void				calc_perp_dist(t_map *map, t_ray *ray);
 
 /*==== raycaster.c ====*/
 
@@ -298,14 +243,9 @@ void				render_walls(t_map *map);
 /*==== render_walls.c ====*/
 
 void				put_pixel(int x, int y, int color, t_game *game);
-void				draw_wall_column(t_game *game, int i, t_ray *ray);
-void				draw_line(t_map *map, double ray_x, double ray_y, int i);
 
 /*==== ray_init.c ====*/
 
-void				compute_camera_ray(t_map *map, t_ray *ray, int x);
-void				compute_delta_distances(t_ray *ray);
-void				compute_step_and_side(t_map *map, t_ray *ray);
 void				init_ray(t_map *map, t_ray *ray, int x);
 
 /*==== ray_projection.c ====*/
@@ -316,7 +256,6 @@ int					compute_texx(t_map *map, t_ray *ray);
 /*==== ray_texture.c ====*/
 
 int					select_texture(t_ray *ray);
-void				draw_textures(t_map *map, t_ray *ray, int x, int texx);
 void				draw_column(t_map *map, t_ray *ray, int x);
 
 /* TEXTURES */
@@ -328,13 +267,9 @@ int					load_textures(t_map *map);
 /*==== parse_textures.c ====*/
 
 int					parse_textures_colors(t_texpath *texpath, char *file_path);
-int					parse_line(t_texpath *texpath, char *line);
-int					handle_texture_line(t_texpath *texpath, char *line);
-int					handle_color_line(t_texpath *texpath, char *line);
 
 /*==== rgb_utils.c ====*/
 
-int					convert_rgb(unsigned int r, unsigned int g, unsigned int b);
 int					parse_rgb(const char *str, int *res);
 int					check_exist_textures(t_texpath *texpath);
 int					check_xpm_file(const char *file_path);
@@ -344,7 +279,6 @@ int					check_xpm_file(const char *file_path);
 int					handle_ceiling(t_texpath *texpath, char *line);
 int					handle_floor(t_texpath *texpath, char *line);
 int					destroy_texpath(t_texpath *texpath);
-int					check_textures(t_texpath *texpath);
 int					is_valid_number(const char *str);
 int					has_leading_zero(const char *str);
 

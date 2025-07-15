@@ -6,13 +6,13 @@
 /*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 20:20:25 by leaugust          #+#    #+#             */
-/*   Updated: 2025/07/11 17:31:34 by leaugust         ###   ########.fr       */
+/*   Updated: 2025/07/15 15:03:45 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d_bonus.h"
 
-void	rotate_left(t_map *map)
+static void	rotate_left(t_map *map)
 {
 	double	old_dir_x;
 	double	old_plane_x;
@@ -30,7 +30,7 @@ void	rotate_left(t_map *map)
 	map->player_angle = atan2(map->dir_y, map->dir_x);
 }
 
-void	rotate_right(t_map *map)
+static void	rotate_right(t_map *map)
 {
 	double	old_dir_x;
 	double	old_plane_x;

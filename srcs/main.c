@@ -6,13 +6,13 @@
 /*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 13:33:11 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/07/11 18:47:56 by leaugust         ###   ########.fr       */
+/*   Updated: 2025/07/15 14:44:10 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "inc/cub3d.h"
 
-int	has_cub_extension(const char *filename)
+static int	has_cub_extension(const char *filename)
 {
 	int	len;
 
@@ -22,12 +22,12 @@ int	has_cub_extension(const char *filename)
 	return (ft_strncmp(filename + len - 4, ".cub", 4) == 0);
 }
 
-void	cleanup_and_exit(t_map *map)
+static void	cleanup_and_exit(t_map *map)
 {
 	destroy_map(map);
 }
 
-t_map	*init_map(void)
+static t_map	*init_map(void)
 {
 	t_map	*map;
 
@@ -42,7 +42,7 @@ t_map	*init_map(void)
 	return (map);
 }
 
-int	check_args(int argc, char **argv)
+static int	check_args(int argc, char **argv)
 {
 	int	fd;
 

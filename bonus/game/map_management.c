@@ -6,13 +6,13 @@
 /*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 20:19:34 by leaugust          #+#    #+#             */
-/*   Updated: 2025/07/11 17:31:25 by leaugust         ###   ########.fr       */
+/*   Updated: 2025/07/15 14:51:53 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d_bonus.h"
 
-void	free_map_grid(t_map *map)
+static void	free_map_grid(t_map *map)
 {
 	int	y;
 

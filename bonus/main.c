@@ -6,13 +6,13 @@
 /*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 13:33:11 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/07/11 18:05:36 by leaugust         ###   ########.fr       */
+/*   Updated: 2025/07/15 16:45:50 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "inc/cub3d_bonus.h"
 
-int	has_cub_extension(const char *filename)
+static int	has_cub_extension(const char *filename)
 {
 	int	len;
 
@@ -22,19 +22,19 @@ int	has_cub_extension(const char *filename)
 	return (ft_strncmp(filename + len - 4, ".cub", 4) == 0);
 }
 
-void	cleanup_and_exit(t_map *map)
+static void	cleanup_and_exit(t_map *map)
 {
 	destroy_map(map);
 }
 
-t_map	*init_map(void)
+static t_map	*init_map(void)
 {
 	t_map	*map;
 
 	map = malloc(sizeof(*map));
 	if (!map)
 	{
-		printf("Failed to allocate memory for map");
+		printf("Error: Failed to allocate memory for map\n");
 		return (NULL);
 	}
 	ft_bzero(map, sizeof(*map));
@@ -42,17 +42,17 @@ t_map	*init_map(void)
 	return (map);
 }
 
-int	check_args(int argc, char **argv)
+static int	check_args(int argc, char **argv)
 {
 	int	fd;
 
 	if (argc != 2)
-		return (printf("Usage: ./cub3d <map_file>"), 1);
+		return (printf("Error: Usage: ./cub3d <map_file>\n"), 1);
 	if (!has_cub_extension(argv[1]))
-		return (printf("Error: file must have .cub extension"), 1);
+		return (printf("Error: file must have .cub extension\n"), 1);
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
-		return (printf("Error: cannot open file"), 1);
+		return (printf("Error: cannot open file\n"), 1);
 	close(fd);
 	return (0);
 }

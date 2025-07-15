@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   map_management.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 20:19:34 by leaugust          #+#    #+#             */
-/*   Updated: 2025/07/05 13:01:19 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/07/15 14:51:58 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-void	free_map_grid(t_map *map)
+static void	free_map_grid(t_map *map)
 {
 	int	y;
 

@@ -6,13 +6,13 @@
 /*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:28:49 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/07/11 18:33:38 by leaugust         ###   ########.fr       */
+/*   Updated: 2025/07/15 15:15:01 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-int	init_textures(t_textures *textures)
+static int	init_textures(t_textures *textures)
 {
 	int	i;
 
@@ -31,7 +31,24 @@ int	init_textures(t_textures *textures)
 	return (0);
 }
 
-int	init_game_struct(t_game *game)
+static int	init_texpath(t_texpath *texpath)
+{
+	texpath->no = NULL;
+	texpath->so = NULL;
+	texpath->we = NULL;
+	texpath->ea = NULL;
+	texpath->floor = NULL;
+	texpath->ceiling = NULL;
+	texpath->floor_rgb = 0;
+	texpath->ceiling_rgb = 0;
+	return (0);
+	texpath->ceiling = NULL;
+	texpath->floor_rgb = -1;
+	texpath->ceiling_rgb = -1;
+	return (0);
+}
+
+static int	init_game_struct(t_game *game)
 {
 	int	i;
 
@@ -75,22 +92,5 @@ int	init_struct(t_map *map)
 	if (!map->texpath)
 		return (printf("Failed to allocate memory for texpath"), 1);
 	init_texpath(map->texpath);
-	return (0);
-}
-
-int	init_texpath(t_texpath *texpath)
-{
-	texpath->no = NULL;
-	texpath->so = NULL;
-	texpath->we = NULL;
-	texpath->ea = NULL;
-	texpath->floor = NULL;
-	texpath->ceiling = NULL;
-	texpath->floor_rgb = 0;
-	texpath->ceiling_rgb = 0;
-	return (0);
-	texpath->ceiling = NULL;
-	texpath->floor_rgb = -1;
-	texpath->ceiling_rgb = -1;
 	return (0);
 }

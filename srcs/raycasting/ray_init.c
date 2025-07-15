@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ray_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 13:36:29 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/06/28 13:37:19 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/07/15 15:37:25 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-void	compute_camera_ray(t_map *map, t_ray *ray, int x)
+static void	compute_camera_ray(t_map *map, t_ray *ray, int x)
 {
 	double	camera_x;
 
@@ -23,7 +23,7 @@ void	compute_camera_ray(t_map *map, t_ray *ray, int x)
 	ray->map_y = (int)map->player_y;
 }
 
-void	compute_delta_distances(t_ray *ray)
+static void	compute_delta_distances(t_ray *ray)
 {
 	if (ray->dir_x == 0.0)
 		ray->delta_dist_x = 1e30;
@@ -35,7 +35,7 @@ void	compute_delta_distances(t_ray *ray)
 		ray->delta_dist_y = fabs(1.0 / ray->dir_y);
 }
 
-void	compute_step_and_side(t_map *map, t_ray *ray)
+static void	compute_step_and_side(t_map *map, t_ray *ray)
 {
 	if (ray->dir_x < 0.0)
 	{

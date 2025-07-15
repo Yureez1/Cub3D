@@ -6,7 +6,7 @@
 #    By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/04 17:01:27 by jbanchon          #+#    #+#              #
-#    Updated: 2025/07/15 14:32:28 by leaugust         ###   ########.fr        #
+#    Updated: 2025/07/15 15:51:32 by leaugust         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,17 +25,17 @@ OBJ_DIR = objs
 BONUS_OBJ_DIR = objs_bonus
 
 SRCS = \
-	srcs/main.c srcs/parsing/char_validation.c srcs/parsing/map_utils.c srcs/parsing/map_validation.c srcs/parsing/parse_map.c\
+	srcs/main.c srcs/parsing/map_utils.c srcs/parsing/map_validation.c srcs/parsing/parse_map.c\
 	srcs/parsing/player_init.c srcs/parsing/void_check.c srcs/textures/parse_textures.c\
 	srcs/textures/rgb_utils.c srcs/textures/texture_utils.c srcs/raycasting/raycasting.c\
 	srcs/raycasting/raycaster.c srcs/raycasting/render_walls.c srcs/raycasting/ray_texture.c srcs/raycasting/ray_projection.c\
-	srcs/raycasting/ray_init.c srcs/init/init_structs.c srcs/init/init_directions.c srcs/game/collision.c\
-	srcs/game/game_loop.c srcs/game/input_handling.c srcs/game/map_management.c srcs/game/move_vector.c\
+	srcs/raycasting/ray_init.c srcs/init/init_structs.c srcs/init/init_directions.c\
+	srcs/game/game_loop.c srcs/game/input_handling.c srcs/game/map_management.c\
 	srcs/game/move.c srcs/game/rotation.c srcs/game/window_management.c srcs/game_textures/load_textures.c\
 	$(GNL_DIR)/get_next_line.c $(GNL_DIR)/get_next_line_utils.c $(GNL_DIR)/gnl.c \
 
 BONUS_SRCS = \
-	bonus/main.c bonus/parsing/char_validation.c bonus/parsing/map_utils.c bonus/parsing/map_validation.c\
+	bonus/main.c bonus/parsing/map_utils.c bonus/parsing/map_validation.c\
 	bonus/parsing/parse_map.c bonus/parsing/player_init.c bonus/parsing/void_check.c\
 	bonus/textures/parse_textures.c bonus/textures/rgb_utils.c bonus/textures/texture_utils.c bonus/raycasting/raycasting.c\
 	bonus/raycasting/raycaster.c bonus/raycasting/render_walls.c bonus/raycasting/ray_texture.c bonus/raycasting/ray_projection.c\

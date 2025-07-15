@@ -3,20 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   game_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 12:03:12 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/07/12 17:31:11 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/07/15 15:47:53 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-int	close_window(t_map *map)
+static void	redraw(t_map *map)
 {
-	destroy_map(map);
-	exit(0);
-	return (0);
+	if (!map || !map->game || !map->game->data)
+		return ;
+	ft_bzero(map->game->data, WIDTH * HEIGHT * 4);
+	render_walls(map);
+	mlx_put_image_to_window(map->game->mlx, map->game->mlx_win,
+		map->game->mlx_img, 0, 0);
 }
 
 static void	init_and_load(t_map *map)
@@ -26,7 +29,7 @@ static void	init_and_load(t_map *map)
 	game = map->game;
 	if (!map || !game)
 	{
-		printf("Map or game structure is NULL");
+		printf("Error: Map or game structure is NULL\n");
 		exit(EXIT_FAILURE);
 	}
 	if (init_window(game))
@@ -36,10 +39,17 @@ static void	init_and_load(t_map *map)
 	}
 	if (load_textures(map))
 	{
-		printf("Failed to load textures");
+		printf("Error: Failed to load textures\n");
 		destroy_map(map);
 		exit(EXIT_FAILURE);
 	}
+}
+
+int	close_window(t_map *map)
+{
+	destroy_map(map);
+	exit(0);
+	return (0);
 }
 
 void	start_game_loop(t_map *map)
@@ -74,14 +84,4 @@ int	game_loop(t_map *map)
 	apply_rotation(map);
 	redraw(map);
 	return (0);
-}
-
-void	redraw(t_map *map)
-{
-	if (!map || !map->game || !map->game->data)
-		return ;
-	ft_bzero(map->game->data, WIDTH * HEIGHT * 4);
-	render_walls(map);
-	mlx_put_image_to_window(map->game->mlx, map->game->mlx_win,
-		map->game->mlx_img, 0, 0);
 }
