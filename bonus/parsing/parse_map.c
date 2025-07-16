@@ -6,7 +6,7 @@
 /*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 21:17:17 by leaugust          #+#    #+#             */
-/*   Updated: 2025/07/15 15:22:22 by leaugust         ###   ########.fr       */
+/*   Updated: 2025/07/16 15:27:59 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static int	open_map_file(char *file_path)
 static char	**allocate_temp_map(void)
 {
 	char	**temp_map;
+	int		i;
 
 	temp_map = malloc(sizeof(char *) * 1024);
 	if (!temp_map)
@@ -35,6 +36,9 @@ static char	**allocate_temp_map(void)
 		printf("Malloc failed for temp_map");
 		return (NULL);
 	}
+	i = 0;
+	while (i < 1024)
+		temp_map[i++] = NULL;
 	return (temp_map);
 }
 
@@ -47,19 +51,13 @@ static int	fill_temp_map(int fd, char **temp_map, int *height, int *max_width)
 	line = get_next_line(fd);
 	while (line)
 	{
-		if (!started)
+		if (!started && handle_pre_map_line(line, &started))
 		{
-			if (line[0] == ' ' || line[0] == '1')
-				started = 1;
-			else
-			{
-				free(line);
-				line = get_next_line(fd);
-				continue ;
-			}
+			line = get_next_line(fd);
+			continue ;
 		}
-		if (process_map_line(line, temp_map, height, max_width))
-			return (free(line), 1);
+		else if (started && handle_map_line(line, temp_map, height, max_width))
+			return (1);
 		line = get_next_line(fd);
 	}
 	free(line);
@@ -78,11 +76,17 @@ static int	read_map_lines(int fd, t_map *map)
 	if (!temp_map)
 		return (1);
 	if (fill_temp_map(fd, temp_map, &height, &max_width))
+	{
+		free_temp_map(temp_map);
 		return (1);
+	}
 	map->height = height;
 	map->width = max_width;
 	if (finalize_map(map, temp_map))
+	{
+		free_temp_map(temp_map);
 		return (1);
+	}
 	return (0);
 }
 
@@ -100,7 +104,7 @@ int	parse_map(t_map *map, char *file_path)
 	close(fd);
 	fd = open_map_file(file_path);
 	if (read_map_lines(fd, map))
-		return ((close(fd), printf("Error reading map lines\n")), 1);
+		return ((close(fd), printf("Error: Invalid map lines\n")), 1);
 	close(fd);
 	if (validate_map(map))
 		return (1);

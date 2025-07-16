@@ -6,11 +6,37 @@
 /*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 14:04:04 by leaugust          #+#    #+#             */
-/*   Updated: 2025/07/15 15:24:27 by leaugust         ###   ########.fr       */
+/*   Updated: 2025/07/16 15:14:41 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
+
+void	free_temp_map(char **temp_map)
+{
+	int	i;
+
+	if (!temp_map)
+		return ;
+	i = 0;
+	while (temp_map[i])
+	{
+		free(temp_map[i]);
+		i++;
+	}
+	free(temp_map);
+}
+
+int	is_line_empty(char *line)
+{
+	while (*line)
+	{
+		if (*line != ' ' && *line != '\n')
+			return (0);
+		line++;
+	}
+	return (1);
+}
 
 static int	is_out_of_bounds(int x, int y, int width, int height)
 {

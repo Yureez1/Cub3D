@@ -6,7 +6,7 @@
 /*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 13:33:09 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/07/15 15:44:37 by leaugust         ###   ########.fr       */
+/*   Updated: 2025/07/16 15:18:56 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -229,6 +229,14 @@ void				fill_voids_with_walls(t_map *map);
 /*==== void_check.c ====*/
 
 int					is_touching_void(t_map *map, int x, int y);
+
+/*==== line_check.c ====*/
+
+void				free_temp_map(char **temp_map);
+int					is_line_empty(char *line);
+int					handle_pre_map_line(char *line, int *started);
+int					handle_map_line(char *line, char **temp_map, int *height,
+						int *max_width);
 
 /* RAYCASTING */
 
