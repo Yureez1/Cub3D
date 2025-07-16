@@ -6,7 +6,7 @@
 /*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 21:28:20 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/07/15 15:18:14 by leaugust         ###   ########.fr       */
+/*   Updated: 2025/07/16 16:20:01 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ static int	check_single_player(t_map *map)
 		y++;
 	}
 	if (count == 0)
-		return (printf("Error: No player position found in map\n"), 1);
+		return (printf("Error: Invalid map settings\n"), 1);
 	if (count > 1)
-		return (printf("Error: Multiple player positions found in map\n"), 1);
+		return (printf("Error: Invalid map settings\n"), 1);
 	return (0);
 }
 
@@ -76,7 +76,7 @@ static int	find_player_position(t_map *map)
 		}
 		y++;
 	}
-	printf("Error: No player position found in map.\n");
+	printf("Error: Invalid map format.\n");
 	return (1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 15:17:45 by leaugust          #+#    #+#             */
-/*   Updated: 2025/07/16 15:19:59 by leaugust         ###   ########.fr       */
+/*   Updated: 2025/07/16 15:48:46 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,30 +15,17 @@
 int	handle_pre_map_line(char *line, int *started)
 {
 	if (line[0] == ' ' || line[0] == '1')
-	{
 		*started = 1;
-		printf("-> Map start detected\n");
-	}
 	else
-	{
-		printf("-> Skipping non-map line\n");
-		free(line);
-		return (1);
-	}
+		return (free(line), 1);
 	return (0);
 }
 
 int	handle_map_line(char *line, char **temp_map, int *height, int *max_width)
 {
 	if (is_line_empty(line))
-	{
-		printf("Error: Empty line after map started\n");
 		return (free(line), 1);
-	}
 	if (process_map_line(line, temp_map, height, max_width))
-	{
-		printf("-> Error processing map line\n");
 		return (free(line), 1);
-	}
 	return (0);
 }

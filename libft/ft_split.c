@@ -3,89 +3,99 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 18:17:59 by jbanchon          #+#    #+#             */
-/*   Updated: 2024/05/30 12:27:02 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/07/16 15:58:57 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_count_words(char const *s, char delim)
+static int	ft_count_parts(char const *s, char delim)
 {
-	int	i;
 	int	count;
+	int	i;
 
-	i = 0;
-	count = 0;
-	if (s == NULL)
+	if (!s)
 		return (0);
-	while (s[i] != '\0')
+	count = 1;
+	i = 0;
+	while (s[i])
 	{
-		if (s[i] != delim && (i == 0 || s[i - 1] == delim))
+		if (s[i] == delim)
 			count++;
 		i++;
 	}
 	return (count);
 }
 
-static char	*ft_extract_word(const char **s, char delim)
-{
-	const char	*start;
-	size_t		len;
-	char		*word;
-
-	while (**s == delim && **s != '\0')
-		(*s)++;
-	if (**s == '\0')
-		return (NULL);
-	start = *s;
-	len = 0;
-	while (**s != '\0' && **s != delim)
-	{
-		(*s)++;
-		len++;
-	}
-	word = (char *)malloc((len + 1) * sizeof(char));
-	if (word == NULL)
-		return (NULL);
-	ft_strlcpy(word, start, len + 1);
-	return (word);
-}
-
-static char	**free_words(char **words)
+static char	**free_split(char **words)
 {
 	int	i;
 
+	if (!words)
+		return (NULL);
 	i = 0;
 	while (words[i])
+		free(words[i++]);
+	free(words);
+	return (NULL);
+}
+
+static char	*ft_extract_part(char const *s, int start, int end)
+{
+	char	*part;
+	int		i;
+
+	part = malloc(end - start + 1);
+	if (!part)
+		return (NULL);
+	i = 0;
+	while (start < end)
+		part[i++] = s[start++];
+	part[i] = '\0';
+	return (part);
+}
+
+static int	fill_split(char **res, char const *s, char c)
+{
+	int	i;
+	int	j;
+	int	start;
+
+	i = 0;
+	j = 0;
+	start = 0;
+	while (s[i])
 	{
-		free(words[i]);
+		if (s[i] == c)
+		{
+			res[j] = ft_extract_part(s, start, i);
+			if (!res[j])
+				return (0);
+			j++;
+			start = i + 1;
+		}
 		i++;
 	}
-	free(words);
-	return (0);
+	res[j] = ft_extract_part(s, start, i);
+	if (!res[j])
+		return (0);
+	res[++j] = NULL;
+	return (1);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	int		word_count;
-	char	**words;
-	int		i;
+	char	**res;
 
-	word_count = ft_count_words(s, c);
-	words = (char **)malloc((word_count + 1) * sizeof(char *));
-	if (words == NULL)
+	if (!s)
 		return (NULL);
-	i = 0;
-	while (i < word_count)
-	{
-		words[i] = ft_extract_word(&s, c);
-		if (words[i] == 0)
-			return (free_words(words));
-		i++;
-	}
-	words[i] = 0;
-	return (words);
+	res = malloc(sizeof(char *) * (ft_count_parts(s, c) + 1));
+	if (!res)
+		return (NULL);
+	if (!fill_split(res, s, c))
+		return (free_split(res));
+	return (res);
 }
