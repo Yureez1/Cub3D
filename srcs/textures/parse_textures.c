@@ -20,33 +20,29 @@ static int	all_settings_complete(t_texpath *texpath)
 
 static int	handle_texture_line(t_texpath *texpath, char *line)
 {
-	if (!ft_strncmp(line, "NO ", 3))
+	if (!ft_strncmp(line, "NO", 2))
 	{
 		if (texpath->no)
 			return (printf("Error: Duplicate NO\n"), 1);
-		texpath->no = ft_strtrim(line + 3, " \t\n");
-		return (1);
+		texpath->no = ft_strtrim(line + 2, " \t\n");
 	}
-	else if (!ft_strncmp(line, "SO ", 3))
+	else if (!ft_strncmp(line, "SO", 2))
 	{
 		if (texpath->so)
 			return (printf("Error: Duplicate SO\n"), 1);
-		texpath->so = ft_strtrim(line + 3, " \t\n");
-		return (1);
+		texpath->so = ft_strtrim(line + 2, " \t\n");
 	}
-	else if (!ft_strncmp(line, "WE ", 3))
+	else if (!ft_strncmp(line, "WE", 2))
 	{
 		if (texpath->we)
 			return (printf("Error: Duplicate WE\n"), 1);
-		texpath->we = ft_strtrim(line + 3, " \t\n");
-		return (1);
+		texpath->we = ft_strtrim(line + 2, " \t\n");
 	}
-	else if (!ft_strncmp(line, "EA ", 3))
+	else if (!ft_strncmp(line, "EA", 2))
 	{
 		if (texpath->ea)
 			return (printf("Error: Duplicate EA\n"), 1);
-		texpath->ea = ft_strtrim(line + 3, " \t\n");
-		return (1);
+		texpath->ea = ft_strtrim(line + 2, " \t\n");
 	}
 	return (0);
 }
@@ -71,7 +67,7 @@ static int	parse_line(t_texpath *texpath, char *line)
 		return (free(trimmed_line), 0);
 	ret = handle_texture_line(texpath, trimmed_line);
 	if (ret == 1)
-		return (free(trimmed_line), 0);
+		return (free(trimmed_line), 1);
 	if (ret != 0)
 		return (free(trimmed_line), ret);
 	ret = handle_color_line(texpath, trimmed_line);
@@ -97,22 +93,21 @@ int	parse_textures_colors(t_texpath *texpath, char *file_path)
 {
 	int		fd;
 	char	*line;
+	int		all_complete;
 
 	if (texpath == NULL || file_path == NULL)
 		return (printf("texpath or file_path is NULL"), 1);
 	fd = open(file_path, O_RDONLY);
 	if (fd < 0)
 		return (printf("Error : Cannot open color file"), 1);
+	all_complete = 0;
 	line = get_next_line(fd);
 	while (line)
 	{
 		if (parse_line(texpath, line))
 			return (free(line), close(fd), 1);
-		if (all_settings_complete(texpath))
-		{
-			free(line);
-			break ;
-		}
+		if (!all_complete && all_settings_complete(texpath))
+			all_complete = 1;
 		free(line);
 		line = get_next_line(fd);
 	}

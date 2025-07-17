@@ -97,22 +97,21 @@ int	parse_textures_colors(t_texpath *texpath, char *file_path)
 {
 	int		fd;
 	char	*line;
+	int		all_complete;
 
 	if (texpath == NULL || file_path == NULL)
 		return (printf("texpath or file_path is NULL"), 1);
 	fd = open(file_path, O_RDONLY);
 	if (fd < 0)
 		return (printf("Error : Cannot open color file"), 1);
+	all_complete = 0;
 	line = get_next_line(fd);
 	while (line)
 	{
 		if (parse_line(texpath, line))
 			return (free(line), close(fd), 1);
-		if (all_settings_complete(texpath))
-		{
-			free(line);
-			break ;
-		}
+		if (!all_complete && all_settings_complete(texpath))
+			all_complete = 1;
 		free(line);
 		line = get_next_line(fd);
 	}
