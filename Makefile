@@ -6,7 +6,7 @@
 #    By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/04 17:01:27 by jbanchon          #+#    #+#              #
-#    Updated: 2025/07/17 14:07:55 by leaugust         ###   ########.fr        #
+#    Updated: 2025/07/17 16:44:02 by leaugust         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ LDFLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lbsd -L$(LIBFT_DIR) -lft
 GNL_DIR = ./gnl
 MLX_DIR = ./mlx
 LIBFT_DIR = ./libft
+LIBFT_A = $(LIBFT_DIR)/libft.a
 
 OBJ_DIR = objs
 BONUS_OBJ_DIR = objs_bonus
@@ -53,17 +54,24 @@ NC = \033[0m
 
 all: libft $(NAME)
 
-$(NAME): $(OBJS)
+$(NAME): $(OBJS) $(LIBFT_A) .normal_flag
+
+.normal_flag: $(OBJS) $(LIBFT_A)
+	@rm -f .bonus_flag
 	@echo "$(LILA)Compiling Cub3D (normal)...$(NC)"
 	@$(CC) $(CFLAGS_NORMAL) $(OBJS) $(LDFLAGS) -o $(NAME)
 	@echo "$(GREEN)Cub3D compiled successfully!$(NC)"
+	@touch .normal_flag
 
-bonus: libft $(BONUS_OBJS)
-	@echo "$(LILA)Cleaning normal version and compiling bonus version...$(NC)"
-	@rm -f $(NAME)
+bonus: libft .bonus_flag
+
+.bonus_flag: $(BONUS_OBJS) $(LIBFT_A)
+	@rm -f .normal_flag $(NAME)
 	@rm -rf $(OBJ_DIR)
+	@echo "$(LILA)Compiling Cub3D (bonus)...$(NC)"
 	@$(CC) $(CFLAGS_BONUS) $(BONUS_OBJS) $(LDFLAGS) -o $(NAME)
 	@echo "$(GREEN)Cub3D bonus compiled successfully!$(NC)"
+	@touch .bonus_flag
 
 $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(dir $@)
@@ -73,14 +81,17 @@ $(BONUS_OBJ_DIR)/%.o: %.c
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS_BONUS) -c $< -o $@
 
-libft:
+$(LIBFT_A):
 	@echo "$(LILA)Compiling libft...$(NC)"
-	@$(MAKE) -s -C $(LIBFT_DIR) > /dev/null
+	@$(MAKE) -s -C $(LIBFT_DIR)
 	@echo "$(GREEN)libft compiled successfully!$(NC)"
 	
+libft: $(LIBFT_A)
+
 clean:
 	@echo "$(LILA)Cleaning up object files...$(NC)"
 	@rm -rf $(OBJ_DIR) $(BONUS_OBJ_DIR)
+	@rm -f .normal_flag .bonus_flag
 	@$(MAKE) -s -C $(LIBFT_DIR) clean > /dev/null
 	@echo "$(GREEN)Object files cleaned!$(NC)"
 
