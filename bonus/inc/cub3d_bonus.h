@@ -6,7 +6,7 @@
 /*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 13:33:09 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/07/17 14:09:00 by leaugust         ###   ########.fr       */
+/*   Updated: 2025/07/17 17:13:31 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define CUB3D_BONUS_H
 
 # include "../../libft/libft.h"
-# include "../../mlx/mlx.h"
+# include "../../minilibx-linux/mlx.h"
 # include "../gnl/get_next_line.h"
 # include <fcntl.h>
 # include <math.h>
