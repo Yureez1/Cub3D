@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 21:17:17 by leaugust          #+#    #+#             */
-/*   Updated: 2025/07/16 15:27:30 by leaugust         ###   ########.fr       */
+/*   Updated: 2025/07/17 12:04:19 by jbanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,16 +51,22 @@ static int	fill_temp_map(int fd, char **temp_map, int *height, int *max_width)
 	line = get_next_line(fd);
 	while (line)
 	{
-		if (!started && handle_pre_map_line(line, &started))
+		if (!started)
 		{
-			line = get_next_line(fd);
-			continue ;
+			if (handle_pre_map_line(line, &started))
+				return (free(line), 1);
+			if (!started)
+			{
+				free(line);
+				line = get_next_line(fd);
+				continue ;
+			}
 		}
-		else if (started && handle_map_line(line, temp_map, height, max_width))
-			return (1);
+		if (started && handle_map_line(line, temp_map, height, max_width))
+			return (free(line), 1);
+		free(line);
 		line = get_next_line(fd);
 	}
-	free(line);
 	return (0);
 }
 
@@ -102,6 +108,7 @@ int	parse_map(t_map *map, char *file_path)
 	map->floor_color = map->texpath->floor_rgb;
 	map->ceiling_color = map->texpath->ceiling_rgb;
 	close(fd);
+	free_stash();
 	fd = open_map_file(file_path);
 	if (read_map_lines(fd, map))
 		return ((close(fd), printf("Error: Invalid map lines\n")), 1);
