@@ -6,7 +6,7 @@
 /*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 13:33:09 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/07/16 15:21:40 by leaugust         ###   ########.fr       */
+/*   Updated: 2025/07/17 14:09:00 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -296,5 +296,10 @@ int					handle_floor(t_texpath *texpath, char *line);
 int					destroy_texpath(t_texpath *texpath);
 int					is_valid_number(const char *str);
 int					has_leading_zero(const char *str);
+
+/*==== parse_utils.c ====*/
+
+int					handle_color_line(t_texpath *texpath, char *line);
+int					handle_texture_line(t_texpath *texpath, char *line);
 
 #endif

@@ -18,48 +18,6 @@ static int	all_settings_complete(t_texpath *texpath)
 		&& texpath->floor && texpath->ceiling);
 }
 
-static int	handle_texture_line(t_texpath *texpath, char *line)
-{
-	if (!ft_strncmp(line, "NO ", 3))
-	{
-		if (texpath->no)
-			return (printf("Error: Duplicate NO\n"), 1);
-		texpath->no = ft_strtrim(line + 3, " \t\n");
-		return (1);
-	}
-	else if (!ft_strncmp(line, "SO ", 3))
-	{
-		if (texpath->so)
-			return (printf("Error: Duplicate SO\n"), 1);
-		texpath->so = ft_strtrim(line + 3, " \t\n");
-		return (1);
-	}
-	else if (!ft_strncmp(line, "WE ", 3))
-	{
-		if (texpath->we)
-			return (printf("Error: Duplicate WE\n"), 1);
-		texpath->we = ft_strtrim(line + 3, " \t\n");
-		return (1);
-	}
-	else if (!ft_strncmp(line, "EA ", 3))
-	{
-		if (texpath->ea)
-			return (printf("Error: Duplicate EA\n"), 1);
-		texpath->ea = ft_strtrim(line + 3, " \t\n");
-		return (1);
-	}
-	return (0);
-}
-
-static int	handle_color_line(t_texpath *texpath, char *line)
-{
-	if (!ft_strncmp(line, "F ", 2))
-		return (handle_floor(texpath, line));
-	if (!ft_strncmp(line, "C ", 2))
-		return (handle_ceiling(texpath, line));
-	return (0);
-}
-
 static int	parse_line(t_texpath *texpath, char *line)
 {
 	char	*trimmed_line;
@@ -71,7 +29,7 @@ static int	parse_line(t_texpath *texpath, char *line)
 		return (free(trimmed_line), 0);
 	ret = handle_texture_line(texpath, trimmed_line);
 	if (ret == 1)
-		return (free(trimmed_line), 0);
+		return (free(trimmed_line), 1);
 	if (ret != 0)
 		return (free(trimmed_line), ret);
 	ret = handle_color_line(texpath, trimmed_line);

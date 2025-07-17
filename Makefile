@@ -6,7 +6,7 @@
 #    By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/04 17:01:27 by jbanchon          #+#    #+#              #
-#    Updated: 2025/07/16 15:21:02 by leaugust         ###   ########.fr        #
+#    Updated: 2025/07/17 14:07:55 by leaugust         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ BONUS_OBJ_DIR = objs_bonus
 SRCS = \
 	srcs/main.c srcs/parsing/map_utils.c srcs/parsing/map_validation.c srcs/parsing/parse_map.c\
 	srcs/parsing/player_init.c srcs/parsing/void_check.c srcs/parsing/line_check.c srcs/textures/parse_textures.c\
-	srcs/textures/rgb_utils.c srcs/textures/texture_utils.c srcs/raycasting/raycasting.c\
+	srcs/textures/rgb_utils.c srcs/textures/texture_utils.c srcs/textures/parse_utils.c srcs/raycasting/raycasting.c\
 	srcs/raycasting/raycaster.c srcs/raycasting/render_walls.c srcs/raycasting/ray_texture.c srcs/raycasting/ray_projection.c\
 	srcs/raycasting/ray_init.c srcs/init/init_structs.c srcs/init/init_directions.c\
 	srcs/game/game_loop.c srcs/game/input_handling.c srcs/game/map_management.c\
@@ -37,7 +37,7 @@ SRCS = \
 BONUS_SRCS = \
 	bonus/main.c bonus/parsing/map_utils.c bonus/parsing/map_validation.c\
 	bonus/parsing/parse_map.c bonus/parsing/player_init.c bonus/parsing/void_check.c bonus/parsing/line_check.c\
-	bonus/textures/parse_textures.c bonus/textures/rgb_utils.c bonus/textures/texture_utils.c bonus/raycasting/raycasting.c\
+	bonus/textures/parse_textures.c bonus/textures/rgb_utils.c bonus/textures/parse_utils.c bonus/textures/texture_utils.c bonus/raycasting/raycasting.c\
 	bonus/raycasting/raycaster.c bonus/raycasting/render_walls.c bonus/raycasting/ray_texture.c bonus/raycasting/ray_projection.c\
 	bonus/raycasting/ray_init.c bonus/init/init_structs.c bonus/init/init_directions.c bonus/game/game_loop_bonus.c\
 	bonus/game/input_handling.c bonus/game/map_management.c bonus/game/move_vector.c bonus/game/rotation.c\

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbanchon <jbanchon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: leaugust <leaugust@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 12:08:23 by jbanchon          #+#    #+#             */
-/*   Updated: 2025/07/17 12:08:25 by jbanchon         ###   ########.fr       */
+/*   Updated: 2025/07/17 13:39:48 by leaugust         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,10 @@ int	process_map_line(char *line, char **temp_map, int *height, int *max_width)
 	temp_map[*height] = ft_strdup(line);
 	if (temp_map[*height] == NULL)
 	{
-		printf("Error: Strdup failed\n");
-		free(line);
+		printf("Strdup failed");
 		return (1);
 	}
 	(*height)++;
-	free(line);
 	return (0);
 }
 
